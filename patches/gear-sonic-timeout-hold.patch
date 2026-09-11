@@ -1,0 +1,31 @@
+diff --git a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/input_interface/zmq_manager.hpp b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/input_interface/zmq_manager.hpp
+--- a/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/input_interface/zmq_manager.hpp
++++ b/gear_sonic_deploy/src/g1/g1_deploy_onnx_ref/include/input_interface/zmq_manager.hpp
+@@ -624,15 +624,22 @@
+-          // Planner timeout - reset to IDLE and clear buffer
+-          has_upper_body_control_ = false;
++          // sonic_lerobot: preserve last upper reference and static squat/kneel intent.
++          // This is a command fallback, not a guarantee of physical stability.
+ 
+           has_hand_joints_ = false;
+ 
+-          auto current_facing = movement_state_buffer.GetDataWithTime().data->facing_direction;
++          auto current = movement_state_buffer.GetDataWithTime().data;
++          auto current_facing = current->facing_direction;
++          const auto current_mode = static_cast<LocomotionMode>(current->locomotion_mode);
++          const bool keep_static = current_mode == LocomotionMode::IDEL_SQUAT ||
++                                   current_mode == LocomotionMode::IDEL_KNEEL_TWO_LEGS;
++          const int fallback_mode = keep_static ? current->locomotion_mode :
++              static_cast<int>(LocomotionMode::IDLE);
++          const float fallback_height = keep_static ? current->height : -1.0f;
+           MovementState idle_state(
+-            static_cast<int>(LocomotionMode::IDLE),
++            fallback_mode,
+             {0.0f, 0.0f, 0.0f},
+             current_facing,
+             -1.0f,
+-            -1.0f
++            fallback_height
+           );
+           movement_state_buffer.SetData(idle_state);
+           

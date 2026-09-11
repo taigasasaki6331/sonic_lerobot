@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sonic-lerobot"
+version = "0.1.0"
+description = "LeRobot planner-reference bridge for GEAR-SONIC G1"
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy>=1.26", "pyzmq>=26", "msgpack>=1.1"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+learning = ["lerobot @ git+https://github.com/huggingface/lerobot.git@b6ec0060779550c0a157ae34feb89e0cf86012a8", "opencv-python>=4.10"]
+
+[project.scripts]
+sonic-gateway = "sonic_lerobot.gateway:main"
+sonic-run = "sonic_lerobot.runner:main"
+sonic-record = "sonic_lerobot.record:main"
+sonic-pico = "sonic_lerobot.pico:main"
+sonic-export = "sonic_lerobot.dataset:main"
+sonic-prepare-policy = "sonic_lerobot.learning:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,19 @@
+name: core-tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -e '.[test]'
+      - uses: actions/checkout@v4
+        with:
+          repository: NVlabs/GR00T-WholeBodyControl
+          ref: 087f9ac01d46f6d8e4d0b73c01ae64799f292a38
+          path: upstream
+      - run: pytest -q
+        env:
+          GEAR_SONIC_ROOT: ${{ github.workspace }}/upstream
