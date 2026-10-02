@@ -1,0 +1,922 @@
+{
+  "scope": "relative_state_action_contract_not_task_quality",
+  "pose_contract_passed": true,
+  "dataset_fully_verified": false,
+  "dataset": "/home/developer/workspaces/pika_ws2/datasets/data_2608261323_valid49_g1_zero_relative_h1_final_v3",
+  "episodes": 49,
+  "frames": 10881,
+  "fps": 30,
+  "rotation_layout": "columns",
+  "gripper_h1_mismatch_count": 145,
+  "gripper_h1_residual_max_m": 0.07895655592437834,
+  "info_sha256": "a1087c9a852cab4ffb8365ce6772dfddad14f5f5fccd423ef5abadb07fedadbb",
+  "source_files": [
+    {
+      "path": "/home/developer/workspaces/pika_ws2/datasets/data_2608261323_valid49_g1_zero_relative_h1_final_v3/data/chunk-000/file-000.parquet",
+      "sha256": "fcf353c42d8c96e94997a67cd439492679679232f200810a3dcb487b1b743c21"
+    },
+    {
+      "path": "/home/developer/workspaces/pika_ws2/datasets/data_2608261323_valid49_g1_zero_relative_h1_final_v3/data/chunk-000/file-001.parquet",
+      "sha256": "5e6245b567045f021634f1d24e8e2ba1fe658b16c92176ccaff48bb8f49d8eb0"
+    },
+    {
+      "path": "/home/developer/workspaces/pika_ws2/datasets/data_2608261323_valid49_g1_zero_relative_h1_final_v3/data/chunk-000/file-002.parquet",
+      "sha256": "3d276da672fff17c77728ad14f659d118ded35e66482f505945f9ab73159794d"
+    },
+    {
+      "path": "/home/developer/workspaces/pika_ws2/datasets/data_2608261323_valid49_g1_zero_relative_h1_final_v3/data/chunk-000/file-003.parquet",
+      "sha256": "b852cc8f0e449b997ea08cd845cd6cb0d89ddcbe80153dd64239e4717409e1d3"
+    },
+    {
+      "path": "/home/developer/workspaces/pika_ws2/datasets/data_2608261323_valid49_g1_zero_relative_h1_final_v3/data/chunk-000/file-004.parquet",
+      "sha256": "564fd5c59ef15755c3bbe78ebba20f5754e930de17d1e830e52f53da4bd2b5cd"
+    },
+    {
+      "path": "/home/developer/workspaces/pika_ws2/datasets/data_2608261323_valid49_g1_zero_relative_h1_final_v3/data/chunk-000/file-005.parquet",
+      "sha256": "4395672fe14ceed4d607122081bb4237ae8b36c2f551dad427a5477aa33a1689"
+    },
+    {
+      "path": "/home/developer/workspaces/pika_ws2/datasets/data_2608261323_valid49_g1_zero_relative_h1_final_v3/data/chunk-000/file-006.parquet",
+      "sha256": "d062aa4944d09bb65b878a7f872612416bcf1b1ed6f7159b23972ca983a71056"
+    },
+    {
+      "path": "/home/developer/workspaces/pika_ws2/datasets/data_2608261323_valid49_g1_zero_relative_h1_final_v3/data/chunk-000/file-007.parquet",
+      "sha256": "d89856ab1dd91c4f0a78b252d09cd72b8c458257d4e782ec26c8032280ce8623"
+    }
+  ],
+  "exporter_pyarrow": "23.0.1",
+  "episode_reports": [
+    {
+      "episode": 0,
+      "frames": 254,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0033314302563667297,
+      "gripper_h1_mismatch_count": 1,
+      "gripper_h1_mismatch_frames": [
+        69
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 1,
+      "frames": 228,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0,
+      "gripper_h1_mismatch_count": 0,
+      "gripper_h1_mismatch_frames": [],
+      "gripper_h1_alignment_verified": true
+    },
+    {
+      "episode": 2,
+      "frames": 243,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0006444975733757019,
+      "gripper_h1_mismatch_count": 1,
+      "gripper_h1_mismatch_frames": [
+        227
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 3,
+      "frames": 252,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0006151199340820312,
+      "gripper_h1_mismatch_count": 1,
+      "gripper_h1_mismatch_frames": [
+        233
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 4,
+      "frames": 236,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.024242009385488927,
+      "gripper_h1_mismatch_count": 4,
+      "gripper_h1_mismatch_frames": [
+        79,
+        92,
+        234,
+        235
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 5,
+      "frames": 220,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.001988612115383148,
+      "gripper_h1_mismatch_count": 1,
+      "gripper_h1_mismatch_frames": [
+        82
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 6,
+      "frames": 229,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.05004636710509658,
+      "gripper_h1_mismatch_count": 6,
+      "gripper_h1_mismatch_frames": [
+        25,
+        29,
+        89,
+        95,
+        218,
+        220
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 7,
+      "frames": 225,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.005047353799454868,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        223,
+        224
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 8,
+      "frames": 214,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.012868054211139679,
+      "gripper_h1_mismatch_count": 4,
+      "gripper_h1_mismatch_frames": [
+        79,
+        139,
+        212,
+        213
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 9,
+      "frames": 218,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.049303947016596794,
+      "gripper_h1_mismatch_count": 3,
+      "gripper_h1_mismatch_frames": [
+        205,
+        216,
+        217
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 10,
+      "frames": 240,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.03215393936261535,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        158,
+        229
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 11,
+      "frames": 218,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.020214187679812312,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        204,
+        213
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 12,
+      "frames": 218,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0,
+      "gripper_h1_mismatch_count": 0,
+      "gripper_h1_mismatch_frames": [],
+      "gripper_h1_alignment_verified": true
+    },
+    {
+      "episode": 13,
+      "frames": 237,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.036888737697154284,
+      "gripper_h1_mismatch_count": 4,
+      "gripper_h1_mismatch_frames": [
+        220,
+        232,
+        235,
+        236
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 14,
+      "frames": 220,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.06295267248060554,
+      "gripper_h1_mismatch_count": 20,
+      "gripper_h1_mismatch_frames": [
+        31,
+        38,
+        59,
+        72,
+        74,
+        78,
+        81,
+        114,
+        135,
+        137,
+        138,
+        143,
+        145,
+        195,
+        204,
+        207,
+        209,
+        211,
+        212,
+        214
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 15,
+      "frames": 228,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0255781285231933,
+      "gripper_h1_mismatch_count": 5,
+      "gripper_h1_mismatch_frames": [
+        201,
+        220,
+        222,
+        226,
+        227
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 16,
+      "frames": 227,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.03888000303413719,
+      "gripper_h1_mismatch_count": 5,
+      "gripper_h1_mismatch_frames": [
+        69,
+        71,
+        216,
+        225,
+        226
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 17,
+      "frames": 225,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.019519150257110596,
+      "gripper_h1_mismatch_count": 7,
+      "gripper_h1_mismatch_frames": [
+        69,
+        72,
+        129,
+        145,
+        219,
+        223,
+        224
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 18,
+      "frames": 228,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.008726879954338074,
+      "gripper_h1_mismatch_count": 3,
+      "gripper_h1_mismatch_frames": [
+        73,
+        77,
+        80
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 19,
+      "frames": 230,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.04300876520574093,
+      "gripper_h1_mismatch_count": 1,
+      "gripper_h1_mismatch_frames": [
+        217
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 20,
+      "frames": 223,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.016555260284803808,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        221,
+        222
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 21,
+      "frames": 229,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0,
+      "gripper_h1_mismatch_count": 0,
+      "gripper_h1_mismatch_frames": [],
+      "gripper_h1_alignment_verified": true
+    },
+    {
+      "episode": 22,
+      "frames": 226,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.04592616017907858,
+      "gripper_h1_mismatch_count": 6,
+      "gripper_h1_mismatch_frames": [
+        24,
+        54,
+        73,
+        223,
+        224,
+        225
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 23,
+      "frames": 226,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.026370885490905493,
+      "gripper_h1_mismatch_count": 7,
+      "gripper_h1_mismatch_frames": [
+        74,
+        142,
+        217,
+        220,
+        222,
+        224,
+        225
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 24,
+      "frames": 222,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.012172436341643333,
+      "gripper_h1_mismatch_count": 4,
+      "gripper_h1_mismatch_frames": [
+        7,
+        32,
+        52,
+        138
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 25,
+      "frames": 234,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.012435408309102058,
+      "gripper_h1_mismatch_count": 4,
+      "gripper_h1_mismatch_frames": [
+        71,
+        79,
+        106,
+        145
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 26,
+      "frames": 199,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.07895655592437834,
+      "gripper_h1_mismatch_count": 5,
+      "gripper_h1_mismatch_frames": [
+        119,
+        185,
+        188,
+        197,
+        198
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 27,
+      "frames": 217,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0008202302269637585,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        215,
+        216
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 28,
+      "frames": 222,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.016484771389514208,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        220,
+        221
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 29,
+      "frames": 223,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.009167708456516266,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        72,
+        210
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 30,
+      "frames": 216,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.026576980017125607,
+      "gripper_h1_mismatch_count": 4,
+      "gripper_h1_mismatch_frames": [
+        78,
+        88,
+        197,
+        208
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 31,
+      "frames": 238,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.03078019991517067,
+      "gripper_h1_mismatch_count": 8,
+      "gripper_h1_mismatch_frames": [
+        67,
+        77,
+        141,
+        202,
+        223,
+        232,
+        236,
+        237
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 32,
+      "frames": 232,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.004171049105934799,
+      "gripper_h1_mismatch_count": 5,
+      "gripper_h1_mismatch_frames": [
+        65,
+        94,
+        197,
+        230,
+        231
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 33,
+      "frames": 238,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0055985599756240845,
+      "gripper_h1_mismatch_count": 3,
+      "gripper_h1_mismatch_frames": [
+        65,
+        67,
+        151
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 34,
+      "frames": 240,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0014965981245040894,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        105,
+        223
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 35,
+      "frames": 221,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0,
+      "gripper_h1_mismatch_count": 0,
+      "gripper_h1_mismatch_frames": [],
+      "gripper_h1_alignment_verified": true
+    },
+    {
+      "episode": 36,
+      "frames": 236,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.009881341829895973,
+      "gripper_h1_mismatch_count": 1,
+      "gripper_h1_mismatch_frames": [
+        80
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 37,
+      "frames": 229,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.011181111447513103,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        227,
+        228
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 38,
+      "frames": 163,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0,
+      "gripper_h1_mismatch_count": 0,
+      "gripper_h1_mismatch_frames": [],
+      "gripper_h1_alignment_verified": true
+    },
+    {
+      "episode": 39,
+      "frames": 206,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.003104494884610176,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        204,
+        205
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 40,
+      "frames": 204,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.01883086282759905,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        202,
+        203
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 41,
+      "frames": 203,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.011003832682035863,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        201,
+        202
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 42,
+      "frames": 211,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0,
+      "gripper_h1_mismatch_count": 0,
+      "gripper_h1_mismatch_frames": [],
+      "gripper_h1_alignment_verified": true
+    },
+    {
+      "episode": 43,
+      "frames": 206,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.017739668488502502,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        193,
+        198
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 44,
+      "frames": 204,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0,
+      "gripper_h1_mismatch_count": 0,
+      "gripper_h1_mismatch_frames": [],
+      "gripper_h1_alignment_verified": true
+    },
+    {
+      "episode": 45,
+      "frames": 199,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.020407432690262794,
+      "gripper_h1_mismatch_count": 3,
+      "gripper_h1_mismatch_frames": [
+        125,
+        188,
+        193
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 46,
+      "frames": 198,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.018036488443613052,
+      "gripper_h1_mismatch_count": 1,
+      "gripper_h1_mismatch_frames": [
+        192
+      ],
+      "gripper_h1_alignment_verified": false
+    },
+    {
+      "episode": 47,
+      "frames": 221,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.0,
+      "gripper_h1_mismatch_count": 0,
+      "gripper_h1_mismatch_frames": [],
+      "gripper_h1_alignment_verified": true
+    },
+    {
+      "episode": 48,
+      "frames": 205,
+      "state_reference": "current_tcp_identity_plus_measured_gripper",
+      "pose_difference_test": "not_applicable_frames_have_different_origins",
+      "state_identity_error_max": 0.0,
+      "state_contract_passed": true,
+      "action_rotation_contract_passed": true,
+      "absolute_pose_trajectory_verified": false,
+      "gripper_h1_residual_max_m": 0.030343488208018243,
+      "gripper_h1_mismatch_count": 2,
+      "gripper_h1_mismatch_frames": [
+        199,
+        201
+      ],
+      "gripper_h1_alignment_verified": false
+    }
+  ]
+}

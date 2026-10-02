@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "mode": "record_only",
+  "hardware_output_enabled": false,
+  "gpu_host": "galleria@192.0.2.9",
+  "ssh_identity": "/home/developer/.ssh/EXAMPLE_GPU_KEY",
+  "gpu_root": "/home/gpu-user/g1-pika-training",
+  "ik_deployment": "/home/gpu-user/g1-pika-training/artifacts/split-wbc-bHU7TO",
+  "sonic_build": "/home/gpu-user/g1-pika-training/artifacts/sonic-build-PCETNV",
+  "sonic_models": "/home/gpu-user/g1-pika-training/artifacts/sonic-models-6733128-low-latency/low_latency",
+  "cuda_root": "/usr/local/cuda-12.8",
+  "tensorrt_root": "/home/gpu-user/TensorRT-192.0.2.3",
+  "diagnostic_deadlines": {
+    "max_source_age_s": 0.1,
+    "max_roundtrip_s": 0.5,
+    "max_tick_gap_s": 0.5
+  }
+}

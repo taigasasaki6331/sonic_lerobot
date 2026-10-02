@@ -1,0 +1,4 @@
+# PIKA USB UART only; do not reuse ttyUSB50 for two devices.
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7522", ENV{ID_MM_DEVICE_IGNORE}="1", ENV{ID_MM_PORT_IGNORE}="1", OWNER="unitree", GROUP="dialout", MODE="0660"
+# Current G1 right PIKA USB port; verify again after recabling.
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7522", KERNELS=="1-2.1.4.4.4", SYMLINK+="pika/right/gripper"

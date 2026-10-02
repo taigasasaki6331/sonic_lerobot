@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "mode": "record_only",
+  "hardware_output_enabled": false,
+  "seconds": 1,
+  "camera_endpoint": "tcp://192.0.2.11:6158",
+  "body_endpoint": "tcp://192.0.2.11:6159",
+  "act_model_sha256": "230c9dbba2bb575f994be2ca3e772332cdef4f8a5499b25e88130bb93a5650e4"
+}

@@ -1,0 +1,42 @@
+{
+  "scope": "recorded_observations_full_episode_to_simulated_WBC",
+  "hardware_ready": false,
+  "task_success_validated": false,
+  "robot_commands_sent": false,
+  "output": "/home/developer/workspaces/g1_pika_ws/g1-pika/artifacts/end-to-end/run-1cshuxmq",
+  "checks": [
+    {
+      "name": "action",
+      "passed": true
+    },
+    {
+      "name": "bridge",
+      "passed": true
+    },
+    {
+      "name": "async",
+      "passed": true
+    },
+    {
+      "name": "full_episode",
+      "passed": true,
+      "exit_code": 0,
+      "accepted_actions": 206,
+      "stop_reason": null,
+      "wbc_compute_p95_ms": 7.439082899873028,
+      "bridge_callback_p95_ms": 0.602572599018458,
+      "report": "/home/developer/workspaces/g1_pika_ws/g1-pika/artifacts/end-to-end/run-1cshuxmq/full_episode/policy-sim-async-latest.json"
+    },
+    {
+      "name": "response_loss",
+      "passed": true,
+      "exit_code": 1,
+      "accepted_actions": 5,
+      "stop_reason": "TimeoutError: Policy response deadline exceeded",
+      "wbc_compute_p95_ms": 7.167859503897488,
+      "bridge_callback_p95_ms": 0.03873699934047177,
+      "report": "/home/developer/workspaces/g1_pika_ws/g1-pika/artifacts/end-to-end/run-1cshuxmq/response_loss/policy-sim-silence-async-latest.json"
+    }
+  ],
+  "passed": true
+}

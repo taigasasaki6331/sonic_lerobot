@@ -1,0 +1,10 @@
+# Official CPU Torch wheels; keep baseline NumPy/MuJoCo versions unchanged.
+--extra-index-url https://download.pytorch.org/whl/cpu
+-r requirements-sim.lock
+torch==2.10.0+cpu
+pin==2.7.0
+pin-pink==3.1.0
+qpsolvers==4.7.1
+quadprog==0.1.13
+scipy==1.15.3
+gymnasium==1.1.1

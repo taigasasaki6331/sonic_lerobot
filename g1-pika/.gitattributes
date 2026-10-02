@@ -1,0 +1,6 @@
+# Preserve whitespace in the upstream license snapshot.
+assets/pika/source/REPOSITORY_LICENSE -whitespace
+
+* -text
+vendor/** -whitespace
+scripts/state_receiver/generated/** -whitespace

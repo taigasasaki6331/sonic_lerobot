@@ -1,0 +1,343 @@
+{
+  "scope": "input_contract_audit_not_training_provenance_proof",
+  "normalizer_sha256": "0638a9b8c123e5c99aafd56e0bc511ea049570b420cee1249fd12f25fe9f3ff5",
+  "checkpoint_depth_mean": [
+    [
+      [
+        0.48500001430511475
+      ]
+    ],
+    [
+      [
+        0.4560000002384186
+      ]
+    ],
+    [
+      [
+        0.4059999883174896
+      ]
+    ]
+  ],
+  "checkpoint_depth_std": [
+    [
+      [
+        0.2290000021457672
+      ]
+    ],
+    [
+      [
+        0.2240000069141388
+      ]
+    ],
+    [
+      [
+        0.22499999403953552
+      ]
+    ]
+  ],
+  "checkpoint_depth_recorded_max": [
+    [
+      [
+        1.0
+      ]
+    ],
+    [
+      [
+        1.0
+      ]
+    ],
+    [
+      [
+        1.0
+      ]
+    ]
+  ],
+  "candidate_statistics": [
+    {
+      "dataset": "data_2608260915_15ep_g1_zero_relative_h1",
+      "all_checked_stats_equal_float32": false,
+      "checks": {
+        "action.mean": false,
+        "action.std": false,
+        "action.min": false,
+        "action.max": false,
+        "action.count": false,
+        "observation.state.mean": false,
+        "observation.state.std": false,
+        "observation.state.min": true,
+        "observation.state.max": true,
+        "observation.state.count": false
+      }
+    },
+    {
+      "dataset": "data_2608260915_g1_zero_relative",
+      "all_checked_stats_equal_float32": false,
+      "checks": {
+        "action.mean": false,
+        "action.std": false,
+        "action.min": false,
+        "action.max": false,
+        "action.count": false,
+        "observation.state.mean": false,
+        "observation.state.std": false,
+        "observation.state.min": true,
+        "observation.state.max": false,
+        "observation.state.count": false
+      }
+    },
+    {
+      "dataset": "data_2608261323_50ep_g1_zero_relative_h1",
+      "all_checked_stats_equal_float32": false,
+      "checks": {
+        "action.mean": false,
+        "action.std": false,
+        "action.min": false,
+        "action.max": false,
+        "action.count": false,
+        "observation.state.mean": false,
+        "observation.state.std": false,
+        "observation.state.min": false,
+        "observation.state.max": false,
+        "observation.state.count": false
+      }
+    },
+    {
+      "dataset": "data_2608261323_ep0_g1_zero_relative_h1",
+      "all_checked_stats_equal_float32": false,
+      "checks": {
+        "action.mean": false,
+        "action.std": false,
+        "action.min": false,
+        "action.max": false,
+        "action.count": false,
+        "observation.state.mean": false,
+        "observation.state.std": false,
+        "observation.state.min": false,
+        "observation.state.max": false,
+        "observation.state.count": false
+      }
+    },
+    {
+      "dataset": "data_2608261323_g1_zero_relative_h1_final_50ep",
+      "all_checked_stats_equal_float32": true,
+      "checks": {
+        "action.mean": true,
+        "action.std": true,
+        "action.min": true,
+        "action.max": true,
+        "action.count": true,
+        "observation.state.mean": true,
+        "observation.state.std": true,
+        "observation.state.min": true,
+        "observation.state.max": true,
+        "observation.state.count": true
+      }
+    },
+    {
+      "dataset": "data_2608261323_valid49_g1_zero_relative_h1_final",
+      "all_checked_stats_equal_float32": false,
+      "checks": {
+        "action.mean": false,
+        "action.std": false,
+        "action.min": false,
+        "action.max": false,
+        "action.count": false,
+        "observation.state.mean": false,
+        "observation.state.std": false,
+        "observation.state.min": true,
+        "observation.state.max": true,
+        "observation.state.count": false
+      }
+    },
+    {
+      "dataset": "data_2608261323_valid49_g1_zero_relative_h1_final_v2",
+      "all_checked_stats_equal_float32": false,
+      "checks": {
+        "action.mean": false,
+        "action.std": false,
+        "action.min": true,
+        "action.max": true,
+        "action.count": false,
+        "observation.state.mean": false,
+        "observation.state.std": false,
+        "observation.state.min": true,
+        "observation.state.max": true,
+        "observation.state.count": false
+      }
+    },
+    {
+      "dataset": "data_2608261323_valid49_g1_zero_relative_h1_final_v3",
+      "all_checked_stats_equal_float32": false,
+      "checks": {
+        "action.mean": false,
+        "action.std": false,
+        "action.min": true,
+        "action.max": true,
+        "action.count": false,
+        "observation.state.mean": false,
+        "observation.state.std": false,
+        "observation.state.min": true,
+        "observation.state.max": true,
+        "observation.state.count": false
+      }
+    },
+    {
+      "dataset": "replace_tape_g1_pika_relative_h1_v2",
+      "all_checked_stats_equal_float32": false,
+      "checks": {
+        "action.mean": false,
+        "action.std": false,
+        "action.min": false,
+        "action.max": false,
+        "action.count": false,
+        "observation.state.mean": false,
+        "observation.state.std": false,
+        "observation.state.min": true,
+        "observation.state.max": false,
+        "observation.state.count": false
+      }
+    }
+  ],
+  "depth_inputs": [
+    {
+      "dataset": "data_2608261323_g1_zero_relative_h1_final_50ep",
+      "depth_metadata": {
+        "dtype": "image",
+        "shape": [
+          1,
+          480,
+          640
+        ],
+        "names": [
+          "channels",
+          "height",
+          "width"
+        ]
+      },
+      "parquet_sha256": "fcf353c42d8c96e94997a67cd439492679679232f200810a3dcb487b1b743c21",
+      "first_depth_encoded_sha256": "780a9b9d07323f8e50338f474684e7426e43c66a4b2546825fb57d488f4392a3",
+      "first_depth_mode": "I;16",
+      "native_shape": [
+        1,
+        480,
+        640
+      ],
+      "native_quantiles": [
+        0.0,
+        0.0,
+        734.0,
+        913.0,
+        57034.0
+      ],
+      "normalized_shape": [
+        3,
+        480,
+        640
+      ],
+      "normalized_abs_max": 254614.0,
+      "probe_pil_rgb_normalized_abs_max": 2.6399998664855957,
+      "depth_semantics": "metadata_missing_is_depth_map_and_depth_unit; native_units_not_verified"
+    },
+    {
+      "dataset": "data_2608261323_valid49_g1_zero_relative_h1_final_v3",
+      "depth_metadata": {
+        "dtype": "image",
+        "shape": [
+          1,
+          480,
+          640
+        ],
+        "names": [
+          "channels",
+          "height",
+          "width"
+        ]
+      },
+      "parquet_sha256": "fcf353c42d8c96e94997a67cd439492679679232f200810a3dcb487b1b743c21",
+      "first_depth_encoded_sha256": "780a9b9d07323f8e50338f474684e7426e43c66a4b2546825fb57d488f4392a3",
+      "first_depth_mode": "I;16",
+      "native_shape": [
+        1,
+        480,
+        640
+      ],
+      "native_quantiles": [
+        0.0,
+        0.0,
+        734.0,
+        913.0,
+        57034.0
+      ],
+      "normalized_shape": [
+        3,
+        480,
+        640
+      ],
+      "normalized_abs_max": 254614.0,
+      "probe_pil_rgb_normalized_abs_max": 2.6399998664855957,
+      "depth_semantics": "metadata_missing_is_depth_map_and_depth_unit; native_units_not_verified"
+    }
+  ],
+  "episode0_exact_comparison": {
+    "frame_index": true,
+    "action": true,
+    "observation.state": true,
+    "observation.depths.pikaDepthCamera": true
+  },
+  "reader_checks": [
+    {
+      "frame_index": 0,
+      "checks": {
+        "observation.images.pikaDepthCamera": {
+          "uint8_flag_after_conversion_equal": true,
+          "older_50ep_value_equal": true
+        },
+        "observation.images.pikaFisheyeCamera": {
+          "uint8_flag_after_conversion_equal": true,
+          "older_50ep_value_equal": true
+        },
+        "observation.depths.pikaDepthCamera": {
+          "uint8_flag_after_conversion_equal": true,
+          "older_50ep_value_equal": true
+        }
+      }
+    },
+    {
+      "frame_index": 127,
+      "checks": {
+        "observation.images.pikaDepthCamera": {
+          "uint8_flag_after_conversion_equal": true,
+          "older_50ep_value_equal": true
+        },
+        "observation.images.pikaFisheyeCamera": {
+          "uint8_flag_after_conversion_equal": true,
+          "older_50ep_value_equal": true
+        },
+        "observation.depths.pikaDepthCamera": {
+          "uint8_flag_after_conversion_equal": true,
+          "older_50ep_value_equal": true
+        }
+      }
+    },
+    {
+      "frame_index": 253,
+      "checks": {
+        "observation.images.pikaDepthCamera": {
+          "uint8_flag_after_conversion_equal": true,
+          "older_50ep_value_equal": true
+        },
+        "observation.images.pikaFisheyeCamera": {
+          "uint8_flag_after_conversion_equal": true,
+          "older_50ep_value_equal": true
+        },
+        "observation.depths.pikaDepthCamera": {
+          "uint8_flag_after_conversion_equal": true,
+          "older_50ep_value_equal": true
+        }
+      }
+    }
+  ],
+  "training_code_revision_known": false,
+  "pil_rgb_probe_is_verified_training_transform": false,
+  "conclusion": "Native depth and checkpoint image statistics are inconsistent; do not deploy or silently rescale."
+}

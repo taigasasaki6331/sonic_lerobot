@@ -1,0 +1,73 @@
+{
+  "format": 1,
+  "files": {
+    "data/chunk-000/file-000.parquet": {
+      "bytes": 92580992,
+      "sha256": "fcf353c42d8c96e94997a67cd439492679679232f200810a3dcb487b1b743c21"
+    },
+    "data/chunk-000/file-001.parquet": {
+      "bytes": 94833058,
+      "sha256": "5e6245b567045f021634f1d24e8e2ba1fe658b16c92176ccaff48bb8f49d8eb0"
+    },
+    "data/chunk-000/file-002.parquet": {
+      "bytes": 92418299,
+      "sha256": "3d276da672fff17c77728ad14f659d118ded35e66482f505945f9ab73159794d"
+    },
+    "data/chunk-000/file-003.parquet": {
+      "bytes": 91742564,
+      "sha256": "b852cc8f0e449b997ea08cd845cd6cb0d89ddcbe80153dd64239e4717409e1d3"
+    },
+    "data/chunk-000/file-004.parquet": {
+      "bytes": 102403118,
+      "sha256": "564fd5c59ef15755c3bbe78ebba20f5754e930de17d1e830e52f53da4bd2b5cd"
+    },
+    "data/chunk-000/file-005.parquet": {
+      "bytes": 103437567,
+      "sha256": "4395672fe14ceed4d607122081bb4237ae8b36c2f551dad427a5477aa33a1689"
+    },
+    "data/chunk-000/file-006.parquet": {
+      "bytes": 92911312,
+      "sha256": "d062aa4944d09bb65b878a7f872612416bcf1b1ed6f7159b23972ca983a71056"
+    },
+    "data/chunk-000/file-007.parquet": {
+      "bytes": 63851214,
+      "sha256": "d89856ab1dd91c4f0a78b252d09cd72b8c458257d4e782ec26c8032280ce8623"
+    },
+    "meta/episode_list.txt": {
+      "bytes": 480,
+      "sha256": "79517a2feb83ba29b3b4d27d56c0e0f8359c0030ad857ba0f65f59edc24ed711"
+    },
+    "meta/episodes/chunk-000/file-000.parquet": {
+      "bytes": 250915,
+      "sha256": "4df521bf2ff19be26d577184947d28b587b6f90d9a3a7f09cc6ee0733808e4a5"
+    },
+    "meta/info.json": {
+      "bytes": 4705,
+      "sha256": "a1087c9a852cab4ffb8365ce6772dfddad14f5f5fccd423ef5abadb07fedadbb"
+    },
+    "meta/raw_episode_mapping.tsv": {
+      "bytes": 302,
+      "sha256": "63a0d8d330e14b65287e8654cfa6a6e0943a2cc943eeb0d6aa68e1d07ac701f7"
+    },
+    "meta/retarget_start_pose.json": {
+      "bytes": 1136,
+      "sha256": "1927af4dce688a6c2a67cf5fc4f58d0cd30774566957b6272f998d5604ed8a67"
+    },
+    "meta/stats.json": {
+      "bytes": 18135,
+      "sha256": "8b5fb052b9bd46a46e6b1274ae38bc71833b80e73e9b14e723e9519d743fd83d"
+    },
+    "meta/tasks.parquet": {
+      "bytes": 2010,
+      "sha256": "a2f3d12afb3b082de4a6dd5da1157547b41a9b8341cf9da4c83ab1bc7014fccb"
+    },
+    "videos/observation.images.pikaDepthCamera/chunk-000/file-000.mp4": {
+      "bytes": 48995969,
+      "sha256": "554e1b16c6a7632e357ef01a9fd6f5238501d33952360fba41bf0a387873b626"
+    },
+    "videos/observation.images.pikaFisheyeCamera/chunk-000/file-000.mp4": {
+      "bytes": 182218838,
+      "sha256": "2942d2b286daf6b8c79e48eaea10c6be750a2143a28061c760787ef441d26feb"
+    }
+  }
+}

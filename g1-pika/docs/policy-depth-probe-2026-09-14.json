@@ -1,0 +1,127 @@
+{
+  "status": "offline_inference_completed",
+  "task_success_evaluated": false,
+  "closed_loop": false,
+  "wbc_connected": false,
+  "hardware_communication": false,
+  "network_guard_enabled": true,
+  "lerobot_commit": "79edf6a95948d0f0d75df1d54d0a5aad305f75a8",
+  "device": "cpu",
+  "requirements_sha256": "45734ddaa5c0b7aff3443b245859ddfb52a477bcfb35ef6af36a3098e481b973",
+  "episode": 0,
+  "samples": 16,
+  "episode_frames": 254,
+  "sampling": "evenly_spaced_recorded_observations",
+  "depth_unit": "mm",
+  "depth_probe": "pil-rgb",
+  "depth_units_verified": false,
+  "training_depth_transform_verified": false,
+  "normalization": "checkpoint_pre_and_post_processors",
+  "input_summary": {
+    "observation.state": {
+      "shape": [
+        10
+      ],
+      "dtype": "torch.float32",
+      "first_min": 0.0,
+      "first_max": 1.0
+    },
+    "observation.images.pikaDepthCamera": {
+      "shape": [
+        3,
+        480,
+        640
+      ],
+      "dtype": "torch.float32",
+      "first_min": 0.0,
+      "first_max": 0.6901960968971252
+    },
+    "observation.images.pikaFisheyeCamera": {
+      "shape": [
+        3,
+        480,
+        640
+      ],
+      "dtype": "torch.float32",
+      "first_min": 0.0,
+      "first_max": 1.0
+    },
+    "observation.depths.pikaDepthCamera": {
+      "shape": [
+        3,
+        480,
+        640
+      ],
+      "dtype": "torch.float32",
+      "first_min": 0.0,
+      "first_max": 1.0
+    }
+  },
+  "rotation_error_mean_rad": 0.012817143238889583,
+  "rotation_error_max_rad": 0.10354189160387402,
+  "no_motion_rotation_error_mean_rad": 0.012785922950551531,
+  "rotation_metric": "column-layout_Gram_Schmidt_projection_for_metrics_only",
+  "negative_gripper_predictions": 0,
+  "ready_for_hardware": false,
+  "deployment_notes": [
+    "No closed-loop validation or calibrated output limits",
+    "Gripper is not actuated; raw predictions are not clipped",
+    "CPU throughput must be assessed separately from simulation speed"
+  ],
+  "mae_per_dimension": [
+    0.0006875324522752635,
+    0.0013154017098031528,
+    0.00044822921961440443,
+    0.000321853905916214,
+    0.009395517902021314,
+    0.002333080027710821,
+    0.009437069613341006,
+    0.00043031200766563416,
+    0.007213783838778909,
+    0.041029962409083964
+  ],
+  "no_motion_mae_per_dimension": [
+    0.0007018752578460408,
+    0.0013156100507103492,
+    0.0003609033673228623,
+    0.0002731494605541229,
+    0.009442936372352054,
+    0.002271057796860987,
+    0.00947783854826412,
+    0.0004071369767189026,
+    0.00717466926380439,
+    7.704459130764008e-05
+  ],
+  "translation_l2_mean_m": 0.0018580677322898307,
+  "no_motion_translation_l2_mean_m": 0.001808409900894059,
+  "gripper_mae_m": 0.041029962409083964,
+  "inference_pipeline_p95_ms": 1051.4992455009633,
+  "predicted_translation_norm_max_m": 0.0002170441214257323,
+  "predicted_gripper_min_max_m": [
+    0.09752394258975983,
+    0.09791138768196106
+  ],
+  "matched_native_comparison": {
+    "frame_indices": [
+      0,
+      16,
+      33,
+      50,
+      67,
+      84,
+      101,
+      118,
+      134,
+      151,
+      168,
+      185,
+      202,
+      219,
+      236,
+      253
+    ],
+    "translation_l2_mean_m": 0.0018132347467558281,
+    "gripper_mae_m": 0.014251370052079437,
+    "negative_gripper_predictions": 5
+  }
+}

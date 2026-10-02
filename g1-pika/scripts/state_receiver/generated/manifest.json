@@ -1,0 +1,11 @@
+{
+  "generator_repository": "https://github.com/eclipse-cyclonedds/cyclonedds.git",
+  "generator_commit": "9995905bce6c4cf9f740d6438bbf7fcfd1c83dfd",
+  "generator_version": "0.10.2",
+  "sha256": {
+    "State.idl": "feebcca0d2415505c159ccdba985957949f04ba69885f3fbdb477a39638009ea",
+    "generated/State.c": "985323f3b674ce299558df0914c1d5b8bb1bebc88ff2f1eb62e838936b35459a",
+    "generated/State.h": "ca95b6c24bec45e599c9cd159e1f20ae99a15712eab79b8e1e25b53c042777c2"
+  },
+  "public_derivative": "generated source filename comments redacted; wire layout not regenerated"
+}

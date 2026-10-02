@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/kufusha/pika_ros",
+  "commit": "0f7f6b75a349ceccb252628f5f48a28aaf5c7b6b",
+  "files_sha256": {
+    "gripper_base.STL": "2895bfa6f1eef2d0ad2cb9dfdedd5f6c760ec07388bcde2b4d1e412e1189c9cb",
+    "link7.STL": "475a7d8db056524d7659fadf5a2c307d62791047b6214d733dfc7846ed1c613d",
+    "link8.STL": "3f88d534a85e28a33ef7d2061adacbd1d25214aa9325f9e464aad0f9e4b74606",
+    "source/README.md": "a8152a0588fce5232ac46f12e3932ad36c659cb45b9cf31a7e97b9430bcf13a2",
+    "source/REPOSITORY_LICENSE": "1524421d52e9dd5cdc92ea5f0086332423bd48b613d5f7692edd94ef3be67c5a",
+    "source/generate_urdf.py": "96a1850952c748819b71fa959eb45feebcf8c08a85ee565c5ba5870d5b1dcfe7",
+    "source/package.xml": "268a887815da7b02cb33e003a4b26fe6683eaf8bd52cdb224b95b4dc21034a40"
+  }
+}

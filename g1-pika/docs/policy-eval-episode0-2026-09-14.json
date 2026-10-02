@@ -1,0 +1,200 @@
+{
+  "status": "offline_inference_completed",
+  "task_success_evaluated": false,
+  "closed_loop": false,
+  "wbc_connected": false,
+  "hardware_communication": false,
+  "network_guard_enabled": true,
+  "lerobot_commit": "79edf6a95948d0f0d75df1d54d0a5aad305f75a8",
+  "device": "cpu",
+  "episode": 0,
+  "samples": 254,
+  "episode_frames": 254,
+  "sampling": "evenly_spaced_recorded_observations",
+  "depth_unit": "mm",
+  "normalization": "checkpoint_pre_and_post_processors",
+  "input_summary": {
+    "observation.state": {
+      "shape": [
+        10
+      ],
+      "dtype": "torch.float32",
+      "first_min": 0.0,
+      "first_max": 1.0
+    },
+    "observation.images.pikaDepthCamera": {
+      "shape": [
+        3,
+        480,
+        640
+      ],
+      "dtype": "torch.float32",
+      "first_min": 0.0,
+      "first_max": 0.6901960968971252
+    },
+    "observation.images.pikaFisheyeCamera": {
+      "shape": [
+        3,
+        480,
+        640
+      ],
+      "dtype": "torch.float32",
+      "first_min": 0.0,
+      "first_max": 1.0
+    },
+    "observation.depths.pikaDepthCamera": {
+      "shape": [
+        1,
+        480,
+        640
+      ],
+      "dtype": "torch.float32",
+      "first_min": 0.0,
+      "first_max": 57034.0
+    }
+  },
+  "rotation_error_mean_rad": 0.008198957243226753,
+  "rotation_error_max_rad": 0.10366690698590406,
+  "no_motion_rotation_error_mean_rad": 0.008092736716553247,
+  "rotation_metric": "column-layout_Gram_Schmidt_projection_for_metrics_only",
+  "negative_gripper_predictions": 76,
+  "ready_for_hardware": false,
+  "deployment_notes": [
+    "No closed-loop validation or calibrated output limits",
+    "Gripper is not actuated; raw predictions are not clipped",
+    "CPU throughput must be assessed separately from simulation speed"
+  ],
+  "mae_per_dimension": [
+    0.0008337177200003029,
+    0.0007674935745357051,
+    0.0006542752506916939,
+    7.528043168736254e-05,
+    0.004359577072489666,
+    0.003215189981031966,
+    0.004340842656679989,
+    9.347134687769131e-05,
+    0.004792546654574992,
+    0.013785029369622732
+  ],
+  "no_motion_mae_per_dimension": [
+    0.0008171802169397593,
+    0.000778812305008711,
+    0.0006110049178130607,
+    6.016079835065707e-05,
+    0.004394601972707033,
+    0.0029504402408367858,
+    0.004401676730528138,
+    8.85351905672569e-05,
+    0.004832940226292987,
+    0.0014386427773008725
+  ],
+  "translation_l2_mean_m": 0.0015750166956064696,
+  "no_motion_translation_l2_mean_m": 0.0015664849211229502,
+  "gripper_mae_m": 0.013785029369622732,
+  "inference_pipeline_p95_ms": 1058.866343651971,
+  "predicted_translation_norm_max_m": 0.0013445974650187823,
+  "predicted_gripper_min_max_m": [
+    -0.005529832094907761,
+    0.10083632916212082
+  ],
+  "checkpoint_manifest": {
+    "scope": "static_checkpoint_contract_only",
+    "static_contract_passed": true,
+    "blockers": [],
+    "inference_executed": false,
+    "hardware_communication": false,
+    "policy_path": "/home/developer/workspaces/pika_ws2/models/zero_relative_50ep_act_h1_v2/pretrained_model",
+    "dataset_path": "/home/developer/workspaces/pika_ws2/datasets/data_2608261323_valid49_g1_zero_relative_h1_final_v3",
+    "training_dataset": "/home/gpu-user/sk_dev/datasets/zero_relative_50ep",
+    "training_dataset_identity_verified": false,
+    "action_semantics_and_rotation_layout_verified": false,
+    "policy_type": "act",
+    "chunk_size": 1,
+    "n_action_steps": 1,
+    "input_features": {
+      "observation.state": {
+        "type": "STATE",
+        "shape": [
+          10
+        ]
+      },
+      "observation.images.pikaDepthCamera": {
+        "type": "VISUAL",
+        "shape": [
+          3,
+          480,
+          640
+        ]
+      },
+      "observation.images.pikaFisheyeCamera": {
+        "type": "VISUAL",
+        "shape": [
+          3,
+          480,
+          640
+        ]
+      },
+      "observation.depths.pikaDepthCamera": {
+        "type": "VISUAL",
+        "shape": [
+          1,
+          480,
+          640
+        ]
+      }
+    },
+    "dataset_info_sha256": "a1087c9a852cab4ffb8365ce6772dfddad14f5f5fccd423ef5abadb07fedadbb",
+    "checkpoint_files": [
+      {
+        "name": "config.json",
+        "size_bytes": 1908,
+        "sha256": "f59bb8984694cc3d04e6c86cd8a453766290ed08562691bbca7b61ea84f073e6"
+      },
+      {
+        "name": "model.safetensors",
+        "size_bytes": 206327008,
+        "sha256": "5864e611938a90daa2f188804db5f765674e59d865b21bcec71eaa67aa3d4291",
+        "tensor_count": 234
+      },
+      {
+        "name": "policy_postprocessor.json",
+        "size_bytes": 661,
+        "sha256": "663a939fb7748ba2490445fbfd8ce262eb6ad9b9672ef25e996f910834d11427"
+      },
+      {
+        "name": "policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+        "size_bytes": 9224,
+        "sha256": "86f4cfea08fee20040aa9bbda2b1ef2d7a5569ed285335655c20c2d80a94e7fe",
+        "tensor_count": 100
+      },
+      {
+        "name": "policy_preprocessor.json",
+        "size_bytes": 1536,
+        "sha256": "6764bae2f644c89cdfb9f51e78cfa70144d0ed0f06ce2e09882e1f9c148c3225"
+      },
+      {
+        "name": "policy_preprocessor_step_3_normalizer_processor.safetensors",
+        "size_bytes": 9232,
+        "sha256": "0638a9b8c123e5c99aafd56e0bc511ea049570b420cee1249fd12f25fe9f3ff5",
+        "tensor_count": 100
+      },
+      {
+        "name": "train_config.json",
+        "size_bytes": 6373,
+        "sha256": "0985250a1d27d1688ce69bf4bf4e2611caa5745d91ca3b7ebd61b128c4d5a3f1"
+      }
+    ],
+    "required_runtime_overrides": [
+      "CPU policy and preprocessor",
+      "offline Hub",
+      "no backbone downloads"
+    ],
+    "notes": [
+      "Shape match is not semantic or training-data equivalence",
+      "Safetensors header/bounds and hashes checked; weights not loaded",
+      "Use checkpoint normalizer and unnormalizer, not current-dataset statistics"
+    ]
+  },
+  "raw_predictions_location": "artifacts/policy-eval-latest.json (254 frames)",
+  "validation_note": "Full episode evaluated before enabling strict=True; subsequent strict load passed and reproduced frame 0 exactly."
+}

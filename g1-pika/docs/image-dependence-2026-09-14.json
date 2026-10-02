@@ -1,0 +1,59 @@
+{
+  "status": "passed",
+  "scope": "validation_input_shuffle_diagnostic",
+  "permutation_seed": 314159,
+  "samples": 1022,
+  "results": [
+    {
+      "steps": 3000,
+      "run": "/home/gpu-user/g1-pika-training/artifacts/full-rgb-baseline/run-bdq1hvyr",
+      "conditions": {
+        "native": {
+          "translation_error_m": 0.0020454139448702335,
+          "gripper_error_m": 0.002087047090753913,
+          "prediction_translation_change_m": 0.0,
+          "prediction_gripper_change_m": 0.0
+        },
+        "paired_images_shuffled": {
+          "translation_error_m": 0.0022476997692137957,
+          "gripper_error_m": 0.03844919055700302,
+          "prediction_translation_change_m": 0.0007397839217446744,
+          "prediction_gripper_change_m": 0.038300104439258575
+        },
+        "gripper_state_shuffled": {
+          "translation_error_m": 0.0020629484206438065,
+          "gripper_error_m": 0.006539450027048588,
+          "prediction_translation_change_m": 0.00016771051741670817,
+          "prediction_gripper_change_m": 0.005946572404354811
+        }
+      }
+    },
+    {
+      "steps": 10000,
+      "run": "/home/gpu-user/g1-pika-training/artifacts/full-rgb-baseline/run-1r5b65hh",
+      "conditions": {
+        "native": {
+          "translation_error_m": 0.002095930278301239,
+          "gripper_error_m": 0.0020420856308192015,
+          "prediction_translation_change_m": 0.0,
+          "prediction_gripper_change_m": 0.0
+        },
+        "paired_images_shuffled": {
+          "translation_error_m": 0.0025851349346339703,
+          "gripper_error_m": 0.038744665682315826,
+          "prediction_translation_change_m": 0.001711924676783383,
+          "prediction_gripper_change_m": 0.03861115500330925
+        },
+        "gripper_state_shuffled": {
+          "translation_error_m": 0.0022069693077355623,
+          "gripper_error_m": 0.00629973690956831,
+          "prediction_translation_change_m": 0.000513270148076117,
+          "prediction_gripper_change_m": 0.0055785649456083775
+        }
+      }
+    }
+  ],
+  "test_used": false,
+  "script_sha256": "ff854b8973a360c035637337d7c495b82cf63af5936fe05f3ab40ba313020c8a",
+  "limitation": "shuffling breaks natural image/state pairing; measures sensitivity, not causal task competence"
+}

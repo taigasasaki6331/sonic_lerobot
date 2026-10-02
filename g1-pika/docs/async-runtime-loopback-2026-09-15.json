@@ -1,0 +1,170 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "nominal",
+      "passed": true,
+      "accepted_actions": 206,
+      "accepted_commands": 2999,
+      "termination": "duration_completed",
+      "height_min": 0.7441028024115877,
+      "tilt_max": 0.09697714407789186,
+      "xy_max": 0.13285489382475943,
+      "actor_records": 206,
+      "roundtrip_no_image_p95_ms": 3.0592969997087494,
+      "roundtrip_image_p95_ms": null,
+      "wbc_p95_ms": 1.6567780112382025,
+      "actor_roundtrip_p95_ms": null,
+      "wall_seconds": 60.00006834600936,
+      "sim_seconds": 60.00000000001224,
+      "max_command_age_s": 0.05000000000002558,
+      "max_physics_lag_s": 0.00020748100594936147,
+      "physics_steps_with_body_pending": 3006,
+      "physics_steps_with_image_pending": 457,
+      "image_roundtrip_p95_ms": 7.750218996079639
+    },
+    {
+      "name": "disconnect",
+      "passed": true,
+      "accepted_actions": 51,
+      "accepted_commands": 200,
+      "termination": "TimeoutError: WBC command freshness deadline",
+      "height_min": 0.7441028024115877,
+      "tilt_max": 0.09697714407789186,
+      "xy_max": 0.13285489382475943,
+      "actor_records": 54,
+      "roundtrip_no_image_p95_ms": 3.5104109992971644,
+      "roundtrip_image_p95_ms": null,
+      "wbc_p95_ms": 1.8033250089501962,
+      "actor_roundtrip_p95_ms": null,
+      "wall_seconds": 4.085069923006813,
+      "sim_seconds": 4.084999999999935,
+      "max_command_age_s": 0.10499999999999776,
+      "max_physics_lag_s": 0.0008575590042418924,
+      "physics_steps_with_body_pending": 216,
+      "physics_steps_with_image_pending": 152,
+      "image_roundtrip_p95_ms": 7.845724001526833
+    },
+    {
+      "name": "stale",
+      "passed": true,
+      "accepted_actions": 52,
+      "accepted_commands": 200,
+      "termination": "ValueError: Stale worker response",
+      "height_min": 0.7441028024115877,
+      "tilt_max": 0.09697714407789186,
+      "xy_max": 0.13285489382475943,
+      "actor_records": 52,
+      "roundtrip_no_image_p95_ms": 3.4283860004507005,
+      "roundtrip_image_p95_ms": null,
+      "wbc_p95_ms": 1.7692569963401183,
+      "actor_roundtrip_p95_ms": null,
+      "wall_seconds": 4.005060491996119,
+      "sim_seconds": 4.004999999999937,
+      "max_command_age_s": 0.0200559500080999,
+      "max_physics_lag_s": 0.0003620629932260533,
+      "physics_steps_with_body_pending": 200,
+      "physics_steps_with_image_pending": 149,
+      "image_roundtrip_p95_ms": 7.710562000283971
+    },
+    {
+      "name": "delay",
+      "passed": true,
+      "accepted_actions": 51,
+      "accepted_commands": 200,
+      "termination": "TimeoutError: WBC command freshness deadline",
+      "height_min": 0.7441028024115877,
+      "tilt_max": 0.09697714407789186,
+      "xy_max": 0.13285489382475943,
+      "actor_records": 54,
+      "roundtrip_no_image_p95_ms": 3.261013000155799,
+      "roundtrip_image_p95_ms": null,
+      "wbc_p95_ms": 1.7563440051162615,
+      "actor_roundtrip_p95_ms": null,
+      "wall_seconds": 4.08506113900512,
+      "sim_seconds": 4.084999999999935,
+      "max_command_age_s": 0.10499999999999776,
+      "max_physics_lag_s": 0.00025678501117276653,
+      "physics_steps_with_body_pending": 216,
+      "physics_steps_with_image_pending": 153,
+      "image_roundtrip_p95_ms": 7.604418002301827
+    },
+    {
+      "name": "policy_delay",
+      "passed": true,
+      "accepted_actions": 5,
+      "accepted_commands": 145,
+      "termination": "TimeoutError: Image response deadline",
+      "height_min": 0.7441028024115877,
+      "tilt_max": 0.09697714407789186,
+      "xy_max": 0.13285489382475943,
+      "actor_records": 6,
+      "roundtrip_no_image_p95_ms": 3.404864008189179,
+      "roundtrip_image_p95_ms": null,
+      "wbc_p95_ms": 1.8437010003253818,
+      "actor_roundtrip_p95_ms": null,
+      "wall_seconds": 2.8853209980006795,
+      "sim_seconds": 2.8849999999999607,
+      "max_command_age_s": 0.020056360008311458,
+      "max_physics_lag_s": 0.00018892400203007753,
+      "physics_steps_with_body_pending": 144,
+      "physics_steps_with_image_pending": 156,
+      "image_roundtrip_p95_ms": 232.97422598989215
+    }
+  ],
+  "unit_tests": [
+    {
+      "name": "check_split_wbc.py",
+      "passed": true
+    },
+    {
+      "name": "check_async_split.py",
+      "passed": true
+    },
+    {
+      "name": "check_wbc_state.py",
+      "passed": true
+    },
+    {
+      "name": "check_control_guard.py",
+      "passed": true
+    },
+    {
+      "name": "check_policy_action.py",
+      "passed": true
+    },
+    {
+      "name": "check_policy_bridge.py",
+      "passed": true
+    },
+    {
+      "name": "check_async_policy.py",
+      "passed": true
+    },
+    {
+      "name": "check_zmq_transport.py",
+      "passed": true
+    }
+  ],
+  "deployment": "/home/gpu-user/g1-pika-training/artifacts/split-wbc-bHU7TO",
+  "output": "/home/developer/workspaces/g1_pika_ws/g1-pika/artifacts/split-runtime/run-t72e4a86",
+  "robot_commands_sent": false,
+  "hardware_ready": false,
+  "scope": "wall_clock_physics_nonblocking_body_and_image_network_not_hard_realtime",
+  "gpu_loopback_diagnostic": true,
+  "source_sha256": {
+    "split_wbc.py": "b028ca221819413f389081926526ab46c85bb889402867d32e3f8d993d8ed5c4",
+    "wbc_controller.py": "5ff94e04f823a873f1da1e2f7b83fa350b424fae71d2d63616807f9619411f47",
+    "wbc_state.py": "5927b69b858239478091f238ddecfbab0bf592b35f0833f09c1afd97bdd744f0",
+    "control_guard.py": "63f2d4e01af456b4f6d1ecccd732d967bcbe4f95f653213ad86f6f28679d6dd6",
+    "pika_model.py": "16bb568c920133eb558fdc023c6f25e978bd633c345a4b8f93c91ddb47983670",
+    "zmq_transport.py": "54af550cfdda154a63f1278a134702133dd1ae2b7f506958e0f3ab8c039c2506",
+    "mock_policy_server.py": "0b294f8cb7aa430640e5ed931b32eded504fb88cda07825ba97b3fbbba5c4b9e",
+    "policy_replay_bridge.py": "d012ffd86663950e70ac1b23cf9fe19da0232a585902c86550320c473824c43b",
+    "policy_action.py": "7b9f0b27e94f9757137458ada0a0c8918cd28f20bdb68d1909fe2ed28e7bd9e7",
+    "teacher_trajectory.py": "0215e297b2dbe1163232ecbc1ae6c11f73908830738ba531cee4f00d68156548",
+    "async_split.py": "f5c01520ef43c400867dd8aa87907c5cf5f5667ab615705415acc65fd2b1a605",
+    "run_split_runtime.py": "318681ba65022fa24c825d5625c029c6d7d8d703a6ca7e971c982c29ac7e42b1",
+    "export_mock_observations.py": "ef306cba15a2555f1d2140cfbe8196e8bdaedfdbfd9d857b31aa86bf21c30682"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "scope": "continuous_right_images_to_GPU_diagnostic_no_actuation",
+  "robot_commands_sent": false,
+  "hardware_ready": false,
+  "camera_closed_loop": false,
+  "width_source": "assumed_0.04m_not_measured",
+  "transport": "G1 DDS state + cameras -> wired ZMQ -> GPU inference -> local log; SSH startup only",
+  "output": "/home/gpu-user/g1-pika-training/artifacts/live-shadow/run-r7jp86l3",
+  "route": "192.0.2.11 dev enp2s0 src 192.0.2.12 uid 1000 \n    cache",
+  "remote_directories": {
+    "g1": "/tmp/g1-pika-stream-omi90b",
+    "gpu": "/home/gpu-user/g1-pika-training/artifacts/live-shadow-7p9zt6ua"
+  },
+  "gpu": {
+    "ready": true,
+    "model_sha256": "230c9dbba2bb575f994be2ca3e772332cdef4f8a5499b25e88130bb93a5650e4",
+    "lerobot_commit": "79edf6a95948d0f0d75df1d54d0a5aad305f75a8",
+    "assumed_width_m": 0.04,
+    "hardware_ready": false
+  },
+  "g1_state_requested": true,
+  "g1": {
+    "ready": true,
+    "scope": "right_live_images_no_robot_commands",
+    "opencv_version": "4.2.0",
+    "transport": "ZMQ",
+    "libzmq": "4.3.2"
+  },
+  "gpu_libzmq": "4.3.4",
+  "round_trip_p95_ms": 35.01424299975042,
+  "inference_p95_ms": 7.965144000991131,
+  "pairs_verified": 30,
+  "unique_body_ticks": 30,
+  "image_state_receive_skew_max_ms": 63.15328099981343
+}

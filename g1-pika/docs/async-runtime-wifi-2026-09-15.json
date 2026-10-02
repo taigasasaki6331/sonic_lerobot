@@ -1,0 +1,165 @@
+{
+  "passed": false,
+  "checks": [
+    {
+      "name": "nominal",
+      "passed": false,
+      "accepted_actions": 206,
+      "accepted_commands": 833,
+      "termination": "TimeoutError: WBC command freshness deadline",
+      "height_min": 0.7441343741279252,
+      "tilt_max": 0.09963151953814736,
+      "xy_max": 0.13318687531043666,
+      "actor_records": 206,
+      "roundtrip_no_image_p95_ms": 23.38319300179137,
+      "roundtrip_image_p95_ms": null,
+      "wbc_p95_ms": 1.5051380032673478,
+      "actor_roundtrip_p95_ms": null,
+      "wall_seconds": 18.50510056300118,
+      "sim_seconds": 18.505000000000603,
+      "max_command_age_s": 0.10499999999997911,
+      "max_physics_lag_s": 0.005759143000496181,
+      "physics_steps_with_body_pending": 2441,
+      "physics_steps_with_image_pending": 2051,
+      "image_roundtrip_p95_ms": 57.248304001404904
+    },
+    {
+      "name": "disconnect",
+      "passed": false,
+      "accepted_actions": 0,
+      "accepted_commands": 16,
+      "termination": "TimeoutError: WBC command freshness deadline",
+      "height_min": 0.7530386304768519,
+      "tilt_max": 0.0405705016124017,
+      "xy_max": 0.046588078421596346,
+      "actor_records": 0,
+      "roundtrip_no_image_p95_ms": 8.943966000515502,
+      "roundtrip_image_p95_ms": null,
+      "wbc_p95_ms": 1.376971005811356,
+      "actor_roundtrip_p95_ms": null,
+      "wall_seconds": 0.4002677109965589,
+      "sim_seconds": 0.40000000000000024,
+      "max_command_age_s": 0.10000000000000009,
+      "max_physics_lag_s": 0.0012242250007691302,
+      "physics_steps_with_body_pending": 47,
+      "physics_steps_with_image_pending": 0,
+      "image_roundtrip_p95_ms": null
+    },
+    {
+      "name": "stale",
+      "passed": true,
+      "accepted_actions": 40,
+      "accepted_commands": 200,
+      "termination": "ValueError: Stale worker response",
+      "height_min": 0.7441628572166779,
+      "tilt_max": 0.10065992969168285,
+      "xy_max": 0.1353040787187008,
+      "actor_records": 41,
+      "roundtrip_no_image_p95_ms": 22.398376000637654,
+      "roundtrip_image_p95_ms": null,
+      "wbc_p95_ms": 1.6682679997757077,
+      "actor_roundtrip_p95_ms": null,
+      "wall_seconds": 4.330119509002543,
+      "sim_seconds": 4.32999999999993,
+      "max_command_age_s": 0.05999999999999872,
+      "max_physics_lag_s": 0.0025488269969784483,
+      "physics_steps_with_body_pending": 562,
+      "physics_steps_with_image_pending": 465,
+      "image_roundtrip_p95_ms": 63.40486900444375
+    },
+    {
+      "name": "delay",
+      "passed": true,
+      "accepted_actions": 37,
+      "accepted_commands": 200,
+      "termination": "TimeoutError: WBC command freshness deadline",
+      "height_min": 0.7441327750603652,
+      "tilt_max": 0.09920527284783663,
+      "xy_max": 0.13305627446647947,
+      "actor_records": 40,
+      "roundtrip_no_image_p95_ms": 20.016301998111885,
+      "roundtrip_image_p95_ms": null,
+      "wbc_p95_ms": 1.676305997534655,
+      "actor_roundtrip_p95_ms": null,
+      "wall_seconds": 4.285186622000765,
+      "sim_seconds": 4.284999999999931,
+      "max_command_age_s": 0.10499999999999776,
+      "max_physics_lag_s": 0.0016960640022034568,
+      "physics_steps_with_body_pending": 518,
+      "physics_steps_with_image_pending": 456,
+      "image_roundtrip_p95_ms": 63.10653099353658
+    },
+    {
+      "name": "policy_delay",
+      "passed": false,
+      "accepted_actions": 0,
+      "accepted_commands": 100,
+      "termination": "TimeoutError: WBC command freshness deadline",
+      "height_min": 0.7441373845323355,
+      "tilt_max": 0.09930941501011037,
+      "xy_max": 0.1330955826782069,
+      "actor_records": 1,
+      "roundtrip_no_image_p95_ms": 9.634752001147717,
+      "roundtrip_image_p95_ms": null,
+      "wbc_p95_ms": 1.2646989925997332,
+      "actor_roundtrip_p95_ms": null,
+      "wall_seconds": 2.0852938699972583,
+      "sim_seconds": 2.0849999999999778,
+      "max_command_age_s": 0.10499999999999798,
+      "max_physics_lag_s": 0.0024626900008297287,
+      "physics_steps_with_body_pending": 220,
+      "physics_steps_with_image_pending": 16,
+      "image_roundtrip_p95_ms": null
+    }
+  ],
+  "unit_tests": [
+    {
+      "name": "check_split_wbc.py",
+      "passed": true
+    },
+    {
+      "name": "check_wbc_state.py",
+      "passed": true
+    },
+    {
+      "name": "check_control_guard.py",
+      "passed": true
+    },
+    {
+      "name": "check_policy_action.py",
+      "passed": true
+    },
+    {
+      "name": "check_policy_bridge.py",
+      "passed": true
+    },
+    {
+      "name": "check_async_policy.py",
+      "passed": true
+    },
+    {
+      "name": "check_zmq_transport.py",
+      "passed": true
+    }
+  ],
+  "deployment": "/home/gpu-user/g1-pika-training/artifacts/split-wbc-bHU7TO",
+  "output": "/home/developer/workspaces/g1_pika_ws/g1-pika/artifacts/split-runtime/run-wvvavyv0",
+  "robot_commands_sent": false,
+  "hardware_ready": false,
+  "scope": "wall_clock_physics_nonblocking_body_and_image_network_not_hard_realtime",
+  "source_sha256": {
+    "split_wbc.py": "b028ca221819413f389081926526ab46c85bb889402867d32e3f8d993d8ed5c4",
+    "wbc_controller.py": "5ff94e04f823a873f1da1e2f7b83fa350b424fae71d2d63616807f9619411f47",
+    "wbc_state.py": "5927b69b858239478091f238ddecfbab0bf592b35f0833f09c1afd97bdd744f0",
+    "control_guard.py": "63f2d4e01af456b4f6d1ecccd732d967bcbe4f95f653213ad86f6f28679d6dd6",
+    "pika_model.py": "16bb568c920133eb558fdc023c6f25e978bd633c345a4b8f93c91ddb47983670",
+    "zmq_transport.py": "54af550cfdda154a63f1278a134702133dd1ae2b7f506958e0f3ab8c039c2506",
+    "mock_policy_server.py": "0b294f8cb7aa430640e5ed931b32eded504fb88cda07825ba97b3fbbba5c4b9e",
+    "policy_replay_bridge.py": "d012ffd86663950e70ac1b23cf9fe19da0232a585902c86550320c473824c43b",
+    "policy_action.py": "7b9f0b27e94f9757137458ada0a0c8918cd28f20bdb68d1909fe2ed28e7bd9e7",
+    "teacher_trajectory.py": "0215e297b2dbe1163232ecbc1ae6c11f73908830738ba531cee4f00d68156548",
+    "async_split.py": "13fbb60247de181741482410717cf3478377bdd0ce4eb2a8a77209608c0e3e63",
+    "run_split_runtime.py": "0b53ac2b18421e515e8d70c2a469645a0032e0213b5b62c8de773aa51b7a3b7d",
+    "export_mock_observations.py": "ef306cba15a2555f1d2140cfbe8196e8bdaedfdbfd9d857b31aa86bf21c30682"
+  }
+}

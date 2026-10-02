@@ -1,0 +1,110 @@
+{
+  "scope": "recorded_mock_G1_network_inference_to_simulated_WBC",
+  "hardware_ready": false,
+  "robot_commands_sent": false,
+  "camera_closed_loop": false,
+  "gpu_used": true,
+  "output": "/home/developer/workspaces/g1_pika_ws/g1-pika/artifacts/mock-runtime/run-qj1nhyge",
+  "deployment": "/home/gpu-user/g1-pika-training/artifacts/mock-runtime-ljIHQM",
+  "checks": [
+    {
+      "name": "check_wbc_state.py",
+      "passed": true
+    },
+    {
+      "name": "check_control_guard.py",
+      "passed": true
+    },
+    {
+      "name": "check_policy_action.py",
+      "passed": true
+    },
+    {
+      "name": "check_policy_bridge.py",
+      "passed": true
+    },
+    {
+      "name": "check_async_policy.py",
+      "passed": true
+    },
+    {
+      "name": "check_zmq_transport.py",
+      "passed": true
+    },
+    {
+      "name": "nominal",
+      "session": "49cf24d5c2dc420abcec19f8cb57add2",
+      "passed": true,
+      "accepted_actions": 30,
+      "stop_reason": null,
+      "simulation_returncode": 0,
+      "wbc_output_frames": 600,
+      "server_records": 30,
+      "request_p95_ms": 110.80485904858504,
+      "body_records_paired": true,
+      "within_simulation_balance_bounds": true
+    },
+    {
+      "name": "stale",
+      "session": "9ff7081278f848a7869e57303f5d288b",
+      "passed": true,
+      "accepted_actions": 5,
+      "stop_reason": "ValueError: Stale session/sequence response",
+      "simulation_returncode": 1,
+      "wbc_output_frames": 600,
+      "server_records": 6,
+      "request_p95_ms": 265.41514480486506,
+      "body_records_paired": true,
+      "within_simulation_balance_bounds": true
+    },
+    {
+      "name": "disconnect",
+      "session": "f71a9de4ce644848afa3c563731af06e",
+      "passed": true,
+      "accepted_actions": 5,
+      "stop_reason": "TimeoutError: Policy response deadline exceeded",
+      "simulation_returncode": 1,
+      "wbc_output_frames": 600,
+      "server_records": 5,
+      "request_p95_ms": 284.80084439943306,
+      "body_records_paired": true,
+      "within_simulation_balance_bounds": true
+    },
+    {
+      "name": "delay",
+      "session": "a348bfe3673b452c8d1a241c0a1e5bbd",
+      "passed": true,
+      "accepted_actions": 5,
+      "stop_reason": "TimeoutError: Policy response deadline exceeded",
+      "simulation_returncode": 1,
+      "wbc_output_frames": 600,
+      "server_records": 6,
+      "request_p95_ms": 357.1118057967396,
+      "body_records_paired": true,
+      "within_simulation_balance_bounds": true
+    },
+    {
+      "name": "fresh_session_after_fault",
+      "session": "953c705415ed43489ee08bd75dc43965",
+      "passed": true,
+      "accepted_actions": 30,
+      "stop_reason": null,
+      "simulation_returncode": 0,
+      "wbc_output_frames": 600,
+      "server_records": 30,
+      "request_p95_ms": 105.1069255983748,
+      "body_records_paired": true,
+      "within_simulation_balance_bounds": true
+    }
+  ],
+  "source_sha256": {
+    "mock_policy_server.py": "b3652456c0accc2893389a75af7e924d730beb355b8bbab56e4d30818ff03d8a",
+    "zmq_transport.py": "70c76cbef4e95fdd5478129fa35d55110acea901af0b9332390fc28afa62fb15",
+    "wbc_state.py": "5927b69b858239478091f238ddecfbab0bf592b35f0833f09c1afd97bdd744f0",
+    "wbc_controller.py": "5ff94e04f823a873f1da1e2f7b83fa350b424fae71d2d63616807f9619411f47",
+    "zmq_policy_client.py": "e00f55bd4dd6b22b7ab5b8850ea4d01ce1f02726b3c6abbeaf4a62615e69f0e4",
+    "run_mock_runtime.py": "a170dc6f2e4e6e7c0d7c0dda70e0c2099f781444a78740cdff3d8919d6714a29",
+    "sim_balance.py": "3f9c9608736190bb05010bd217453ba6e094e70e5143be9fd930f00c88ddc6cd"
+  },
+  "passed": true
+}

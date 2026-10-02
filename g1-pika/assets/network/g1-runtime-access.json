@@ -1,0 +1,20 @@
+{
+  "verified_date": "2026-09-18",
+  "g1_host": "unitree@192.0.2.11",
+  "g1_hostname": "example-g1-host",
+  "g1_interface": "enP8p1s0",
+  "g1_os": "Ubuntu 22.04.5 LTS",
+  "g1_architecture": "aarch64",
+  "g1_python": "3.10.12",
+  "gpu_interface": "enp2s0",
+  "gpu_wired_ip": "192.0.2.12",
+  "gpu_ssh_identity": "/home/gpu-user/.ssh/EXAMPLE_RUNTIME_KEY",
+  "gpu_known_hosts": "/home/gpu-user/g1-pika-training/artifacts/g1-access-lw4t5m/known_hosts",
+  "g1_host_ed25519_sha256": "PUBLIC_EXAMPLE_NOT_VERIFIED",
+  "ssh_verified": false,
+  "robot_commands_sent": false,
+  "scope": "PUBLIC_EXAMPLE_NOT_a_verified_deployment",
+  "right_fisheye_device": "/dev/v4l/by-path/platform-3610000.usb-usb-0:2.1.4.4.1:1.0-video-index0",
+  "right_realsense_device": "/dev/v4l/by-path/platform-3610000.usb-usb-0:2.1.4.4.2:1.0-video-index4",
+  "camera_pair_provenance": "EXAMPLE ONLY; USB mapping and cameras must be verified locally"
+}

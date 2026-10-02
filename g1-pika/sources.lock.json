@@ -1,0 +1,56 @@
+{
+  "wbc": {
+    "url": "https://github.com/NVlabs/GR00T-WholeBodyControl.git",
+    "commit": "087f9ac01d46f6d8e4d0b73c01ae64799f292a38",
+    "component": "decoupled_wbc",
+    "balance_sha256": "f645da599d4ca3d29ed273c8f4712620bb680d34977469ca3aeabe5bb9631c18",
+    "walk_sha256": "7c82255b6905ffcc4468fa7f8ddcf7b70db168cf1042107ccab887cb6a8e5407"
+  },
+  "sonic": {
+    "url": "https://github.com/NVlabs/GR00T-WholeBodyControl.git",
+    "commit": "087f9ac01d46f6d8e4d0b73c01ae64799f292a38",
+    "components": [
+      "gear_sonic",
+      "gear_sonic_deploy"
+    ],
+    "source_license": "Apache-2.0; see vendor/GR00T-WholeBodyControl/LICENSE",
+    "model_license": "NVIDIA Open Model License; pinned low_latency weights verified",
+    "protocol_candidate": "pose v1, 1280-byte header, complete 29-joint references",
+    "status": "saved-image LeRobot -> reused IK -> SONIC file diagnostic completed; live and physical control pending",
+    "ik_reuse": {
+      "component": "decoupled_wbc BodyIKSolver and ReducedRobotModel only, not its WBC network",
+      "runtime_source_hashes": "scripts/sonic_tcp_reference.py:IK_HASHES",
+      "urdf": "artifacts/models/g1_pika_closed.urdf",
+      "urdf_sha256": "213b147f729b9961e27ab51b3d0d1c2fce8e17d5a5137381d12cc297eba7f6c3",
+      "scope": "kinematic endpoint with measured legs/waist, not a balance plan",
+      "original_local_urdf_sha256": "3f22154b499fe0e37e0646091747aeaf4652d0907cfe9bae618009e7f21d53b6",
+      "public_derivative": "mesh filenames made relative; model parameters unchanged"
+    },
+    "checkpoint": {
+      "repo": "nvidia/GEAR-SONIC",
+      "revision": "6733128a3d8a523b1418b06bca3cdf61c8b0987f",
+      "variant": "low_latency",
+      "encoder_sha256": "60be43157f57d812f38bdbb740a5de5d5d070e8840d9edc16f02a91a6d06255b",
+      "decoder_sha256": "c4ac2e74045e7cbfb568f15e6bf47ea7ce023df7a94322af50be223e0a628bab",
+      "observation_config_sha256": "582b9a273a3d69fbf49ae59b39295a3be2b4a295e195ef4cf674b5e2571c90ab"
+    },
+    "build_environment": {
+      "cuda": "12.8.93",
+      "tensorrt": "10.13.3.9",
+      "onnxruntime_cpp": "1.16.3",
+      "gxx": "11.4.0"
+    }
+  },
+  "pika_ros": {
+    "url": "https://github.com/kufusha/pika_ros.git",
+    "branch": "feature/g1-pika-retarget-package",
+    "commit": "0f7f6b75a349ceccb252628f5f48a28aaf5c7b6b",
+    "status": "description generator and 3 PIKA meshes migrated; existing dirty worktree preserved",
+    "migrated_assets_manifest": "assets/pika/provenance.json"
+  },
+  "lerobot": {
+    "url": "https://github.com/taigasasaki6331/lerobot.git",
+    "commit": "79edf6a95948d0f0d75df1d54d0a5aad305f75a8",
+    "status": "pinned vendor source; offline ACT inference in separate Python 3.12 environment"
+  }
+}

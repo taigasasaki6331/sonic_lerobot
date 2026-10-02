@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "purpose": "diagnostic_candidate_not_task_acceptance",
+  "hardware_ready": false,
+  "checkpoint": "artifacts/full-rgb-residual/run-xg1fn3b_/pretrained_model",
+  "lerobot_commit": "79edf6a95948d0f0d75df1d54d0a5aad305f75a8",
+  "contract": {
+    "policy": "act",
+    "n_obs_steps": 1,
+    "chunk_size": 1,
+    "n_action_steps": 1,
+    "state_dim": 10,
+    "action_dim": 10,
+    "rotation_layout": "columns",
+    "translation": "local_relative_h1_m",
+    "external_width": "future_absolute_width_m",
+    "codec": "delta_from_measured_width",
+    "camera_roles": {
+      "realsense_rgb": "observation.images.pikaDepthCamera",
+      "fisheye": "observation.images.pikaFisheyeCamera"
+    },
+    "input_rgb_chw": [
+      3,
+      480,
+      640
+    ],
+    "policy_rgb_chw": [
+      3,
+      96,
+      128
+    ],
+    "resize": {
+      "mode": "bilinear",
+      "align_corners": false,
+      "antialias": true
+    },
+    "depth_used": false,
+    "decode_order": [
+      "ACT",
+      "saved_postprocessor",
+      "codec_with_measured_width"
+    ]
+  },
+  "files": {
+    "config.json": {
+      "size_bytes": 1689,
+      "sha256": "0ddae6481d9f1809b1f903d55ad20fe8c6dc91bc39b64d2dc9feecf4936734c9"
+    },
+    "model.safetensors": {
+      "size_bytes": 46903632,
+      "sha256": "230c9dbba2bb575f994be2ca3e772332cdef4f8a5499b25e88130bb93a5650e4"
+    },
+    "action_codec.json": {
+      "size_bytes": 448,
+      "sha256": "26effa5a29009eb455c1aef5e46179f946c40273ec59e5d41eb9f8fe12c56a2d"
+    },
+    "policy_preprocessor.json": {
+      "size_bytes": 1350,
+      "sha256": "5a1625d931b49fddc2a1d810fb9741290c5834b225df4860f466fbd454ebc4fb"
+    },
+    "policy_postprocessor.json": {
+      "size_bytes": 661,
+      "sha256": "663a939fb7748ba2490445fbfd8ce262eb6ad9b9672ef25e996f910834d11427"
+    },
+    "policy_preprocessor_step_3_normalizer_processor.safetensors": {
+      "size_bytes": 904,
+      "sha256": "3b2d26d196ed9ba4cc1fd2239e07440538d1244a0b19de7cd4e50c29554de27c"
+    },
+    "policy_postprocessor_step_0_unnormalizer_processor.safetensors": {
+      "size_bytes": 904,
+      "sha256": "3b2d26d196ed9ba4cc1fd2239e07440538d1244a0b19de7cd4e50c29554de27c"
+    }
+  },
+  "runtime_files": {
+    "scripts/train_rgb_smoke.py": {
+      "size_bytes": 13468,
+      "sha256": "4a3bb4ab43866ef9fca25657a5fd86112b73f7f5e2663ace37f2087c546c6aab"
+    },
+    "scripts/gripper_codec.py": {
+      "size_bytes": 1013,
+      "sha256": "36f6d734a24f49571f4308f96ff5aa48be2da5f9649115d746e6c014f8ba57f7"
+    },
+    "requirements-gpu.lock": {
+      "size_bytes": 1732,
+      "sha256": "5f0f84c6a0204f18354279b723e40eee8f697c1f816def02a9e48ec6fd230d02"
+    }
+  },
+  "training_provenance": {
+    "dataset_manifest_sha256": "475cca99b2324dbf4e0206fe5d428cddee06b4cc6e1ed329b4eb1482fc53ac5d",
+    "split_sha256": "d08a7bb76d3bb49ff502f8a75fed41f38d9756aafcbcb344991a9e033fc213cc",
+    "test_set_used": false
+  }
+}

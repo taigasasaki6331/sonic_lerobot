@@ -1,0 +1,94 @@
+{
+  "initial_run_summary": {
+    "status": "passed",
+    "scope": "cached_RGB_ACT_CUDA_training_and_strict_reload",
+    "hardware_ready": false,
+    "task_success_validated": false,
+    "steps": 1000,
+    "seed": 42,
+    "full_data": true,
+    "training_pool": 8693,
+    "batch_size": 16,
+    "unique_training_samples_seen": 8693,
+    "examples_drawn": 15989,
+    "input_cache": "/home/gpu-user/g1-pika-training/artifacts/full-rgb-cache/cache-6f9in3_c",
+    "test_evaluated": false,
+    "resumed_from_step": 0,
+    "resume_sha256": null,
+    "gpu": "NVIDIA GeForce RTX 5060 Ti",
+    "torch": "2.10.0+cu128",
+    "cuda": "12.8",
+    "lerobot_commit": "79edf6a95948d0f0d75df1d54d0a5aad305f75a8",
+    "samples_sha256": "0731ffb33584835dbb449279274af6a793debe9fcb57f525523835e3c1287558",
+    "requirements_sha256": "5f0f84c6a0204f18354279b723e40eee8f697c1f816def02a9e48ec6fd230d02",
+    "script_sha256": "01342742a0a66038901212d2df266c661aef6248f90f1a3b800503989dc56b52",
+    "input_manifest_sha256": "9d7ca847fcd3be16e4e8987e462e19f3bbf6a9cc46685e4bc6e58c20ad712c67",
+    "training_seconds": 27.735826738000014,
+    "training_timing_includes_resume_checkpoint_io": true,
+    "cached_inference_p95_ms": 4.824598789215088,
+    "timing_scope": "synchronized CPU cache to GPU ACT to CPU output; excludes decoding and resize",
+    "reload_exact": true,
+    "reload_evaluated_samples": 1278,
+    "metrics": {
+      "train": {
+        "evaluated_samples": 256,
+        "translation_l2_mean_m": 0.002077095676213503,
+        "no_motion_translation_l2_mean_m": 0.0021029063500463963,
+        "gripper_mae_m": 0.0025099203921854496,
+        "hold_gripper_mae_m": 0.0013634196948260069,
+        "negative_gripper_predictions": 0
+      },
+      "validation": {
+        "evaluated_samples": 1022,
+        "translation_l2_mean_m": 0.0020660932641476393,
+        "no_motion_translation_l2_mean_m": 0.002115487353876233,
+        "gripper_mae_m": 0.003029558341950178,
+        "hold_gripper_mae_m": 0.0017674850532785058,
+        "negative_gripper_predictions": 0
+      }
+    },
+    "run": "/home/gpu-user/g1-pika-training/artifacts/full-rgb-baseline/run-79a2ge2g"
+  },
+  "audit": {
+    "status": "passed",
+    "run": "/home/gpu-user/g1-pika-training/artifacts/full-rgb-baseline/run-6tprwbow",
+    "train_only_statistics_exact": true,
+    "cache_and_source_hashes_match": true,
+    "test_frames_used": false,
+    "training_unique_samples_seen": 8693,
+    "validation_frames": 1022,
+    "moving_threshold_m": 0.001,
+    "moving_frames": 577,
+    "validation_metrics": {
+      "evaluated_samples": 1022,
+      "translation_l2_mean_m": 0.0020660932641476393,
+      "no_motion_translation_l2_mean_m": 0.002115487353876233,
+      "gripper_mae_m": 0.003029558341950178,
+      "hold_gripper_mae_m": 0.0017674850532785058,
+      "negative_gripper_predictions": 0
+    },
+    "audit_script_sha256": "56570432ad2f6832e796601c8b1e9f3e83cbf1a0272c2cc5d4734a6faaa8f18a",
+    "moving_translation_error_m": 0.0032031568698585033,
+    "moving_no_motion_error_m": 0.003317182417958975,
+    "rotation_error_mean_rad": 0.010941846611097022,
+    "no_motion_rotation_error_mean_rad": 0.01047412040279283,
+    "invalid_rotation_predictions": 0,
+    "rotation_prediction_decode": "columns Gram-Schmidt; reject degenerate vectors; no action clipping",
+    "predicted_gripper_range_m": [
+      0.0015654675662517548,
+      0.09439847618341446
+    ],
+    "hardware_ready": false,
+    "task_success_validated": false
+  },
+  "resume": {
+    "status": "passed",
+    "scope": "full_data_1000_vs_500_plus_500",
+    "reference_run": "/home/gpu-user/g1-pika-training/artifacts/full-rgb-baseline/run-79a2ge2g",
+    "resumed_run": "/home/gpu-user/g1-pika-training/artifacts/full-rgb-baseline/run-6tprwbow",
+    "all_losses_weights_predictions_optimizer_sampler_rng_exact": true,
+    "training_unique_samples_seen": 8693,
+    "test_used": false,
+    "hardware_ready": false
+  }
+}

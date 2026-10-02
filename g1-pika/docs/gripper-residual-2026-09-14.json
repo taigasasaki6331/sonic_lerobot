@@ -1,0 +1,124 @@
+{
+  "status": "completed",
+  "plan": {
+    "steps": 3000,
+    "seed": 42,
+    "change": "internal width target = future width - measured current width",
+    "external_action": "unchanged 10D local h1, columns rotation, future absolute width",
+    "test_used": false,
+    "no_clipping": true
+  },
+  "run": "/home/gpu-user/g1-pika-training/artifacts/full-rgb-residual/run-xg1fn3b_",
+  "absolute_width_reference": {
+    "steps": 3000,
+    "run": "/home/gpu-user/g1-pika-training/artifacts/full-rgb-baseline/run-bdq1hvyr",
+    "validation": {
+      "evaluated_samples": 1022,
+      "translation_l2_mean_m": 0.0020454139448702335,
+      "no_motion_translation_l2_mean_m": 0.002115487353876233,
+      "gripper_mae_m": 0.002087047090753913,
+      "hold_gripper_mae_m": 0.0017674850532785058,
+      "negative_gripper_predictions": 4
+    },
+    "audit": {
+      "status": "passed",
+      "run": "/home/gpu-user/g1-pika-training/artifacts/full-rgb-baseline/run-bdq1hvyr",
+      "train_only_statistics_exact": true,
+      "cache_and_source_hashes_match": true,
+      "test_frames_used": false,
+      "training_unique_samples_seen": 8693,
+      "validation_frames": 1022,
+      "moving_threshold_m": 0.001,
+      "moving_frames": 577,
+      "validation_metrics": {
+        "evaluated_samples": 1022,
+        "translation_l2_mean_m": 0.0020454139448702335,
+        "no_motion_translation_l2_mean_m": 0.002115487353876233,
+        "gripper_mae_m": 0.002087047090753913,
+        "hold_gripper_mae_m": 0.0017674850532785058,
+        "negative_gripper_predictions": 4
+      },
+      "audit_script_sha256": "56570432ad2f6832e796601c8b1e9f3e83cbf1a0272c2cc5d4734a6faaa8f18a",
+      "moving_translation_error_m": 0.003100008936598897,
+      "moving_no_motion_error_m": 0.003317182417958975,
+      "rotation_error_mean_rad": 0.010402854744044768,
+      "no_motion_rotation_error_mean_rad": 0.01047412040279283,
+      "invalid_rotation_predictions": 0,
+      "rotation_prediction_decode": "columns Gram-Schmidt; reject degenerate vectors; no action clipping",
+      "predicted_gripper_range_m": [
+        -0.0007473044097423553,
+        0.09984222054481506
+      ],
+      "hardware_ready": false,
+      "task_success_validated": false
+    },
+    "diagnostic_gates": {
+      "position_better_than_hold": true,
+      "moving_position_better_than_hold": true,
+      "rotation_better_than_hold": true,
+      "gripper_better_than_hold": false,
+      "no_degenerate_rotation": true,
+      "no_negative_gripper": false
+    },
+    "all_diagnostic_gates_passed": false,
+    "training_seconds_this_stage": 82.62473885800046,
+    "cached_inference_p95_ms": 4.723155498504639,
+    "first_1000_losses_equal_previous_baseline": true
+  },
+  "residual_validation": {
+    "evaluated_samples": 1022,
+    "translation_l2_mean_m": 0.0020241292659193277,
+    "no_motion_translation_l2_mean_m": 0.002115487353876233,
+    "gripper_mae_m": 0.001602655160240829,
+    "hold_gripper_mae_m": 0.0017674850532785058,
+    "negative_gripper_predictions": 2
+  },
+  "residual_audit": {
+    "status": "passed",
+    "run": "/home/gpu-user/g1-pika-training/artifacts/full-rgb-residual/run-xg1fn3b_",
+    "train_only_statistics_exact": true,
+    "action_codec": "delta_from_measured_width",
+    "cache_and_source_hashes_match": true,
+    "test_frames_used": false,
+    "training_unique_samples_seen": 8693,
+    "validation_frames": 1022,
+    "moving_threshold_m": 0.001,
+    "moving_frames": 577,
+    "validation_metrics": {
+      "evaluated_samples": 1022,
+      "translation_l2_mean_m": 0.0020241292659193277,
+      "no_motion_translation_l2_mean_m": 0.002115487353876233,
+      "gripper_mae_m": 0.001602655160240829,
+      "hold_gripper_mae_m": 0.0017674850532785058,
+      "negative_gripper_predictions": 2
+    },
+    "audit_script_sha256": "14017bafa91949c006b957bb1656eb721feb19472a6c45c4aa642daaac3ecc98",
+    "moving_translation_error_m": 0.003056903136894107,
+    "moving_no_motion_error_m": 0.003317182417958975,
+    "rotation_error_mean_rad": 0.010510935573910179,
+    "no_motion_rotation_error_mean_rad": 0.01047412040279283,
+    "invalid_rotation_predictions": 0,
+    "rotation_prediction_decode": "columns Gram-Schmidt; reject degenerate vectors; no action clipping",
+    "predicted_gripper_range_m": [
+      -0.004192458000034094,
+      0.09683459997177124
+    ],
+    "hardware_ready": false,
+    "task_success_validated": false
+  },
+  "diagnostic_gates": {
+    "position_better_than_hold": true,
+    "moving_position_better_than_hold": true,
+    "rotation_better_than_hold": false,
+    "gripper_better_than_hold": true,
+    "no_negative_width": false,
+    "no_degenerate_rotation": true
+  },
+  "all_diagnostic_gates_passed": false,
+  "training_seconds": 84.58588786099972,
+  "cached_inference_p95_ms": 4.9329118728637695,
+  "hardware_ready": false,
+  "test_used": false,
+  "comparison": "/home/gpu-user/g1-pika-training/artifacts/gripper-residual/comparison-oszk3de9",
+  "warning": "Native ACT/postprocessor output is residual width: mandatory action_codec.json decoding."
+}

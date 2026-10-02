@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "mode": "record_only",
+  "hardware_output_enabled": false,
+  "init_duration_s": 3.0,
+  "settle_duration_s": 0.5,
+  "settle_position_tolerance_rad": 0.02,
+  "settle_velocity_tolerance_rad_s": 0.05,
+  "max_body_age_s": 0.1,
+  "max_ownership_ack_age_s": 0.5,
+  "max_takeover_wait_s": 0.5,
+  "max_command_age_s": 0.1,
+  "max_target_step_rad": 0.05,
+  "max_writer_gap_s": 0.01,
+  "control_period_s": 0.02,
+  "writer_period_s": 0.002
+}

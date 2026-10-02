@@ -1,0 +1,2 @@
+# CPU-only development checks; no LeRobot/SONIC weights or hardware drivers.
+numpy==1.26.4

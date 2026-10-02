@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "scope": "20_steps_vs_10_then_new_process_resume_to_20",
+  "losses_model_predictions_optimizer_cpu_cuda_rng_exact": true,
+  "full_run": "/home/gpu-user/g1-pika-training/artifacts/gpu-smoke/run-culppb1r",
+  "partial_run": "/home/gpu-user/g1-pika-training/artifacts/gpu-smoke/run-gs1v8rny",
+  "resumed_run": "/home/gpu-user/g1-pika-training/artifacts/gpu-smoke/run-suuhyij9",
+  "trainer_sha256": "967c318757d77ef2f76393bcab52282610378ef9ceb488d49478935520a799d8",
+  "hardware_ready": false,
+  "unexpected_crash_tested": false
+}

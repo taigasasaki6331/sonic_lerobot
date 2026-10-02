@@ -1,0 +1,10 @@
+{
+  "gpu_host": "galleria@192.0.2.9",
+  "gpu_ip": "192.0.2.9",
+  "client_ip": "192.0.2.8",
+  "gpu_root": "/home/gpu-user/g1-pika-training",
+  "ssh_key": "/home/developer/.ssh/EXAMPLE_GPU_KEY",
+  "port": 6159,
+  "frames": 30,
+  "seconds": 12
+}

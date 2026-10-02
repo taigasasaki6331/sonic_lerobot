@@ -1,0 +1,1184 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="g1_pika_closed">
+  <mujoco>
+    <compiler meshdir="meshes" discardvisual="false" />
+  </mujoco>
+  <link name="pelvis">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/pelvis.STL" />
+      </geometry>
+      <material name="dark">
+        <color rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 -0.07605" rpy="0 0 0" />
+      <mass value="3.813" />
+      <inertia ixx="0.01054899832358096" iyy="0.009308899999999997" izz="0.007918401676419036" ixy="0.0" ixz="2.099996453890986e-06" iyz="0.0" />
+    </inertial>
+  </link>
+  <link name="pelvis_contour_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/pelvis_contour_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/pelvis_contour_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="pelvis_contour_joint" type="fixed">
+    <parent link="pelvis" />
+    <child link="pelvis_contour_link" />
+  </joint>
+  <link name="left_hip_pitch_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_hip_pitch_link.STL" />
+      </geometry>
+      <material name="dark">
+        <color rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_hip_pitch_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.002741 0.047791 -0.02606" rpy="0 0 0" />
+      <mass value="1.35" />
+      <inertia ixx="0.001811004868294075" iyy="0.0014193029888784389" izz="0.0012812021428274852" ixy="3.680008386440671e-05" ixz="-3.440019998574099e-05" iyz="0.00017100037109195814" />
+    </inertial>
+  </link>
+  <joint name="left_hip_pitch_joint" type="revolute">
+    <origin xyz="0 0.064452 -0.1027" rpy="0 0 0" />
+    <parent link="pelvis" />
+    <child link="left_hip_pitch_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.5307" upper="2.8798" effort="88" velocity="32" />
+  </joint>
+  <link name="left_hip_roll_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_hip_roll_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_hip_roll_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.029812 -0.001045 -0.087934" rpy="0 0 0" />
+      <mass value="1.52" />
+      <inertia ixx="0.0023773001746271853" iyy="0.0024122982252233714" izz="0.0016595016001494424" ixy="-3.800166363454874e-06" ixz="-0.00039079998955544117" iyz="1.8400046213493058e-05" />
+    </inertial>
+  </link>
+  <joint name="left_hip_roll_joint" type="revolute">
+    <origin xyz="0 0.052 -0.030465" rpy="0 -0.1748999842939423 0" />
+    <parent link="left_hip_pitch_link" />
+    <child link="left_hip_roll_link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.5236" upper="2.9671" effort="88" velocity="32" />
+  </joint>
+  <link name="left_hip_yaw_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_hip_yaw_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_hip_yaw_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.057709 -0.010981 -0.15078" rpy="0 0 0" />
+      <mass value="1.702" />
+      <inertia ixx="0.005777397107124588" iyy="0.007612401402598431" izz="0.003149001490276982" ixy="-0.0005411011552619453" ixz="-0.0023948037654594324" iyz="-0.000707202250480817" />
+    </inertial>
+  </link>
+  <joint name="left_hip_yaw_joint" type="revolute">
+    <origin xyz="0.025001 0 -0.12412" rpy="0 0 0" />
+    <parent link="left_hip_roll_link" />
+    <child link="left_hip_yaw_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.7576" upper="2.7576" effort="88" velocity="32" />
+  </joint>
+  <link name="left_knee_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_knee_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_knee_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.005457 0.003964 -0.12074" rpy="0 0 0" />
+      <mass value="1.932" />
+      <inertia ixx="0.011328992306848156" iyy="0.011276992436821493" izz="0.001516795256330348" ixy="4.8166506219503937e-05" ixz="-4.489745205909347e-05" iyz="-0.000714600248731503" />
+    </inertial>
+  </link>
+  <joint name="left_knee_joint" type="revolute">
+    <origin xyz="-0.078273 0.0021489 -0.17734" rpy="0 0.1748999842939425 0" />
+    <parent link="left_hip_yaw_link" />
+    <child link="left_knee_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.087267" upper="2.8798" effort="139" velocity="20" />
+  </joint>
+  <link name="left_ankle_pitch_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_ankle_pitch_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_ankle_pitch_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.007269 0 0.011137" rpy="0 0 0" />
+      <mass value="0.074" />
+      <inertia ixx="8.399997150351002e-06" iyy="1.89e-05" izz="1.2600002849649004e-05" ixy="0.0" ixz="-2.8999945312820983e-06" iyz="0.0" />
+    </inertial>
+  </link>
+  <joint name="left_ankle_pitch_joint" type="revolute">
+    <origin xyz="0 -9.4445e-05 -0.30001" rpy="0 0 0" />
+    <parent link="left_knee_link" />
+    <child link="left_ankle_pitch_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.87267" upper="0.5236" effort="50" velocity="37" />
+  </joint>
+  <link name="left_ankle_roll_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_ankle_roll_link.STL" />
+      </geometry>
+      <material name="dark">
+        <color rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.05 0.025 -0.03" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.005" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.05 -0.025 -0.03" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.005" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.12 0.03 -0.03" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.005" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.12 -0.03 -0.03" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.005" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.026505 0 -0.016425" rpy="0 0 0" />
+      <mass value="0.608" />
+      <inertia ixx="0.000223099671363976" iyy="0.001616100106372291" izz="0.001666701222263733" ixy="1.9999990824031503e-07" ixz="8.91010116822498e-05" iyz="-1.0000201701707651e-07" />
+    </inertial>
+  </link>
+  <joint name="left_ankle_roll_joint" type="revolute">
+    <origin xyz="0 0 -0.017558" rpy="0 0 0" />
+    <parent link="left_ankle_pitch_link" />
+    <child link="left_ankle_roll_link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.2618" upper="0.2618" effort="50" velocity="37" />
+  </joint>
+  <link name="right_hip_pitch_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_hip_pitch_link.STL" />
+      </geometry>
+      <material name="dark">
+        <color rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_hip_pitch_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.002741 -0.047791 -0.02606" rpy="0 0 0" />
+      <mass value="1.35" />
+      <inertia ixx="0.001811004868294075" iyy="0.0014193029888784389" izz="0.0012812021428274852" ixy="-3.680008386440671e-05" ixz="-3.440019998574099e-05" iyz="-0.00017100037109195814" />
+    </inertial>
+  </link>
+  <joint name="right_hip_pitch_joint" type="revolute">
+    <origin xyz="0 -0.064452 -0.1027" rpy="0 0 0" />
+    <parent link="pelvis" />
+    <child link="right_hip_pitch_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-2.5307" upper="2.8798" effort="88" velocity="32" />
+  </joint>
+  <link name="right_hip_roll_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_hip_roll_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_hip_roll_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.029812 0.001045 -0.087934" rpy="0 0 0" />
+      <mass value="1.52" />
+      <inertia ixx="0.0023773001746271853" iyy="0.0024122982252233714" izz="0.0016595016001494424" ixy="3.800166363454874e-06" ixz="-0.00039079998955544117" iyz="-1.8400046213493058e-05" />
+    </inertial>
+  </link>
+  <joint name="right_hip_roll_joint" type="revolute">
+    <origin xyz="0 -0.052 -0.030465" rpy="0 -0.1748999842939423 0" />
+    <parent link="right_hip_pitch_link" />
+    <child link="right_hip_roll_link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-2.9671" upper="0.5236" effort="88" velocity="32" />
+  </joint>
+  <link name="right_hip_yaw_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_hip_yaw_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_hip_yaw_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.057709 0.010981 -0.15078" rpy="0 0 0" />
+      <mass value="1.702" />
+      <inertia ixx="0.005777397107124587" iyy="0.007612401402598431" izz="0.003149001490276982" ixy="0.0005411011552619446" ixz="-0.0023948037654594324" iyz="0.0007072022504808172" />
+    </inertial>
+  </link>
+  <joint name="right_hip_yaw_joint" type="revolute">
+    <origin xyz="0.025001 0 -0.12412" rpy="0 0 0" />
+    <parent link="right_hip_roll_link" />
+    <child link="right_hip_yaw_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.7576" upper="2.7576" effort="88" velocity="32" />
+  </joint>
+  <link name="right_knee_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_knee_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_knee_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.005457 -0.003964 -0.12074" rpy="0 0 0" />
+      <mass value="1.932" />
+      <inertia ixx="0.011329010733745452" iyy="0.011277010395012138" izz="0.001516798871242411" ixy="-4.8238971895461755e-05" ixz="4.489734581881256e-05" iyz="0.0007146010460124165" />
+    </inertial>
+  </link>
+  <joint name="right_knee_joint" type="revolute">
+    <origin xyz="-0.078273 -0.0021489 -0.17734" rpy="0 0.1748999842939425 0" />
+    <parent link="right_hip_yaw_link" />
+    <child link="right_knee_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.087267" upper="2.8798" effort="139" velocity="20" />
+  </joint>
+  <link name="right_ankle_pitch_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_ankle_pitch_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_ankle_pitch_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.007269 0 0.011137" rpy="0 0 0" />
+      <mass value="0.074" />
+      <inertia ixx="8.399997150351002e-06" iyy="1.89e-05" izz="1.2600002849649004e-05" ixy="0.0" ixz="-2.8999945312820983e-06" iyz="0.0" />
+    </inertial>
+  </link>
+  <joint name="right_ankle_pitch_joint" type="revolute">
+    <origin xyz="0 9.4445e-05 -0.30001" rpy="0 0 0" />
+    <parent link="right_knee_link" />
+    <child link="right_ankle_pitch_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.87267" upper="0.5236" effort="50" velocity="37" />
+  </joint>
+  <link name="right_ankle_roll_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_ankle_roll_link.STL" />
+      </geometry>
+      <material name="dark">
+        <color rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.05 0.025 -0.03" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.005" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.05 -0.025 -0.03" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.005" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.12 0.03 -0.03" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.005" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.12 -0.03 -0.03" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.005" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.026505 0 -0.016425" rpy="0 0 0" />
+      <mass value="0.608" />
+      <inertia ixx="0.000223099671363976" iyy="0.001616100106372291" izz="0.001666701222263733" ixy="-1.9999990824031503e-07" ixz="8.91010116822498e-05" iyz="1.0000201701707651e-07" />
+    </inertial>
+  </link>
+  <joint name="right_ankle_roll_joint" type="revolute">
+    <origin xyz="0 0 -0.017558" rpy="0 0 0" />
+    <parent link="right_ankle_pitch_link" />
+    <child link="right_ankle_roll_link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.2618" upper="0.2618" effort="50" velocity="37" />
+  </joint>
+  <link name="waist_yaw_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/waist_yaw_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <inertial>
+      <origin xyz="0.003494 0.000233 0.018034" rpy="0 0 0" />
+      <mass value="0.214" />
+      <inertia ixx="0.00010672975393804547" iyy="0.00010421984662697533" izz="0.000162500399434979" ixy="2.7028141250584e-06" ixz="-7.63111886445652e-06" iyz="-2.0099777371207575e-07" />
+    </inertial>
+  </link>
+  <joint name="waist_yaw_joint" type="revolute">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="pelvis" />
+    <child link="waist_yaw_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.618" upper="2.618" effort="88" velocity="32" />
+  </joint>
+  <link name="waist_roll_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/waist_roll_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <inertial>
+      <origin xyz="0 2.3e-05 0" rpy="0 0 0" />
+      <mass value="0.086" />
+      <inertia ixx="7.079e-06" iyy="6.339e-06" izz="8.245e-06" ixy="0.0" ixz="0.0" iyz="0.0" />
+    </inertial>
+  </link>
+  <joint name="waist_roll_joint" type="revolute">
+    <origin xyz="-0.0039635 0 0.044" rpy="0 0 0" />
+    <parent link="waist_yaw_link" />
+    <child link="waist_roll_link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.52" upper="0.52" effort="50" velocity="37" />
+  </joint>
+  <link name="torso_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/torso_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/torso_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.00203158 0.000339683 0.184568" rpy="0 0 0" />
+      <mass value="7.818" />
+      <inertia ixx="0.12169844316350995" iyy="0.10982508111893434" izz="0.027521975717555675" ixy="3.1109256639473666e-05" ixz="-0.0037422894808516794" iyz="-1.550743394335511e-05" />
+    </inertial>
+  </link>
+  <joint name="waist_pitch_joint" type="revolute">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="waist_roll_link" />
+    <child link="torso_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-0.52" upper="0.52" effort="50" velocity="37" />
+  </joint>
+  <joint name="logo_joint" type="fixed">
+    <origin xyz="0.0039635 0 -0.054" rpy="0 0 0" />
+    <parent link="torso_link" />
+    <child link="logo_link" />
+  </joint>
+  <link name="logo_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/logo_link.STL" />
+      </geometry>
+      <material name="dark">
+        <color rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/logo_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="head_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/head_link.STL" />
+      </geometry>
+      <material name="dark">
+        <color rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/head_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="head_joint" type="fixed">
+    <origin xyz="0.0039635 0 -0.054" rpy="0 0 0" />
+    <parent link="torso_link" />
+    <child link="head_link" />
+  </joint>
+  <link name="waist_support_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/waist_support_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/waist_support_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="waist_support_joint" type="fixed">
+    <origin xyz="0.0039635 0 -0.054" rpy="0 0 0" />
+    <parent link="torso_link" />
+    <child link="waist_support_link" />
+  </joint>
+  <link name="imu_link" />
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="-0.03959 -0.00224 0.13792" rpy="0 0 0" />
+    <parent link="torso_link" />
+    <child link="imu_link" />
+  </joint>
+  <link name="d435_link" />
+  <joint name="d435_joint" type="fixed">
+    <origin xyz="0.0576235 0.01753 0.41987" rpy="0 0.8307767239493009 0" />
+    <parent link="torso_link" />
+    <child link="d435_link" />
+  </joint>
+  <link name="mid360_link" />
+  <joint name="mid360_joint" type="fixed">
+    <origin xyz="0.0002835 0.00003 0.40618" rpy="0 0.04014257279586953 0" />
+    <parent link="torso_link" />
+    <child link="mid360_link" />
+  </joint>
+  <link name="left_shoulder_pitch_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_shoulder_pitch_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0.04 -0.01" rpy="0 1.5707963267948966 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.05" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0.035892 -0.011628" rpy="0 0 0" />
+      <mass value="0.718" />
+      <inertia ixx="0.00042909968491946246" iyy="0.00045300025641321456" izz="0.00042300005866732353" ixy="-9.200017830403864e-06" ixz="6.399783509828613e-06" iyz="2.2600111071811054e-05" />
+    </inertial>
+  </link>
+  <joint name="left_shoulder_pitch_joint" type="revolute">
+    <origin xyz="0.0039563 0.10022 0.24778" rpy="0.2793090626390551 5.494889853707718e-05 -0.000191589977890233" />
+    <parent link="torso_link" />
+    <child link="left_shoulder_pitch_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-3.0892" upper="2.6704" effort="25" velocity="37" />
+  </joint>
+  <link name="left_shoulder_roll_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_shoulder_roll_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.004 0.006 -0.053" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.03" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.000227 0.00727 -0.063243" rpy="0 0 0" />
+      <mass value="0.643" />
+      <inertia ixx="0.0006176996150304665" iyy="0.0006911998322671005" izz="0.00038939955270243294" ixy="-1.0000822400442927e-06" ixz="8.699999981031637e-06" iyz="-5.300323715449427e-06" />
+    </inertial>
+  </link>
+  <joint name="left_shoulder_roll_joint" type="revolute">
+    <origin xyz="0 0.038 -0.013831" rpy="-0.2792505189613739 0 0" />
+    <parent link="left_shoulder_pitch_link" />
+    <child link="left_shoulder_roll_link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-1.5882" upper="2.2515" effort="25" velocity="37" />
+  </joint>
+  <link name="left_shoulder_yaw_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_shoulder_yaw_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_shoulder_yaw_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.010773 -0.002949 -0.072009" rpy="0 0 0" />
+      <mass value="0.734" />
+      <inertia ixx="0.0009988038874856958" iyy="0.0010604967120099713" izz="0.00043540040050433365" ixy="7.899710029146711e-06" ixz="0.00014120079581610167" iyz="-2.859992837297651e-05" />
+    </inertial>
+  </link>
+  <joint name="left_shoulder_yaw_joint" type="revolute">
+    <origin xyz="0 0.00624 -0.1032" rpy="0 0 0" />
+    <parent link="left_shoulder_roll_link" />
+    <child link="left_shoulder_yaw_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.618" upper="2.618" effort="25" velocity="37" />
+  </joint>
+  <link name="left_elbow_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_elbow_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_elbow_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.064956 0.004454 -0.010062" rpy="0 0 0" />
+      <mass value="0.6" />
+      <inertia ixx="0.00028909962132362397" iyy="0.0004151999739863405" izz="0.0004197004046900353" ixy="6.530015225215015e-05" ixz="1.720010902309666e-05" iyz="-5.600087685876815e-06" />
+    </inertial>
+  </link>
+  <joint name="left_elbow_joint" type="revolute">
+    <origin xyz="0.015783 0 -0.080518" rpy="0 0 0" />
+    <parent link="left_shoulder_yaw_link" />
+    <child link="left_elbow_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.0472" upper="2.0944" effort="25" velocity="37" />
+  </joint>
+  <joint name="left_wrist_roll_joint" type="revolute">
+    <origin xyz="0.1 0.00188791 -0.01" rpy="0 0 0" />
+    <axis xyz="1 0 0" />
+    <parent link="left_elbow_link" />
+    <child link="left_wrist_roll_link" />
+    <limit effort="25" velocity="37" lower="-1.972222054" upper="1.972222054" />
+  </joint>
+  <link name="left_wrist_roll_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_wrist_roll_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_wrist_roll_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0171394 0.000537591 4.8864e-07" rpy="0 0 0" />
+      <mass value="0.085445" />
+      <inertia ixx="4.821544985875471e-05" iyy="3.7228955460963715e-05" izz="5.4821094680281596e-05" ixy="-4.245137186478677e-06" ixz="5.107507839029042e-09" iyz="-1.2312132851369397e-09" />
+    </inertial>
+  </link>
+  <joint name="left_wrist_pitch_joint" type="revolute">
+    <origin xyz="0.038 0 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <parent link="left_wrist_roll_link" />
+    <child link="left_wrist_pitch_link" />
+    <limit effort="5" velocity="22" lower="-1.614429558" upper="1.614429558" />
+  </joint>
+  <link name="left_wrist_pitch_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_wrist_pitch_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_wrist_pitch_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0229999 -0.00111685 -0.00111658" rpy="0 0 0" />
+      <mass value="0.48405" />
+      <inertia ixx="0.00016579650778954862" iyy="0.0004295405454726838" izz="0.00042953694673776745" ixy="-1.2312044668400514e-05" ixz="1.2316958617843378e-05" iyz="8.142487319394196e-07" />
+    </inertial>
+  </link>
+  <joint name="left_wrist_yaw_joint" type="revolute">
+    <origin xyz="0.046 0 0" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <parent link="left_wrist_pitch_link" />
+    <child link="left_wrist_yaw_link" />
+    <limit effort="5" velocity="22" lower="-1.614429558" upper="1.614429558" />
+  </joint>
+  <link name="left_wrist_yaw_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_wrist_yaw_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/left_wrist_yaw_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.02200381568 0.00049485096 0.00053861123" rpy="0 0 0" />
+      <mass value="0.08457647" />
+      <inertia ixx="4.929128828e-05" iyy="5.973338134e-05" izz="3.928083826e-05" ixy="-4.5735494e-07" ixz="4.45867591e-06" iyz="4.3217198e-07" />
+    </inertial>
+  </link>
+  <link name="right_shoulder_pitch_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_shoulder_pitch_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.04 -0.01" rpy="0 1.5707963267948966 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.05" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 -0.035892 -0.011628" rpy="0 0 0" />
+      <mass value="0.718" />
+      <inertia ixx="0.00042909968491946246" iyy="0.00045300025641321456" izz="0.00042300005866732353" ixy="9.200017830403864e-06" ixz="6.399783509828613e-06" iyz="-2.2600111071811054e-05" />
+    </inertial>
+  </link>
+  <joint name="right_shoulder_pitch_joint" type="revolute">
+    <origin xyz="0.0039563 -0.10021 0.24778" rpy="-0.2793090626390551 5.494889853707718e-05 0.000191589977890233" />
+    <parent link="torso_link" />
+    <child link="right_shoulder_pitch_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-3.0892" upper="2.6704" effort="25" velocity="37" />
+  </joint>
+  <link name="right_shoulder_roll_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_shoulder_roll_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.004 -0.006 -0.053" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.03" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.000227 -0.00727 -0.063243" rpy="0 0 0" />
+      <mass value="0.643" />
+      <inertia ixx="0.0006176996150304665" iyy="0.0006911998322671005" izz="0.00038939955270243283" ixy="1.0000822400442195e-06" ixz="8.699999981031639e-06" iyz="5.300323715449426e-06" />
+    </inertial>
+  </link>
+  <joint name="right_shoulder_roll_joint" type="revolute">
+    <origin xyz="0 -0.038 -0.013831" rpy="0.2792505189613739 0 0" />
+    <parent link="right_shoulder_pitch_link" />
+    <child link="right_shoulder_roll_link" />
+    <axis xyz="1 0 0" />
+    <limit lower="-2.2515" upper="1.5882" effort="25" velocity="37" />
+  </joint>
+  <link name="right_shoulder_yaw_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_shoulder_yaw_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_shoulder_yaw_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.010773 0.002949 -0.072009" rpy="0 0 0" />
+      <mass value="0.734" />
+      <inertia ixx="0.0009988038874856958" iyy="0.0010604967120099713" izz="0.00043540040050433365" ixy="-7.899710029146594e-06" ixz="0.00014120079581610167" iyz="2.8599928372976525e-05" />
+    </inertial>
+  </link>
+  <joint name="right_shoulder_yaw_joint" type="revolute">
+    <origin xyz="0 -0.00624 -0.1032" rpy="0 0 0" />
+    <parent link="right_shoulder_roll_link" />
+    <child link="right_shoulder_yaw_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.618" upper="2.618" effort="25" velocity="37" />
+  </joint>
+  <link name="right_elbow_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_elbow_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_elbow_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.064956 -0.004454 -0.010062" rpy="0 0 0" />
+      <mass value="0.6" />
+      <inertia ixx="0.000289099621323624" iyy="0.0004151999739863405" izz="0.0004197004046900353" ixy="-6.530015225215018e-05" ixz="1.720010902309666e-05" iyz="5.600087685876815e-06" />
+    </inertial>
+  </link>
+  <joint name="right_elbow_joint" type="revolute">
+    <origin xyz="0.015783 0 -0.080518" rpy="0 0 0" />
+    <parent link="right_shoulder_yaw_link" />
+    <child link="right_elbow_link" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.0472" upper="2.0944" effort="25" velocity="37" />
+  </joint>
+  <joint name="right_wrist_roll_joint" type="revolute">
+    <origin xyz="0.1 -0.00188791 -0.01" rpy="0 0 0" />
+    <axis xyz="1 0 0" />
+    <parent link="right_elbow_link" />
+    <child link="right_wrist_roll_link" />
+    <limit effort="25" velocity="37" lower="-1.972222054" upper="1.972222054" />
+  </joint>
+  <link name="right_wrist_roll_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_wrist_roll_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_wrist_roll_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0171394 -0.000537591 4.8864e-07" rpy="0 0 0" />
+      <mass value="0.085445" />
+      <inertia ixx="4.821544985875471e-05" iyy="3.7228955460963715e-05" izz="5.4821094680281596e-05" ixy="4.245137186478677e-06" ixz="5.107507839027199e-09" iyz="1.2312132851378794e-09" />
+    </inertial>
+  </link>
+  <joint name="right_wrist_pitch_joint" type="revolute">
+    <origin xyz="0.038 0 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <parent link="right_wrist_roll_link" />
+    <child link="right_wrist_pitch_link" />
+    <limit effort="5" velocity="22" lower="-1.614429558" upper="1.614429558" />
+  </joint>
+  <link name="right_wrist_pitch_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_wrist_pitch_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_wrist_pitch_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0229999 0.00111685 -0.00111658" rpy="0 0 0" />
+      <mass value="0.48405" />
+      <inertia ixx="0.00016579650778954862" iyy="0.00042954054547268374" izz="0.00042953694673776745" ixy="1.2312044668400504e-05" ixz="1.2316958617843388e-05" iyz="-8.142487319394581e-07" />
+    </inertial>
+  </link>
+  <joint name="right_wrist_yaw_joint" type="revolute">
+    <origin xyz="0.046 0 0" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <parent link="right_wrist_pitch_link" />
+    <child link="right_wrist_yaw_link" />
+    <limit effort="5" velocity="22" lower="-1.614429558" upper="1.614429558" />
+  </joint>
+  <link name="right_wrist_yaw_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_wrist_yaw_link.STL" />
+      </geometry>
+      <material name="white">
+        <color rgba="0.7 0.7 0.7 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../vendor/GR00T-WholeBodyControl/decoupled_wbc/control/robot_model/model_data/g1/meshes/right_wrist_yaw_link.STL" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.02200381568 -0.00049485096 0.00053861123" rpy="0 0 0" />
+      <mass value="0.08457647" />
+      <inertia ixx="4.929128828e-05" iyy="5.973338134e-05" izz="3.928083826e-05" ixy="4.5735494e-07" ixz="4.45867591e-06" iyz="-4.3217198e-07" />
+    </inertial>
+  </link>
+  <link name="left_pika_mount" />
+  <joint name="left_pika_mount_joint" type="fixed">
+    <origin xyz="0.0415 0 0" rpy="0 1.5708 0" />
+    <parent link="left_wrist_yaw_link" />
+    <child link="left_pika_mount" />
+  </joint>
+  <link name="left_pika_gripper_base">
+    <inertial>
+      <origin xyz="-0.000183807 0.000080503 0.032143669" rpy="0 0 0" />
+      <mass value="0.145318531013916" />
+      <inertia ixx="0.0001017403" ixy="-0.00000014396" ixz="-0.00000008724" iyy="0.0000416518" iyz="0.00000003277" izz="0.0001186913" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../assets/pika/gripper_base.STL" />
+      </geometry>
+      <material name="pika_gray">
+        <color rgba="0.792 0.820 0.933 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../assets/pika/gripper_base.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="left_pika_base_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="left_pika_mount" />
+    <child link="left_pika_gripper_base" />
+  </joint>
+  <link name="left_pika_finger_a">
+    <inertial>
+      <origin xyz="0.000651232 -0.049192987 0.009722588" rpy="0 0 0" />
+      <mass value="0.0303534921" />
+      <inertia ixx="0.0000113870" ixy="0.00000042853" ixz="-0.00000006452" iyy="0.0000062611" iyz="0.00000157290" izz="0.0000157822" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../assets/pika/link7.STL" />
+      </geometry>
+      <material name="pika_gray">
+        <color rgba="0.792 0.820 0.933 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../assets/pika/link7.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_pika_finger_b">
+    <inertial>
+      <origin xyz="0.000651232 -0.049192987 0.009722588" rpy="0 0 0" />
+      <mass value="0.0303534921" />
+      <inertia ixx="0.0000113870" ixy="0.00000042853" ixz="-0.00000006452" iyy="0.0000062611" iyz="0.00000157290" izz="0.0000157822" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../assets/pika/link8.STL" />
+      </geometry>
+      <material name="pika_gray">
+        <color rgba="0.792 0.820 0.933 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../assets/pika/link8.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="left_pika_finger_a_joint" type="fixed">
+    <origin xyz="0 0 0.1358" rpy="1.5708 0 0" />
+    <parent link="left_pika_gripper_base" />
+    <child link="left_pika_finger_a" />
+  </joint>
+  <joint name="left_pika_finger_b_joint" type="fixed">
+    <origin xyz="0 0 0.1358" rpy="1.5708 0 -3.1416" />
+    <parent link="left_pika_gripper_base" />
+    <child link="left_pika_finger_b" />
+  </joint>
+  <link name="left_pika_tcp" />
+  <joint name="left_pika_tcp_joint" type="fixed">
+    <origin xyz="0.18 0 0" rpy="0 1.5708 0" />
+    <parent link="left_wrist_yaw_link" />
+    <child link="left_pika_tcp" />
+  </joint>
+  <link name="right_pika_mount" />
+  <joint name="right_pika_mount_joint" type="fixed">
+    <origin xyz="0.0415 0 0" rpy="1.56616231 -1.57000366 1.57543035" />
+    <parent link="right_wrist_yaw_link" />
+    <child link="right_pika_mount" />
+  </joint>
+  <link name="right_pika_gripper_base">
+    <inertial>
+      <origin xyz="-0.000183807 0.000080503 0.032143669" rpy="0 0 0" />
+      <mass value="0.145318531013916" />
+      <inertia ixx="0.0001017403" ixy="-0.00000014396" ixz="-0.00000008724" iyy="0.0000416518" iyz="0.00000003277" izz="0.0001186913" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../assets/pika/gripper_base.STL" />
+      </geometry>
+      <material name="pika_gray">
+        <color rgba="0.792 0.820 0.933 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../assets/pika/gripper_base.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="right_pika_base_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="right_pika_mount" />
+    <child link="right_pika_gripper_base" />
+  </joint>
+  <link name="right_pika_finger_a">
+    <inertial>
+      <origin xyz="0.000651232 -0.049192987 0.009722588" rpy="0 0 0" />
+      <mass value="0.0303534921" />
+      <inertia ixx="0.0000113870" ixy="0.00000042853" ixz="-0.00000006452" iyy="0.0000062611" iyz="0.00000157290" izz="0.0000157822" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../assets/pika/link7.STL" />
+      </geometry>
+      <material name="pika_gray">
+        <color rgba="0.792 0.820 0.933 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../assets/pika/link7.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="right_pika_finger_b">
+    <inertial>
+      <origin xyz="0.000651232 -0.049192987 0.009722588" rpy="0 0 0" />
+      <mass value="0.0303534921" />
+      <inertia ixx="0.0000113870" ixy="0.00000042853" ixz="-0.00000006452" iyy="0.0000062611" iyz="0.00000157290" izz="0.0000157822" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../assets/pika/link8.STL" />
+      </geometry>
+      <material name="pika_gray">
+        <color rgba="0.792 0.820 0.933 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../../assets/pika/link8.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="right_pika_finger_a_joint" type="fixed">
+    <origin xyz="0 0 0.1358" rpy="1.5708 0 0" />
+    <parent link="right_pika_gripper_base" />
+    <child link="right_pika_finger_a" />
+  </joint>
+  <joint name="right_pika_finger_b_joint" type="fixed">
+    <origin xyz="0 0 0.1358" rpy="1.5708 0 -3.1416" />
+    <parent link="right_pika_gripper_base" />
+    <child link="right_pika_finger_b" />
+  </joint>
+  <link name="right_pika_tcp" />
+  <joint name="right_pika_tcp_joint" type="fixed">
+    <origin xyz="0.18 0 0" rpy="1.56616231 -1.57000366 1.57543035" />
+    <parent link="right_wrist_yaw_link" />
+    <child link="right_pika_tcp" />
+  </joint>
+  <link name="right_pika_tracking_frame" />
+  <joint name="right_pika_tracking_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="3.141592653589793 -1.5707963267948966 0" />
+    <parent link="right_pika_tcp" />
+    <child link="right_pika_tracking_frame" />
+  </joint>
+</robot>

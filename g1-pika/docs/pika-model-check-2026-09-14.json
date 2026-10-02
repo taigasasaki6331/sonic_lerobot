@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "samples": 30,
+  "robot_mass_mujoco_kg": 33.413193970427834,
+  "robot_mass_pinocchio_kg": 33.413193970427834,
+  "max_tcp_position_difference_m": 4.440892098500626e-16,
+  "max_tcp_rotation_matrix_difference": 1.2212453270876722e-15,
+  "max_gravity_torque_difference_Nm": 7.105427357601002e-15,
+  "pika_model": {
+    "pika_mass_each_kg": 0.206025515213916,
+    "pika_mass_total_kg": 0.412051030427832,
+    "gripper_state": "fixed_at_legacy_q_zero",
+    "mass_provenance": "legacy_URDF_not_measured",
+    "mount_hardware_and_cables": "not_modelled",
+    "collision": "convex_hull_per_mesh",
+    "bare_wrist_mass_each_kg": 0.08457647
+  }
+}

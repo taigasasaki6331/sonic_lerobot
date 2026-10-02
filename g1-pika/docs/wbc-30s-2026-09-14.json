@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "status": "passed",
+  "termination_reason": "duration_completed",
+  "requested_sim_seconds": 30.0,
+  "scope": "upstream_wbc_and_ik_no_pika",
+  "upstream_commit": "087f9ac01d46f6d8e4d0b73c01ae64799f292a38",
+  "balance_sha256": "f645da599d4ca3d29ed273c8f4712620bb680d34977469ca3aeabe5bb9631c18",
+  "providers": [
+    "CPUExecutionProvider"
+  ],
+  "sim_seconds": 29.999999999998316,
+  "wall_seconds": 5.7537804120001965,
+  "physics_hz": 200.0,
+  "policy_hz": 50.0,
+  "pelvis_height_min_m": 0.7440787051396455,
+  "pelvis_height_final_m": 0.7481961440683634,
+  "tilt_max_rad": 0.0675436422827411,
+  "xy_displacement_max_m": 0.11081352832963853,
+  "inference_p95_ms": null,
+  "mujoco_warning_count": 0,
+  "thresholds": {
+    "min_height_m": 0.45,
+    "max_tilt_rad": 0.8,
+    "max_xy_m": 0.25,
+    "max_ik_error_m": 0.02,
+    "max_wrist_error_m": 0.05,
+    "max_wrist_orientation_error_rad": 0.3,
+    "min_right_wrist_travel_m": 0.04
+  },
+  "ik_position_error_max_m": 5.657751403975371e-05,
+  "wrist_tracking_error_max_m": 0.02294920492280877,
+  "wrist_orientation_error_max_rad": 0.11238158167833219,
+  "right_wrist_travel_max_m": 0.07063823302782404,
+  "right_target_travel_max_m": 0.07211102550927978,
+  "whole_body_control_p95_ms": 3.0250669000452035,
+  "ik_solver": "quadprog",
+  "arm_gravity_compensation": true,
+  "target_frame": "pelvis",
+  "controlled_frame": "right_wrist_yaw_link"
+}

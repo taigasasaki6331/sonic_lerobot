@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "scope": "saved_real_images_with_assumed_width_gpu_inference_only",
+  "robot_commands_sent": false,
+  "hardware_ready": false,
+  "camera_closed_loop": false,
+  "gripper_width_source": "assumed_for_diagnostics_not_measured",
+  "assumed_gripper_width_m": 0.04,
+  "action": [
+    -0.0005035029025748372,
+    -0.0003849538916256279,
+    0.00036628759698942304,
+    0.999787449836731,
+    -0.0009160294430330396,
+    0.004120296332985163,
+    0.0012718818616122007,
+    0.99984210729599,
+    0.0010486312676221132,
+    0.03889094665646553
+  ],
+  "predicted_width_within_sim_bound": true,
+  "codec": "delta_from_measured_width",
+  "lerobot_commit": "79edf6a95948d0f0d75df1d54d0a5aad305f75a8",
+  "model_sha256": "230c9dbba2bb575f994be2ca3e772332cdef4f8a5499b25e88130bb93a5650e4",
+  "image_sha256": {
+    "realsense_rgb": "671e20b82b70cb24a5956d0fc1192b987a8452089032dd25370aea11dcb27b37",
+    "fisheye": "af3b5c78c3230934429c91db95d75d8ae022b0b54b66d314b79a8c6891e8945a"
+  },
+  "preprocessing_sha256": "4a3bb4ab43866ef9fca25657a5fd86112b73f7f5e2663ace37f2087c546c6aab",
+  "script_sha256": "4a84dc0ae027d9a30654dfe2642d18e5fb96c266d64427748f3e1ce60acc9281",
+  "device": "NVIDIA GeForce RTX 5060 Ti",
+  "inference_p95_ms": 5.268031099240034,
+  "timing_scope": "same loaded image pair, resize + preprocessing + GPU inference + decoding; excludes capture/network",
+  "warmup": 5,
+  "timed_repeats": 20,
+  "limitations": [
+    "Sequential snapshots, not synchronized",
+    "No live G1 state or measured gripper width",
+    "No action quality or hardware safety validation"
+  ]
+}
