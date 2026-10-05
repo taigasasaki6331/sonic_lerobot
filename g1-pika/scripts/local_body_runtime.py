@@ -58,21 +58,28 @@ class LocalBodyRuntimeWorker(LocalBodyRecordWorker):
         super().poll()
         if self.native and self.phase=='running':
             status=self.native.snapshot()
-            if status['stop_latched'] or status['owner_exited']:
+            if status['stop_latched'] or status['writer_exited'] or status['owner_exited']:
                 self.fail('native_owner_stopped: '+status['reason'])
                 raise RuntimeError('Native record owner stopped: '+status['reason'])
 
     def fail(self,reason):
         super().fail(reason)
-        if self.native: self.stop_native(reason)
+        if self.native: self.stop_native(reason,fault=True)
 
-    def stop_native(self,reason):
+    def stop_native(self,reason,*,fault=False):
         if self.native:
-            self.native.stop(reason); self.native_final=self.native.snapshot()
+            self.native.stop(reason,fault=fault); self.native_final=self.native.snapshot()
+
+    def recover_native(self,stop_observation):
+        if self.native is None or self.phase!='stopped': raise ValueError('Stopped record runtime required')
+        self.native.recover(stop_observation); self.native_final=self.native.snapshot()
 
     def native_status(self):
         return self.native.snapshot() if self.native else self.native_final
 
     def close_native(self):
         if self.native:
-            self.native_final=self.native.snapshot(); self.native.close(); self.native=None
+            try:
+                try: self.native.finish()
+                finally: self.native_final=self.native.snapshot()
+            finally: self.native.close(); self.native=None

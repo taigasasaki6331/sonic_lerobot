@@ -81,6 +81,12 @@ class Tests(unittest.TestCase):
         self.assertFalse(fresh_pair({'fisheye':frames['fisheye']},{},1.02))
 
     def test_cleanup_only_own_input_process(self):
+        # /proc may be mounted from an ancestor PID namespace in Cloud. Its
+        # process numbers cannot safely be used with this namespace's kill().
+        import os
+        status=Path('/proc/self/status').read_text().splitlines()
+        proc_pid=int(next(line for line in status if line.startswith('Pid:')).split()[1])
+        if proc_pid!=os.getpid(): self.skipTest('/proc PID namespace differs from local kill namespace; no signals attempted')
         with tempfile.TemporaryDirectory(prefix='g1-pika-online-',dir='/tmp') as folder:
             path=Path(folder)/'body_history_service.py'
             path.write_text("import time\nprint('ready',flush=True)\ntime.sleep(30)\n")

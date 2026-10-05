@@ -1,6 +1,6 @@
 // Actual SDK bindings, BUILD-ONLY in current record-only project. No launcher.
 #pragma once
-#include "body_io_adapter.hpp"
+#include "body_owner_lifecycle.hpp"
 #include <memory>
 
 namespace g1_pika {
@@ -17,5 +17,16 @@ public:
   bool write_body(uint8_t machine,const MotorValues&) override;
   void close_body_publisher() override;
   int select_mode(const std::string&) override;
+};
+// Build-only assembly, sharing the record runtime's owner lifecycle.
+// Construction performs no IO. No Python/C/CLI hardware backend is exposed.
+class UnitreeBodySession {
+  UnitreeBodyTransport transport_;
+  BodyIoAdapter adapter_;
+public:
+  WriterMailbox mailbox;
+  BodyOwnerLifecycle owner;
+  UnitreeBodySession(const std::string& interface_name,const std::string& session,
+                    TrialContract contract,Joints lower,Joints upper,Joints velocity,Joints stop_kd);
 };
 }

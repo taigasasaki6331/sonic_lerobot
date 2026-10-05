@@ -28,6 +28,8 @@ struct WriterBody {
   std::array<uint32_t,29> motor_errors{};
 };
 struct WriterReference {
+  enum class Phase { unspecified,initializing,settling,ready,tracking };
+  Phase phase=Phase::unspecified; // Trusted same-host lifecycle; never a peer ACK.
   std::string session;
   uint64_t sequence=0;
   WriterTime received_at;
@@ -38,6 +40,7 @@ struct WriterSnapshot {
   std::optional<WriterBody> body;
   std::optional<WriterReference> reference;
   bool local_phase_validated=false,stop_requested=false,identity_lost=false;
+  bool fault_stop=false;
   std::string reason;
 };
 
@@ -53,7 +56,8 @@ class WriterMailbox {
   bool have_machine_=false;
   uint8_t machine_=0;
   std::optional<WriterTime> last_ingest_;
-  bool reject(const std::string& reason) {
+  bool reject(const std::string& reason,bool fault=true) {
+    value_.fault_stop=value_.fault_stop || fault;
     value_.stop_requested=true;
     if(value_.reason.empty()) value_.reason=reason;
     wake_.notify_all(); return false;
@@ -132,8 +136,8 @@ public:
     if(value_.stop_requested) throw std::logic_error("Writer stop is latched");
     value_.local_phase_validated=true;
   }
-  void request_stop(const std::string& reason="local_stop_requested") {
-    std::lock_guard<std::mutex> lock(mutex_); reject(reason.empty()?"local_stop_requested":reason);
+  void request_stop(const std::string& reason="local_stop_requested",bool fault=true) {
+    std::lock_guard<std::mutex> lock(mutex_); reject(reason.empty()?"local_stop_requested":reason,fault);
   }
   WriterSnapshot snapshot() {std::lock_guard<std::mutex> lock(mutex_); return value_;}
   // New targets/body do not cause extra writes; only stop interrupts the wait.
@@ -187,7 +191,9 @@ class WriterSink {
 public:
   virtual ~WriterSink()=default;
   virtual bool publish(const LocalEvidence&,const MotorValues&)=0;
+  virtual bool publish_reference(const LocalEvidence& e,const WriterReference& ref) {return publish(e,ref.motors);}
   virtual StopResult stop_candidate(bool identity_lost)=0;
+  virtual StopResult stop_candidate_for(bool identity_lost,bool) {return stop_candidate(identity_lost);}
 };
 // Not instantiated by any hardware launcher. Caller must keep ALL adapter
 // calls on this IO-owner thread, including prior explicit setup and restore.
@@ -220,12 +226,13 @@ inline WriterRunReport run_body_writer(WriterMailbox& mailbox,WriterSink& sink) 
   WriterRunReport report; WriterKernel kernel;
   std::optional<WriterTime> prior_write;
   auto stop=[&](const std::string& reason) {
-    mailbox.request_stop(reason); report.reason=mailbox.snapshot().reason;
+    auto before=mailbox.snapshot(); bool fault=before.stop_requested?before.fault_stop:true;
+    mailbox.request_stop(reason,fault); report.reason=mailbox.snapshot().reason;
     // Stop is latched before calling sink. No GPU/RPC/join wait first.
     report.stop_attempted=true;
     auto final=mailbox.snapshot();
     bool identity_lost=final.identity_lost || reason=="writer_machine_changed";
-    try {report.stop_write_accepted=sink.stop_candidate(identity_lost).sdk_write_accepted;}
+    try {report.stop_write_accepted=sink.stop_candidate_for(identity_lost,fault).sdk_write_accepted;}
     catch(...) {report.stop_write_accepted=false;}
     // Never promote the sink's response to a physical-stop confirmation.
   };
@@ -240,7 +247,7 @@ inline WriterRunReport run_body_writer(WriterMailbox& mailbox,WriterSink& sink) 
       if(prior_write) report.max_start_gap_s=std::max(report.max_start_gap_s,std::chrono::duration<double>(now-*prior_write).count());
       prior_write=now;
       bool ok=false; auto begin=WriterClock::now();
-      try {ok=sink.publish(decision.evidence,input.reference->motors);} catch(...) {}
+      try {ok=sink.publish_reference(decision.evidence,*input.reference);} catch(...) {}
       auto end=WriterClock::now();
       report.max_sink_call_s=std::max(report.max_sink_call_s,std::chrono::duration<double>(end-begin).count());
       if(!ok) {stop("writer_sink_failed"); return report;}

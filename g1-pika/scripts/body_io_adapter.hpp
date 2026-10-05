@@ -5,6 +5,7 @@
 #include <array>
 #include <cmath>
 #include <cstdint>
+#include <functional>
 #include <limits>
 #include <stdexcept>
 #include <string>
@@ -26,10 +27,12 @@ struct TrialContract {
   bool diagnostic_only=true;
 };
 struct StopResult { bool sdk_write_accepted=false; bool physical_stop_confirmed=false; };
+enum class AdapterScope { physical_trial,record_only };
 
 class Transport {
 public:
   virtual ~Transport()=default;
+  virtual bool record_only() const {return false;}
   virtual void open_query_channel()=0;
   virtual ModeReply query_mode()=0;
   virtual int release_mode()=0;
@@ -42,13 +45,18 @@ public:
 class BodyIoAdapter {
   Transport& transport_;
   TrialContract contract_;
+  AdapterScope scope_;
   Joints lower_,upper_;
   bool query_open_=false,publisher_open_=false,stopped_=false,fault_=false,release_attempted_=false;
-  bool identity_lost_=false,restored_=false;
+  bool identity_lost_=false,restored_=false,publisher_attempted_=false;
   std::string original_mode_;
   uint8_t machine_=0;
   bool have_machine_=false;
   void permission() const {
+    if(scope_==AdapterScope::record_only) {
+      if(!transport_.record_only()) throw std::logic_error("Record scope requires a memory-only transport");
+      return;
+    }
     if(!contract_.hardware_output_enabled || !contract_.explicit_trial_permission ||
        !contract_.support_and_stop_procedure_confirmed || !contract_.actual_configuration_confirmed ||
        contract_.diagnostic_only) throw std::logic_error("Physical trial contract absent; adapter IO prohibited");
@@ -72,9 +80,10 @@ class BodyIoAdapter {
   }
 public:
   // Single G1 IO-owner thread only; not a scheduler or a thread-safe controller.
-  // No IO in constructor/destructor. Record-only config can never open IO.
-  BodyIoAdapter(Transport& transport,TrialContract contract,Joints lower,Joints upper)
-    :transport_(transport),contract_(contract),lower_(lower),upper_(upper) {
+  // No IO in constructor/destructor. Record scope accepts memory transports only.
+  BodyIoAdapter(Transport& transport,TrialContract contract,Joints lower,Joints upper,
+                AdapterScope scope=AdapterScope::physical_trial)
+    :transport_(transport),contract_(contract),scope_(scope),lower_(lower),upper_(upper) {
     for(size_t i=0;i<29;i++) if(!std::isfinite(lower[i]) || !std::isfinite(upper[i]) || lower[i]>=upper[i])
       throw std::invalid_argument("Explicit joint bounds required");
   }
@@ -91,11 +100,13 @@ public:
       return reply;
     } catch(...) {fault_=true; throw;}
   }
-  int release_once(const LocalEvidence& evidence) {
+  int release_once(const LocalEvidence& evidence,const std::function<LocalEvidence()>& refresh={}) {
     permission(); local(evidence);
     if(publisher_open_ || stopped_ || release_attempted_) throw std::logic_error("Repeated/late release prohibited");
     release_attempted_=true;
     auto reply=query_mode(); original_mode_=reply.name;
+    // Recheck trusted local cancellation/age AFTER a potentially blocking RPC.
+    if(refresh) local(refresh());
     // Explicit single attempt. No constructor release, retries or spin loop.
     if(original_mode_.empty()) return 0;
     try {
@@ -104,11 +115,13 @@ public:
       return status; // RPC status is not proof of a physical ownership lease.
     } catch(...) {fault_=true; throw;}
   }
-  void open_publisher(const LocalEvidence& evidence) {
+  void open_publisher(const LocalEvidence& evidence,const std::function<LocalEvidence()>& refresh={}) {
     permission(); local(evidence);
     if(publisher_open_ || stopped_) throw std::logic_error("Publisher phase");
     auto reply=query_mode();
     if(!reply.name.empty()) {fault_=true; throw std::logic_error("Existing controller still active");}
+    if(refresh) local(refresh());
+    publisher_attempted_=true;
     try {transport_.open_body_publisher(); publisher_open_=true;}
     catch(...) {fault_=true; throw;}
   }
@@ -141,11 +154,20 @@ public:
       throw std::logic_error("Explicit physical-stop observation required before restore");
     if(original_mode_.empty()) throw std::logic_error("No previously observed controller to restore");
     // Do not restore automatically in destructor/error cleanup.
-    if(publisher_open_) {transport_.close_body_publisher(); publisher_open_=false;}
+    close_publisher();
     restored_=true;
     return transport_.select_mode(original_mode_);
   }
   bool stop_latched() const {return stopped_;}
+  AdapterScope scope() const {return scope_;}
+  void validate_recovery_evidence(const LocalEvidence& e) {permission(); local(e);}
+  void close_publisher() {
+    if(!publisher_open_ && !publisher_attempted_) return;
+    permission();
+    if(!stopped_) throw std::logic_error("Stop required before publisher close");
+    try {transport_.close_body_publisher(); publisher_open_=false; publisher_attempted_=false;}
+    catch(...) {fault_=true; throw;}
+  }
   // Local owner-loop notification; no SDK call. Identity loss forbids old
   // machine commands, including damping/restore, even without publish().
   void latch_body_identity_loss() {identity_lost_=true; fault_=true; stopped_=true;}

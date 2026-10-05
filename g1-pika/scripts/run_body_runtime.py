@@ -25,7 +25,7 @@ from sonic_process import strict_message
 
 ROOT=Path(__file__).resolve().parents[1]
 FILES=('launch_body_runtime.py','local_body_service.py','local_body_runtime.py','body_runtime.py','body_runtime.cpp',
-    'body_writer.hpp','body_io_adapter.hpp','body_lifecycle.py','local_body_monitor.py',
+    'body_writer.hpp','body_io_adapter.hpp','body_owner_lifecycle.hpp','body_lifecycle.py','local_body_monitor.py',
     'sonic_body_bridge.py','sonic_process.py','state_history.py','sonic_startup_ablation.py',
     'sonic_joint_trajectory.py','sonic_observation.py','sonic_reference.py','zmq_transport.py')
 
@@ -51,11 +51,12 @@ def build(directory):
     return source
 
 
-def service_command(source,endpoint,report,seconds,peer=None):
+def service_command(source,endpoint,report,seconds,peer=None,*,recovery=False):
     return [sys.executable,'-I',str(source/'local_body_service.py'),'--endpoint',endpoint,
         '--profile',str(source/'profile.json'),'--config',str(source/'body-lifecycle.json'),
         '--native-runtime',str(source/'body-runtime.so'),'--require-crc','--seconds',str(seconds),
-        '--report',str(report)]+(['--peer-ip',peer] if peer else [])
+        '--report',str(report)]+(['--peer-ip',peer] if peer else [])+(
+        ['--record-recovery-note','ARTIFICIAL record stop observed; NOT physical confirmation'] if recovery else [])
 
 
 def terminate(process):
@@ -69,7 +70,9 @@ def rehearse(directory,source,seconds,scenario):
     from zmq_transport import ZmqChannel
     from sonic_body_bridge import envelope
     import struct
-    output=directory/'outputs'; output.mkdir(); endpoint='ipc://'+str(directory/'body.sock')
+    output=directory/'outputs'; output.mkdir()
+    ipc_directory=tempfile.TemporaryDirectory(prefix='g1-body-ipc-')
+    endpoint='ipc://'+str(Path(ipc_directory.name)/'body.sock')
     profile=strict_message((source/'profile.json').read_bytes()); config=strict_message((source/'body-lifecycle.json').read_bytes())
     initial=profile['defaults'].copy(); joint=22; initial[joint]+=.02
     process=None; channel=None; feed=None; quit_feed=threading.Event(); pause=threading.Event()
@@ -80,7 +83,8 @@ def rehearse(directory,source,seconds,scenario):
         robot_commands_sent=False,physical_stop_confirmed=False,hardware_transport_linked=False)
     stage='service_start'
     try:
-        process=subprocess.Popen(service_command(source,endpoint,output/'service-report.json',min(60,math.ceil(seconds)+8)),
+        process=subprocess.Popen(service_command(source,endpoint,output/'service-report.json',min(60,math.ceil(seconds)+8),
+            recovery=scenario=='recovery'),
             stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=stderr,bufsize=0,
             env=dict(os.environ,OPENBLAS_NUM_THREADS='1',OMP_NUM_THREADS='1',MKL_NUM_THREADS='1'))
         def feeder():
@@ -107,7 +111,9 @@ def rehearse(directory,source,seconds,scenario):
             except Exception as exc: feeder_errors.append(str(exc))
         feed=threading.Thread(target=feeder); feed.start()
         if not select.select([process.stdout],[],[],5)[0]: raise TimeoutError('Runtime ready timeout')
-        ready=json.loads(process.stdout.readline())
+        line=process.stdout.readline()
+        if not line: raise RuntimeError('Service exited before ready; see outputs/service.stderr')
+        ready=json.loads(line)
         if ready.get('ready') is not True: raise ValueError('Service not ready')
         stage='hello'; channel=ZmqChannel(endpoint,timeout_ms=1000,max_message_bytes=65536)
         session='runtime-rehearsal'; channel.send(dict(op='hello',session=session,schema=1,mode='record_only'))
@@ -147,7 +153,7 @@ def rehearse(directory,source,seconds,scenario):
             if reply.get('seq')!=seq or reply.get('hardware_output_enabled') is not False: raise ValueError('Runtime reply mismatch')
             received.append(reply['result']); seq+=1; next_target=time.monotonic()+.02
         stage='stop'
-        if scenario=='normal':
+        if scenario in ('normal','recovery'):
             channel.send(dict(op='stop',session=session))
             if channel.read()!=dict(stopped=True,session=session): raise ValueError('Runtime stop ACK mismatch')
             code=process.wait(timeout=3)
@@ -164,6 +170,7 @@ def rehearse(directory,source,seconds,scenario):
             and native['normal_publications_final']>100 and accepted>0 and packet_crc_ok and not feeder_errors)
         if scenario=='body_expiry':
             passed=passed and ('body' in native['reason'] or 'local_body' in native['reason'])
+        passed=passed and lifecycle_passes(native,scenario)
         report.update(passed=bool(passed),service_exit_code=code,targets=len(received),accepted_abstract_targets=accepted,
             gated_targets=len(received)-accepted,native_runtime=native,last_packet_crc_matches=packet_crc_ok,
             service_report='outputs/service-report.json',duration_wall_s=time.monotonic()-start,
@@ -184,6 +191,103 @@ def rehearse(directory,source,seconds,scenario):
                 except BrokenPipeError: pass
         report.update(reader_feeder_exited=feed is None or not feed.is_alive(),feeder_errors=feeder_errors)
         write(output/'target-replies.json',received); write(output/'report.json',report)
+        ipc_directory.cleanup()
+    return report
+
+
+def lifecycle_passes(native,scenario):
+    owner=native['owner_lifecycle']; history=owner['history']
+    required=('initialized','ownership_pending','owned','initializing','tracking','stop_required','stopped','closed')
+    if not all(p in history for p in required) or not native['writer_exited'] or not native['owner_exited']: return False
+    if owner['fault_latched']!=(scenario=='body_expiry'): return False
+    if scenario=='recovery': return owner['recovery_acknowledged'] and 'recovered' in history
+    return not owner['recovery_acknowledged'] and 'recovery_pending' not in history
+
+
+def rehearse_direct(directory,source,seconds,scenario):
+    """Same local worker/native owner; explicit socket-free fixture for CPU hosts.
+
+    The artificial body follows the INIT reference. This is software lifecycle
+    evidence, never a hardware pose/ownership/CRC or ZMQ-delivery check.
+    """
+    from local_body_runtime import LocalBodyRuntimeWorker
+    from sonic_body_bridge import envelope
+    import struct
+    output=directory/'outputs'; output.mkdir()
+    profile=strict_message((source/'profile.json').read_bytes())
+    config=strict_message((source/'body-lifecycle.json').read_bytes())
+    worker=LocalBodyRuntimeWorker(profile,config,library=source/'body-runtime.so')
+    session='direct-runtime-rehearsal'; joint=22; initial=profile['defaults'].copy(); initial[joint]+=.02
+    replies=[]; tick=0; frame=None; paused=False; start=None; error=None; rearm_rejected=False
+    states=(output/'fixture-state.jsonl').open('w')
+    report=dict(passed=False,scope='one_runtime_native_owner_DIRECT_INIT_stop_rehearsal',scenario=scenario,
+        pc_transport='in_process_envelope_NO_ZMQ_delivery_verified',
+        input_source='ARTIFICIAL_body_and_targets_NOT_DDS_or_ACT_SONIC_inference',
+        robot_commands_sent=False,physical_stop_confirmed=False,hardware_transport_linked=False)
+    def feed(now):
+        nonlocal tick,frame
+        q=initial.copy()
+        if start is not None:
+            u=min(1.,max(0.,(now-start)/config['init_duration_s'])); blend=10*u**3-15*u**4+6*u**5
+            q[joint]=initial[joint]+blend*(profile['defaults'][joint]-initial[joint])
+        frame=dict(tick=tick,receive_monotonic_s=now,mode_pr=0,mode_machine=5,
+            q=q+[0.]*6,dq=[0.]*35,quaternion=[1.,0.,0.,0.],gyroscope=[0.]*3,
+            raw_motor_state=[0]*35,motor_modes=[1]*29+[0]*6,
+            crc_verified=True,crc_received=0,crc_calculated=0,crc_native_size_bytes=2092,
+            input_provenance='ARTIFICIAL_fixture_CRC_metadata_NOT_actual_CRC_validation')
+        states.write(json.dumps(frame)+'\n'); worker.ingest_local(frame); tick+=1
+    try:
+        feed(time.monotonic())
+        worker.handle(dict(op='hello',session=session,schema=1,mode='record_only'))
+        start=time.monotonic(); next_target=start; seq=0
+        while time.monotonic()-start<seconds:
+            now=time.monotonic()
+            if scenario=='body_expiry' and now-start>config['init_duration_s']+config['settle_duration_s']+.4:
+                paused=True
+            if now<next_target:
+                worker.poll(); time.sleep(min(.005,next_target-now)); continue
+            if not paused: feed(now)
+            target=profile['defaults'].copy(); target[joint]+=.005*math.sin((now-start)*.5)
+            result=dict(seq=seq,q_target_hardware=target,gripper_width_m=.04,gripper_actuated=False)
+            payload=envelope(session,seq,frame,result,
+                source_age_s=0. if paused else now-frame['receive_monotonic_s'],joint_names=profile['names'])
+            reply=worker.handle(dict(op='record',session=session,seq=seq,payload=payload))
+            replies.append(reply['result']); worker.control_tick(); worker.poll()
+            seq+=1; next_target=time.monotonic()+.02
+        if scenario=='body_expiry': raise RuntimeError('Expected local body expiry was not observed')
+        worker.handle(dict(op='stop',session=session))
+        if scenario=='recovery':
+            worker.recover_native('ARTIFICIAL local stop observed; NOT physical confirmation')
+            probe=dict(q=profile['defaults'],dq=[0.]*29,tau=[0.]*29,kp=profile['kp'],kd=profile['kd'],
+                       phase='tracking',source_age_s=0.)
+            try: worker.native.reference(probe,now=time.monotonic())
+            except ValueError: rearm_rejected=True
+            if not rearm_rejected: raise RuntimeError('Recovery incorrectly rearmed normal output')
+    except Exception as exc:
+        error=type(exc).__name__+': '+str(exc)
+        worker.fail(error)
+    finally:
+        try:
+            worker.stop_native('direct_rehearsal_end'); worker.close_native()
+        finally: states.close()
+    native=worker.native_status()
+    accepted=sum(v['decision']=='accepted_abstract_target_NOT_sent' for v in replies)
+    crc_ok=False
+    if native:
+        packet=bytes.fromhex(native['last_native_memory_hex'])
+        crc_ok=struct.unpack_from('<I',packet,1000)[0]==crc_words(packet[:1000])
+    expected_fault=(scenario=='body_expiry' and paused and error is not None and native and
+                    ('body' in native['reason'] or 'local_body' in native['reason']))
+    passed=bool(native and native['record_stop_attempted'] and native['record_stop_write_accepted'] and
+        native['normal_publications_final']>100 and accepted>0 and crc_ok and lifecycle_passes(native,scenario) and
+        ((expected_fault and scenario=='body_expiry') or (error is None and scenario!='body_expiry')) and
+        (scenario!='recovery' or rearm_rejected))
+    report.update(passed=passed,error=error,expected_body_fault=bool(expected_fault),native_runtime=native,
+        targets=len(replies),accepted_abstract_targets=accepted,last_packet_crc_matches=crc_ok,
+        duration_wall_s=time.monotonic()-start if start else None,
+        fixture_body_paused=paused,artificial_peer_continued_after_body_pause=paused,
+        rearm_rejected_after_recovery=rearm_rejected,initial_reference_duration_s=config['init_duration_s'])
+    write(output/'target-replies.json',replies); write(output/'report.json',report)
     return report
 
 
@@ -207,7 +311,9 @@ def serve(source,args):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--mode',choices=('rehearse','build','serve'),default='rehearse')
-    parser.add_argument('--scenario',choices=('normal','body_expiry'),default='normal')
+    parser.add_argument('--scenario',choices=('normal','body_expiry','recovery'),default='normal')
+    parser.add_argument('--transport',choices=('ipc','direct'),default='ipc',
+        help='direct uses in-process envelopes and does NOT validate ZMQ delivery')
     parser.add_argument('--seconds',type=float,default=5)
     parser.add_argument('--output',type=Path); parser.add_argument('--package',type=Path)
     parser.add_argument('--receiver',type=Path); parser.add_argument('--interface')
@@ -223,7 +329,7 @@ def main():
     else: directory=Path(tempfile.mkdtemp(prefix='run-',dir=base))
     source=build(directory)
     if args.mode=='build': print(json.dumps(dict(package=str(directory),robot_commands_sent=False))); return 0
-    report=rehearse(directory,source,args.seconds,args.scenario)
+    report=(rehearse_direct if args.transport=='direct' else rehearse)(directory,source,args.seconds,args.scenario)
     # Keep the full 1004-byte sample in the file, not console output.
     summary={key:value for key,value in report.items() if key!='native_runtime'}
     summary['native_runtime']={key:value for key,value in report.get('native_runtime',{}).items() if key!='last_native_memory_hex'}

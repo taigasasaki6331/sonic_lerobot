@@ -13,6 +13,10 @@
 #endif
 
 namespace g1_pika {
+UnitreeBodySession::UnitreeBodySession(const std::string& interface_name,const std::string& session,
+    TrialContract contract,Joints lower,Joints upper,Joints velocity,Joints stop_kd)
+  :transport_(interface_name),adapter_(transport_,contract,lower,upper),
+   mailbox(session,lower,upper,velocity),owner(adapter_,stop_kd) {}
 using Command=unitree_hg::msg::dds_::LowCmd_;
 using Publisher=unitree::robot::ChannelPublisher<Command>;
 using Switcher=unitree::robot::b2::MotionSwitcherClient;

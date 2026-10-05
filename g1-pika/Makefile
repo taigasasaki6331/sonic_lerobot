@@ -16,12 +16,18 @@ cloud-check:
 	$(CLOUD_PYTHON) -I scripts/check_body_lifecycle_record.py
 	$(CLOUD_PYTHON) -I scripts/check_body_io_adapter.py
 	$(CLOUD_PYTHON) -I scripts/check_body_writer.py
+	$(CLOUD_PYTHON) -I scripts/check_body_owner.py
 	$(CLOUD_PYTHON) -I scripts/check_sonic_body_bridge.py
 	$(CLOUD_PYTHON) -I scripts/check_local_body_monitor.py
 	$(CLOUD_PYTHON) -I scripts/check_lowcmd_preview.py
 	$(CLOUD_PYTHON) -I scripts/check_state_crc.py
 	$(CLOUD_PYTHON) -I scripts/check_local_body_service.py
 	$(CLOUD_PYTHON) -I scripts/check_online_record.py
+	$(CLOUD_PYTHON) -I scripts/check_body_runtime.py
+.PHONY: cloud-body-runtime
+BODY_SCENARIO ?= normal
+cloud-body-runtime:
+	$(CLOUD_PYTHON) -I scripts/run_body_runtime.py --seconds 5 --transport direct --scenario "$(BODY_SCENARIO)"
 cloud-export:
 	@test -n "$(OUTPUT)" || (echo 'Usage: make cloud-export OUTPUT=new-directory (local only)' >&2; exit 2)
 	python3 -I scripts/export_cloud_source.py --output "$(OUTPUT)"

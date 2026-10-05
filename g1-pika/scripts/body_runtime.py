@@ -1,5 +1,6 @@
 """Record-only G1 native owner loop binding. No selectable hardware backend."""
 import ctypes as C
+import json
 import math
 import time
 from pathlib import Path
@@ -15,9 +16,12 @@ class NativeBodyRecordRuntime:
         self.lib.g1_pika_record_error.restype=C.c_char_p
         self.lib.g1_pika_record_now.restype=C.c_double
         self.lib.g1_pika_record_body.argtypes=[C.c_void_p,C.c_double,C.c_uint32,C.c_uint8,C.c_uint8,C.POINTER(C.c_uint32)]
-        self.lib.g1_pika_record_reference.argtypes=[C.c_void_p,C.c_char_p,C.c_uint64,C.c_double,C.c_double]+[ptr]*5
+        self.lib.g1_pika_record_reference.argtypes=[C.c_void_p,C.c_char_p,C.c_uint64,C.c_double,C.c_double,C.c_int]+[ptr]*5
         self.lib.g1_pika_record_begin.argtypes=[C.c_void_p]
-        self.lib.g1_pika_record_stop.argtypes=[C.c_void_p,C.c_char_p]
+        self.lib.g1_pika_record_stop.argtypes=[C.c_void_p,C.c_char_p,C.c_int]
+        self.lib.g1_pika_record_recover.argtypes=[C.c_void_p,C.c_char_p]
+        self.lib.g1_pika_record_finish.argtypes=[C.c_void_p]
+        self.lib.g1_pika_record_lifecycle.argtypes=[C.c_void_p,C.c_char_p,C.c_size_t]
         self.lib.g1_pika_record_snapshot.argtypes=[C.c_void_p,C.POINTER(C.c_ubyte),C.POINTER(C.c_uint64),ptr,C.c_char_p,C.c_size_t]
         self.lib.g1_pika_record_delete.argtypes=[C.c_void_p]; self.lib.g1_pika_record_delete.restype=None
         # Linux steady_clock and local Python CLOCK_MONOTONIC must share epoch.
@@ -52,24 +56,37 @@ class NativeBodyRecordRuntime:
 
     def reference(self,ref,*,now):
         arrays=[self.vector(ref[key]) for key in ('q','dq','tau','kp','kd')]
-        self.checked(self.lib.g1_pika_record_reference(self.handle,self.session.encode(),self.seq,now,ref['source_age_s'],
+        phase={'initializing':1,'settling':2,'ready':3,'tracking':4}.get(ref.get('phase'))
+        if phase is None: raise ValueError('Explicit local reference phase required')
+        self.checked(self.lib.g1_pika_record_reference(self.handle,self.session.encode(),self.seq,now,ref['source_age_s'],phase,
             *(a.ctypes.data_as(C.POINTER(C.c_double)) for a in arrays)))
         self.seq+=1
 
     def begin(self): self.checked(self.lib.g1_pika_record_begin(self.handle))
 
     def snapshot(self):
-        packet=(C.c_ubyte*1004)(); counts=(C.c_uint64*6)(); timings=(C.c_double*2)(); reason=C.create_string_buffer(512)
+        packet=(C.c_ubyte*1004)(); counts=(C.c_uint64*7)(); timings=(C.c_double*2)(); reason=C.create_string_buffer(512)
         self.checked(self.lib.g1_pika_record_snapshot(self.handle,packet,counts,timings,reason,len(reason)))
+        lifecycle=C.create_string_buffer(2048)
+        self.checked(self.lib.g1_pika_record_lifecycle(self.handle,lifecycle,len(lifecycle)))
         return dict(memory_publications=counts[0],owner_exited=bool(counts[1]),stop_latched=bool(counts[2]),
+            writer_exited=bool(counts[6]),owner_lifecycle=json.loads(lifecycle.value),
             normal_publications_final=counts[3],record_stop_attempted=bool(counts[4]),record_stop_write_accepted=bool(counts[5]),
             max_start_gap_s=timings[0],max_memory_write_s=timings[1],reason=reason.value.decode(),
             references=self.seq,last_native_memory_hex=bytes(packet).hex(),robot_commands_sent=False,
             hardware_transport_linked=False,physical_stop_confirmed=False,physical_ownership_confirmed=False,
             motor_health_criterion='record-only raw zero bits; NOT firmware health certification')
 
-    def stop(self,reason='local_record_stop'):
-        if self.handle: self.checked(self.lib.g1_pika_record_stop(self.handle,reason.encode()))
+    def stop(self,reason='local_record_stop',*,fault=False):
+        if self.handle: self.checked(self.lib.g1_pika_record_stop(self.handle,reason.encode(),int(fault)))
+
+    def recover(self,stop_observation):
+        if not self.handle or not isinstance(stop_observation,str) or not stop_observation.strip():
+            raise ValueError('Explicit local record stop observation required')
+        self.checked(self.lib.g1_pika_record_recover(self.handle,stop_observation.encode()))
+
+    def finish(self):
+        if self.handle: self.checked(self.lib.g1_pika_record_finish(self.handle))
 
     def close(self):
         if self.handle: self.lib.g1_pika_record_delete(self.handle); self.handle=None

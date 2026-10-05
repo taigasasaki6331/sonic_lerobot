@@ -1,6 +1,6 @@
 # 実装TODO・進捗・検証で判明した課題
 
-更新：2026-10-02。目標は **Unitree G1＋AgileX PIKAをLeRobot＋GEAR-SONICで動かす環境の完成**。
+更新：2026-10-05。目標は **Unitree G1＋AgileX PIKAをLeRobot＋GEAR-SONICで動かす環境の完成**。
 最終的には、人のPIKA実演から学習したポリシーで、自立したG1がタスクを実行する。
 
 最新の優先順位：部品の細かなマイルストーンは後で割り振り、まず一本の動作経路を完成させる。
@@ -16,6 +16,11 @@ G1側record runtimeは状態/初期参照/ZMQ/native writer/停止要求を一�
 
 本書は計画と残作業の一覧。[HANDOFF](HANDOFF.md)は最新状態、[PROGRESS](PROGRESS.md)は時系列の証拠を管理する。
 「ソフトウェア試験成功」「シミュレーション成功」「実機確認」を区別し、実機未検証を完了扱いしない。
+
+## 2026-10-05の更新
+
+[共通owner](BODY_OWNER.md)をrecord runtime／build-only SDK sessionへ接続した。
+ソフトウェア経路の完成と、実SDK／G1の未検証を分ける。Cloud環境制約・実thread faultも[PROGRESS](PROGRESS.md)に残す。
 
 ## 1. 当初のTODOと到達点
 
@@ -43,13 +48,13 @@ G1側record runtimeは状態/初期参照/ZMQ/native writer/停止要求を一�
 | ID | 作業・必要性 | 状態 / 次の完了条件 | 関連課題 |
 |---|---|---|---|
 | C1 | G1-local入力監視・CRC：GPU停止とは独立に身体入力を検査 | 実CRC診断済み。raw motor診断取得/native接続を実装、今回のG1配置/firmware解釈は未検証 | P4, P5 |
-| C2 | 500Hz owner loop：50Hz推論と低レベル出力周期を分離 | **進行中**。2ms設計/期限/停止要求をSDK-free疑似通信先で検査済み。実G1計測は未実施 | P4, P5 |
-| C3 | 実gateway：session/目標期限、局所身体、初期姿勢、制御権を統合 | **進行中**。record runtimeで状態→初期参照/姿勢確認→ZMQ→native writer→停止要求を接続・5秒完走。実入力runner接続は今回未実行、SDK出力/実権限は未統合 | P1–P5 |
-| C4 | INIT→追従開始：最初の参照と実姿勢を整合 | 送信なし軌道/条件検査あり。起動時の位置・速度・参照変化を含めて合格させる | P1–P3 |
-| C5 | 独立停止・復帰：異常をラッチし、GPU/RPC終了待ちにしない | SDK接続・停止候補はbuild-only。現場方式選定、SDK実効性/ブロック時の代替を検証する | P5 |
+| C2 | 500Hz owner loop：50Hz推論と低レベル出力周期を分離 | 共通ownerへ接続、native 2ms・局所期限・停止ラッチを通し検証。Cloud scheduling faultの記録あり。実SDK／G1周期は未検証 | P4, P5, P10 |
+| C3 | 実gateway：session/目標期限、局所身体、初期姿勢、制御権を統合 | record runtimeとSDK sessionが共通owner状態機械を共有。通常／期限切れ／明示復帰を人工入力で通し検証。実SDK機器I/O／実gatewayの局所証拠供給・G1配置は未検証 | P1–P5 |
+| C4 | INIT→追従開始：最初の参照と実姿勢を整合 | 既存3秒参照／整定を共通ownerへ接続。physicalは別途の局所姿勢確認を要求。実初期姿勢／支持／参照適合は未検証 | P1–P4 |
+| C5 | 独立停止・復帰：異常をラッチし、GPU/RPC終了待ちにしない | 共通ownerの異常停止／停止候補最大1回／明示復帰・再arm拒否を実装。SDK object compileのみ、現場停止・SDKブロック時の代替・復帰効果は未検証 | P5, P10 |
 | C6 | MuJoCoの起動区間・教師/ACT統合を詰める | ACT保存RGB30秒成功。教師の未合格を維持し、起動区間も含め再評価する | P2, P3, P6 |
 | C7 | PIKA幅・センサーを身体経路と統合 | codec/読取り/単体操作は別経路として存在。身体と合わせた起動/終了・故障処理は未完 | P6, P8 |
-| C8 | 実機用ランチャーと共有手順 | `make run`はsim一括。`make body-runtime`はG1不要のruntime通し実行。`online-record BODY_RUNTIME=1`でG1配置/現地build/実入力接続/回収を実装、未実行。物理動作入口は未提供 | P4, P5, P9 |
+| C8 | 実機用ランチャーと共有手順 | `make cloud-body-runtime`でCPUの起動・停止・復帰を一括。READMEを簡潔化、旧全文を保存。`make run`はsim一括。`make body-runtime`はG1不要のruntime通し実行。`online-record BODY_RUNTIME=1`でG1配置/現地build/実入力接続/回収を実装、未実行。物理動作入口は未提供 | P4, P5, P9 |
 | C9 | 限定実機検証と実タスク評価 | 未実施。実装・現場条件・明示許可が揃ってから段階実施 | P1–P9 |
 
 C2の疑似試験成功は、C3/C4/C5や実機500Hzの完了を意味しない。
@@ -68,6 +73,7 @@ G1向けの最新ソース配置/コンパイルは、G1起動が必要な工程
 | P7 | 実入力の統合完走は一時RR/1下の3秒。通常優先度/長時間の実入力安定性は未完 | 保存/人工入力30秒の成功と分ける。現在構成で同時入力・遅延・終了を再確認する |
 | P8 | 右PIKAは別試験のため取り外し中。左/取付具/カメラ/配線の現状は未確認 | 既存PIKA質量/TCPを現在の実機へ適用しない。再装着/構成確認まで右PIKA把持の実機試験は行わない |
 | P9 | 既存2台の環境と分離配置に依存。完全自動setupは未提供 | モデルbundleだけで全環境を再現できるとはしない。ホスト設定・依存・ライセンス・初回導入を共有手順へまとめる |
+| P10 | Cloudの実thread試行でwriter gap10ms超のfault。IPC bindはEPERM、/procは別PID名前空間 | 停止ラッチを維持し失敗履歴を保存。direct版はZMQ配送・実時間性を証明しない。対象cleanup試験だけ名前空間不一致時に明示skip |
 
 補足：別作業のPIKA単体試行では実際の急動作の申告があり、根因/修正後の解消は未確認。
 段階的grip機能を物理速度制限や修復の証拠にしない。[単体操作・故障履歴](PIKA_GRIPPER_CONTROL.md)。

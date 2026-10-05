@@ -1,0 +1,541 @@
+{
+  "date": "2026-10-05",
+  "base_commit": "22999ade4b4035891157e9897c44172e2864acfa",
+  "scope": "Cloud CPU software / ARTIFICIAL body and target fixtures / SDK-free memory output",
+  "python": "3.12.14",
+  "numpy": "1.26.4",
+  "hardware_transport_linked": false,
+  "robot_commands_sent": false,
+  "physical_stop_confirmed": false,
+  "physical_ownership_confirmed": false,
+  "ZMQ_delivery_verified": false,
+  "environment_constraints": [
+    "IPC bind EPERM",
+    "proc Pid differs from local PID (example 1448 vs 5)",
+    "Native writer_deadline_gap in multiple real-thread trials; gates unchanged, failures retained"
+  ],
+  "fake_owner_checks": 18,
+  "fake_adapter_checks": 19,
+  "fake_writer_checks": 24,
+  "SDK_validation": "object compilation gate 0 and 1; no linking/construction/execution",
+  "rehearsals": [
+    {
+      "path": "artifacts/body-runtime/cloud-check-4tt41ggt/body_expiry/outputs/report.json",
+      "scenario": "body_expiry",
+      "passed": false,
+      "error": "RuntimeError: Native record owner stopped: writer_deadline_gap",
+      "targets": 119,
+      "accepted": 0,
+      "normal_publications": 1163,
+      "reason": "writer_deadline_gap",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "fault",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": true
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.006148088,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-4tt41ggt/normal/outputs/report.json",
+      "scenario": "normal",
+      "passed": false,
+      "error": "ValueError: Local body rejected: local_body_gap_expired",
+      "targets": 17,
+      "accepted": 0,
+      "normal_publications": 167,
+      "reason": "local_body_gap_expired",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "fault",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": true
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.004893108,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-4tt41ggt/recovery/outputs/report.json",
+      "scenario": "recovery",
+      "passed": false,
+      "error": "RuntimeError: Native record owner stopped: writer_deadline_gap",
+      "targets": 11,
+      "accepted": 0,
+      "normal_publications": 85,
+      "reason": "writer_deadline_gap",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "fault",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": true
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.005188695,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-_j7oerd6/body_expiry/outputs/report.json",
+      "scenario": "body_expiry",
+      "passed": true,
+      "error": "ValueError: Local LowState watchdog expired",
+      "targets": 184,
+      "accepted": 21,
+      "normal_publications": 1906,
+      "reason": "writer_body_crc_health_or_age_invalid",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "fault",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": true
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.006386874,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-_j7oerd6/normal/outputs/report.json",
+      "scenario": "normal",
+      "passed": false,
+      "error": "ValueError: Local body rejected: writer_deadline_gap",
+      "targets": 4,
+      "accepted": 0,
+      "normal_publications": 29,
+      "reason": "writer_deadline_gap",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "fault",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": true
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.004841166,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-_j7oerd6/recovery/outputs/report.json",
+      "scenario": "recovery",
+      "passed": true,
+      "error": null,
+      "targets": 233,
+      "accepted": 70,
+      "normal_publications": 2380,
+      "reason": "peer_record_stop",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "stop_required",
+          "stopped",
+          "recovery_pending",
+          "recovered",
+          "closed"
+        ],
+        "recovery_acknowledged": true,
+        "fault_latched": false
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.009502081,
+      "rearm_rejected_after_recovery": true
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-ld86aawm/body_expiry/outputs/report.json",
+      "scenario": "body_expiry",
+      "passed": true,
+      "error": "ValueError: Local LowState watchdog expired",
+      "targets": 191,
+      "accepted": 23,
+      "normal_publications": 1907,
+      "reason": "writer_body_crc_health_or_age_invalid",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "fault",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": true
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.007299689,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-ld86aawm/normal/outputs/report.json",
+      "scenario": "normal",
+      "passed": true,
+      "error": null,
+      "targets": 241,
+      "accepted": 71,
+      "normal_publications": 2402,
+      "reason": "peer_record_stop",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": false
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.003996509,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-ld86aawm/recovery/outputs/report.json",
+      "scenario": "recovery",
+      "passed": true,
+      "error": null,
+      "targets": 241,
+      "accepted": 71,
+      "normal_publications": 2401,
+      "reason": "peer_record_stop",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "stop_required",
+          "stopped",
+          "recovery_pending",
+          "recovered",
+          "closed"
+        ],
+        "recovery_acknowledged": true,
+        "fault_latched": false
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.003894003,
+      "rearm_rejected_after_recovery": true
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-xagj1rql/body_expiry/outputs/report.json",
+      "scenario": "body_expiry",
+      "passed": false,
+      "error": "RuntimeError: Native record owner stopped: writer_deadline_gap",
+      "targets": 74,
+      "accepted": 0,
+      "normal_publications": 727,
+      "reason": "writer_deadline_gap",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "fault",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": true
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.005050377,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-xagj1rql/normal/outputs/report.json",
+      "scenario": "normal",
+      "passed": true,
+      "error": null,
+      "targets": 229,
+      "accepted": 69,
+      "normal_publications": 2384,
+      "reason": "peer_record_stop",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": false
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.005777454,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-xagj1rql/recovery/outputs/report.json",
+      "scenario": "recovery",
+      "passed": true,
+      "error": null,
+      "targets": 229,
+      "accepted": 68,
+      "normal_publications": 2376,
+      "reason": "peer_record_stop",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "stop_required",
+          "stopped",
+          "recovery_pending",
+          "recovered",
+          "closed"
+        ],
+        "recovery_acknowledged": true,
+        "fault_latched": false
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.00587964,
+      "rearm_rejected_after_recovery": true
+    },
+    {
+      "path": "artifacts/body-runtime/run-_i0yg7dr/outputs/report.json",
+      "scenario": "recovery",
+      "passed": false,
+      "error": "RuntimeError: Native record owner stopped: writer_deadline_gap",
+      "targets": 173,
+      "accepted": 3,
+      "normal_publications": 1712,
+      "reason": "writer_deadline_gap",
+      "owner_exited": true,
+      "writer_exited": true,
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "fault",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": true
+      },
+      "record_stop_attempted": true,
+      "record_stop_write_accepted": true,
+      "last_packet_crc_matches": true,
+      "max_start_gap_s": 0.009813438,
+      "rearm_rejected_after_recovery": false
+    }
+  ],
+  "checks": {
+    "baseline-cloud-check": {
+      "tests": 130,
+      "passed": 127,
+      "skipped": 2,
+      "failures": 1,
+      "log_sha256": "55d4ab60f485e58f0a331538d3b2c9b59d3b854372ca0f1ce995c76e8f17e233"
+    },
+    "final-cloud-check": {
+      "tests": 134,
+      "passed": 130,
+      "skipped": 3,
+      "failures": 1,
+      "log_sha256": "6f20ef43216975756f088455e51ae75a5137d88ba4e2b0e64bcc7ec5297bb44d"
+    },
+    "repeat-cloud-check": {
+      "tests": 134,
+      "passed": 128,
+      "skipped": 3,
+      "failures": 3,
+      "log_sha256": "9210b4c87fcd22710d83276b118128f4a435830200cd99acc5f7a8501e747db5"
+    },
+    "idle-cloud-check": {
+      "tests": 134,
+      "passed": 130,
+      "skipped": 3,
+      "failures": 1,
+      "log_sha256": "10ec435d946bcf730abcbf3f2cc64f9cb107fd88c9e1b183279a3c4fd5cf9f52"
+    },
+    "runtime-check": {
+      "tests": 3,
+      "passed": 3,
+      "skipped": 0,
+      "failures": 0,
+      "log_sha256": "7ab979f190721fc60c86fc86952ae1b341cd618bac0e2c3a0046b3220ac14e97"
+    },
+    "cleanup-final-check": {
+      "tests": 20,
+      "passed": 17,
+      "skipped": 1,
+      "failures": 2,
+      "log_sha256": "34e8192fdf6610b4bd71131d40903ad3c029114e75163c7926617f93fb2f62af"
+    },
+    "ipc-check": {
+      "tests": 7,
+      "passed": 5,
+      "skipped": 0,
+      "failures": 2,
+      "log_sha256": "5fbbc74d59274456659bb2a8ff95b97c6f727fc5b0c323e62d841cea12d99926"
+    },
+    "namespace-only-latest": {
+      "tests": 1,
+      "passed": 0,
+      "skipped": 1,
+      "failures": 0
+    }
+  },
+  "final_cloud_check_passed": false,
+  "source_sha256": {
+    "scripts/body_io_adapter.hpp": "c5ffaab4e84e7e3964434ed5bf27a4894fd57a7968993738e75ab93116e818c4",
+    "scripts/body_owner_lifecycle.hpp": "9619a8ad9e6eb904932f1b82ced83d539b7439630b0cee19ef1a3d0f203beff5",
+    "scripts/body_runtime.cpp": "82663d1ae5d48d723fd5819da3b96c224de102e4074597ecccbfed27aea313b2",
+    "scripts/body_runtime.py": "9a1bb1f95394b680eb291021944728ffb81d88fb5bd562b97932a275d062a7ce",
+    "scripts/body_writer.hpp": "d2c21e263facf94e83559f3396d59966d7ee52c3522986d268c2ceb62dc3a78f",
+    "scripts/local_body_runtime.py": "5e0504954db2eb89a037e8d9533805c5d9721ba54c6930879485f17050da2a13",
+    "scripts/local_body_service.py": "e00929f1d13f9df67a8fae5b9d3fafec0cdd0bbfc20823117ab1f5f42daf4fe9",
+    "scripts/online_input_sources.py": "acb5b18b43bcf2d1fa7bf280cf4f9dc6911ce0583327a272b9311f28b7b1b814",
+    "scripts/run_body_runtime.py": "c98593bc556fd7f1b411e7bb083740f001dcfd56f039a511e425cf6a449cb0ca",
+    "scripts/unitree_body_transport.cpp": "776a5f126f517ee72fadaaf0d5b9141c03ec26863ac16f7dec38e53829cd1b51",
+    "scripts/unitree_body_transport.hpp": "0ef52ee1f4cbe6ab033635c00eedbcf67cc6d5f546d620403adc6d67d64998fe"
+  },
+  "additional_failures": "Final online-only recheck: 17 pass, 1 namespace skip, 2 source/camera age deadline failures. No gate relaxation.",
+  "namespace_cleanup": "Cloud test skips before fixture processes or REMOTE_CLEANUP signals when proc PID differs. Production source retained unchanged.",
+  "publication_boundary": {
+    "auto_review_rejected": [
+      "historical document containing operational connection information",
+      "online_input_sources.py containing SSH deployment mechanics"
+    ],
+    "safer_alternative": "CPU-only current handoff with links to existing Git history; production online_input_sources.py retained unchanged; Cloud test skips before cleanup in mismatched PID namespace."
+  }
+}

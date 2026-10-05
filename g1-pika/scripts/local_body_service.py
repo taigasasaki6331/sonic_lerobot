@@ -102,7 +102,10 @@ def main():
     parser.add_argument('--require-crc',action='store_true',help='Reject legacy/unchecked local LowState')
     parser.add_argument('--native-runtime',type=Path,
         help='Record-only native owner library: rehearse local INIT/writer/stop; NEVER hardware IO')
+    parser.add_argument('--record-recovery-note',help='Explicit LOCAL artificial stop observation; memory recovery only')
     args=parser.parse_args()
+    if args.record_recovery_note is not None and (not args.native_runtime or not args.record_recovery_note.strip()):
+        parser.error('Record recovery requires native runtime and nonempty local observation')
     if args.native_runtime:
         faulthandler.enable()
         faulthandler.register(signal.SIGUSR1,all_threads=True)
@@ -182,6 +185,13 @@ def main():
         if channel: channel.close()
         reader.join(2)
         if watch.ident is not None: watch.join(2)
+        if args.native_runtime:
+            try:
+                if args.record_recovery_note is not None:
+                    worker.recover_native(args.record_recovery_note)
+            except Exception as exc:
+                errors.append('Record recovery: '+str(exc)); worker.fail(errors[-1])
+            finally: worker.close_native()
         if args.report:
             args.report.write_text(json.dumps(dict(scope='record_only_local_monitor',phase=worker.phase,
                 errors=errors,fault_observed_monotonic_s=fault_at[0] if fault_at else None,
@@ -192,7 +202,7 @@ def main():
                 reader_exited=not reader.is_alive(),watchdog_exited=not watch.is_alive(),
                 robot_commands_sent=False,physical_stop_validated=False),indent=2)+'\n')
         if reader.is_alive() or watch.is_alive(): raise RuntimeError('Local body service thread did not exit')
-        if args.native_runtime: worker.close_native()
+        if args.record_recovery_note is not None and errors: raise RuntimeError('Record recovery was not completed: '+str(errors))
 
 
 if __name__=='__main__': main()

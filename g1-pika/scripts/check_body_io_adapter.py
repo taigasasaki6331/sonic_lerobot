@@ -30,10 +30,12 @@ class Tests(unittest.TestCase):
         for name,digest in {**PINNED,**TRANSPORT_PINNED}.items(): self.assertEqual(sha(INCLUDE/name),digest)
         source=Path(__file__).resolve().parent
         # Syntax/object compilation only: no SDK linking, construction or IO.
-        for gate in ('0','1'):
-            subprocess.run(['g++','-std=c++17','-Wall','-Wextra','-fsyntax-only','-DG1_PIKA_ENABLE_BODY_IO='+gate,
-                '-I'+str(INCLUDE),'-I'+str(SDK/'thirdparty/include'),'-I'+str(SDK/'thirdparty/include/ddscxx'),
-                str(source/'unitree_body_transport.cpp')],check=True,timeout=30)
+        with tempfile.TemporaryDirectory(prefix='g1-sdk-object-') as tmp:
+            for gate in ('0','1'):
+                subprocess.run(['g++','-std=c++17','-Wall','-Wextra','-c','-DG1_PIKA_ENABLE_BODY_IO='+gate,
+                    '-I'+str(INCLUDE),'-I'+str(SDK/'thirdparty/include'),'-I'+str(SDK/'thirdparty/include/ddscxx'),
+                    str(source/'unitree_body_transport.cpp'),'-o',str(Path(tmp)/('body-'+gate+'.o'))],
+                    check=True,timeout=30)
 
 
 if __name__=='__main__': unittest.main()
