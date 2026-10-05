@@ -1,0 +1,268 @@
+{
+  "date": "2026-10-05",
+  "base_commit": "07e290153154ab7eb5c75a3de50179118b8155ad",
+  "scope": "Cloud CPU ARTIFICIAL local body/targets, SDK-free memory output; no ZMQ delivery/hardware validation",
+  "total_tests": 134,
+  "passed": 131,
+  "skipped": 3,
+  "failures": 0,
+  "cloud_check_exit": 0,
+  "writer_conditions": 27,
+  "SDK_validation": "object compile flag0/1 only, no linking/construction/IO",
+  "robot_commands_sent": false,
+  "hardware_transport_linked": false,
+  "physical_stop_confirmed": false,
+  "gates": {
+    "writer_gap_s": 0.01,
+    "body_reference_age_s": 0.1,
+    "reference_step_rad": 0.05
+  },
+  "log_sha256": "9686e990620c0924ed27cf11ec1151c05f2b125eb41117b3155b572808cca52e",
+  "prior_failures_preserved": "cloud-validation-20261005.json; prior deadline failures remain recorded, causes not claimed solved by one pass",
+  "changes": [
+    "capture clock after copying input",
+    "recheck latest inputs and actual elapsed budget immediately before sink",
+    "commit guarded sink call start to kernel clock",
+    "lightweight watchdog status without packet/history copies",
+    "retain failed-gap and stop-age diagnostics"
+  ],
+  "source_sha256": {
+    "body_writer.hpp": "a1439688dce9673b82e761d83bd9ed3cf8e9fa3adaaf234717a66d30cc84f9fd",
+    "body_runtime.cpp": "bb2024ebc34e947ad3cceeeeecc9face07a7439a89d1ded7b835189a40e5fc17",
+    "body_runtime.py": "fca02d41c1df8187bfa52b55ad87b4e95783705ba44dd763257197e39958ae38",
+    "local_body_runtime.py": "97eaccfe92878a566df30c81bc17a9789349a218019d4662d85296875acc84a1",
+    "check_body_writer.cpp": "d4da2f0e2b25bca3330c786f780f136cdd2682c5c8a23e78f24693b28d5fb8d1",
+    "check_body_writer.py": "2c94c38eb66e6f81847ce548314cd1ca602346fff4df98da5e5b251612b73684",
+    "check_body_runtime.py": "dd29dfdea780baac35af01024b98128d52ce21335f851b3f390d7adeeba40916"
+  },
+  "rehearsals": [
+    {
+      "path": "artifacts/body-runtime/cloud-check-1zmg5uuw/body_expiry/outputs/report.json",
+      "scenario": "body_expiry",
+      "passed": true,
+      "error": "ValueError: Local LowState watchdog expired",
+      "targets": 190,
+      "accepted": 21,
+      "normal_publications": 1897,
+      "reason": "writer_body_crc_health_or_age_invalid",
+      "timing": {
+        "available": true,
+        "max_observed_gap_s": 0.006813021,
+        "max_admission_delay_s": 3.2245e-05,
+        "stop_body_age_s": 0.100314777,
+        "stop_reference_age_s": 0.018087849
+      },
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "fault",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": true
+      },
+      "owner_exited": true,
+      "writer_exited": true,
+      "last_packet_crc_matches": true,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-1zmg5uuw/normal/outputs/report.json",
+      "scenario": "normal",
+      "passed": true,
+      "error": null,
+      "targets": 240,
+      "accepted": 71,
+      "normal_publications": 2394,
+      "reason": "peer_record_stop",
+      "timing": {
+        "available": true,
+        "max_observed_gap_s": 0.003770042,
+        "max_admission_delay_s": 0.000126065,
+        "stop_body_age_s": 0.021332894,
+        "stop_reference_age_s": 0.020998101
+      },
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": false
+      },
+      "owner_exited": true,
+      "writer_exited": true,
+      "last_packet_crc_matches": true,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-1zmg5uuw/recovery/outputs/report.json",
+      "scenario": "recovery",
+      "passed": true,
+      "error": null,
+      "targets": 240,
+      "accepted": 72,
+      "normal_publications": 2397,
+      "reason": "peer_record_stop",
+      "timing": {
+        "available": true,
+        "max_observed_gap_s": 0.00335867,
+        "max_admission_delay_s": 4.6226e-05,
+        "stop_body_age_s": 0.005857827,
+        "stop_reference_age_s": 0.00550747
+      },
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "stop_required",
+          "stopped",
+          "recovery_pending",
+          "recovered",
+          "closed"
+        ],
+        "recovery_acknowledged": true,
+        "fault_latched": false
+      },
+      "owner_exited": true,
+      "writer_exited": true,
+      "last_packet_crc_matches": true,
+      "rearm_rejected_after_recovery": true
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-kke63h93/body_expiry/outputs/report.json",
+      "scenario": "body_expiry",
+      "passed": true,
+      "error": "ValueError: Local LowState watchdog expired",
+      "targets": 191,
+      "accepted": 22,
+      "normal_publications": 1908,
+      "reason": "writer_body_crc_health_or_age_invalid",
+      "timing": {
+        "available": true,
+        "max_observed_gap_s": 0.003981367,
+        "max_admission_delay_s": 1.9206e-05,
+        "stop_body_age_s": 0.10158403,
+        "stop_reference_age_s": 0.019152136
+      },
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "fault",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": true
+      },
+      "owner_exited": true,
+      "writer_exited": true,
+      "last_packet_crc_matches": true,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-kke63h93/normal/outputs/report.json",
+      "scenario": "normal",
+      "passed": true,
+      "error": null,
+      "targets": 240,
+      "accepted": 70,
+      "normal_publications": 2400,
+      "reason": "peer_record_stop",
+      "timing": {
+        "available": true,
+        "max_observed_gap_s": 0.005447716,
+        "max_admission_delay_s": 1.9825e-05,
+        "stop_body_age_s": 0.016303438,
+        "stop_reference_age_s": 0.015980004
+      },
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "stop_required",
+          "stopped",
+          "closed"
+        ],
+        "recovery_acknowledged": false,
+        "fault_latched": false
+      },
+      "owner_exited": true,
+      "writer_exited": true,
+      "last_packet_crc_matches": true,
+      "rearm_rejected_after_recovery": false
+    },
+    {
+      "path": "artifacts/body-runtime/cloud-check-kke63h93/recovery/outputs/report.json",
+      "scenario": "recovery",
+      "passed": true,
+      "error": null,
+      "targets": 238,
+      "accepted": 70,
+      "normal_publications": 2370,
+      "reason": "peer_record_stop",
+      "timing": {
+        "available": true,
+        "max_observed_gap_s": 0.007356791,
+        "max_admission_delay_s": 0.000188728,
+        "stop_body_age_s": 0.020967195,
+        "stop_reference_age_s": 0.020528084
+      },
+      "owner_lifecycle": {
+        "phase": "closed",
+        "history": [
+          "idle",
+          "initialized",
+          "ownership_pending",
+          "owned",
+          "initializing",
+          "tracking",
+          "stop_required",
+          "stopped",
+          "recovery_pending",
+          "recovered",
+          "closed"
+        ],
+        "recovery_acknowledged": true,
+        "fault_latched": false
+      },
+      "owner_exited": true,
+      "writer_exited": true,
+      "last_packet_crc_matches": true,
+      "rearm_rejected_after_recovery": true
+    }
+  ]
+}

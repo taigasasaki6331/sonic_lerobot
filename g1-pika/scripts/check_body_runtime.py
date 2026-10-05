@@ -19,6 +19,10 @@ class Tests(unittest.TestCase):
         self.assertTrue(report['passed'],str(directory/'outputs/report.json')+': '+str(report.get('error')))
         for key in ('robot_commands_sent','physical_stop_confirmed','hardware_transport_linked'):
             self.assertFalse(report[key])
+        diagnostics=report['native_runtime']['writer_timing_diagnostics']
+        self.assertTrue(diagnostics['available'])
+        self.assertGreaterEqual(diagnostics['max_observed_gap_s'],report['native_runtime']['max_start_gap_s'])
+        self.assertGreaterEqual(diagnostics['max_admission_delay_s'],0.)
         return report
 
     def test_normal(self): self.scenario('normal')

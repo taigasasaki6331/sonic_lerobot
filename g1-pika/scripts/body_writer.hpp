@@ -153,6 +153,38 @@ struct WriterDecision {
   std::string reason;
   LocalEvidence evidence;
 };
+// Inspect a snapshot using a timestamp acquired AFTER copying that snapshot.
+// A concurrent local ingest may otherwise look falsely "from the future".
+inline WriterDecision inspect_writer_inputs(WriterTime now,const WriterSnapshot& value) {
+  auto stop=[](const std::string& reason) {return WriterDecision{WriterAction::stop,reason,{}};};
+  if(value.stop_requested) return stop(value.reason.empty()?"local_stop_requested":value.reason);
+  if(!value.body || !value.reference || !value.local_phase_validated) return {};
+  const auto& body=*value.body; const auto& ref=*value.reference;
+  if(!body.crc_verified || body.mode_pr!=0 || !body.motor_health_checked ||
+     body.received_at>now || now-body.received_at>writer_max_age)
+    return stop("writer_body_crc_health_or_age_invalid");
+  for(auto error:body.motor_errors) if(error) return stop("writer_motor_error");
+  if(ref.received_at>now || ref.source_age_bound.count()<0 || ref.source_age_bound>writer_max_age ||
+     now-ref.received_at>writer_max_age-ref.source_age_bound)
+    return stop("writer_reference_expired_or_invalid");
+  return {WriterAction::publish,"",{true,0,body.mode_machine,std::chrono::duration<double>(now-body.received_at).count()}};
+}
+// Recheck immediately before a sink call; a poll result is not a lasting permit.
+// The existing 10ms/100ms bounds apply to actual elapsed time, including delays
+// in mailbox copies or scheduling between the poll and publication.
+inline WriterDecision guard_writer_publication(WriterTime now,const WriterSnapshot& value,
+    WriterTime polled_at,const std::optional<WriterTime>& previous_write,uint8_t expected_machine) {
+  if(value.stop_requested) return {WriterAction::stop,value.reason.empty()?"local_stop_requested":value.reason,{}};
+  if(now<polled_at || (previous_write && now<*previous_write))
+    return {WriterAction::stop,"writer_clock_reversed",{}};
+  if(now-polled_at>writer_max_gap || (previous_write && now-*previous_write>writer_max_gap))
+    return {WriterAction::stop,"writer_deadline_gap",{}};
+  auto result=inspect_writer_inputs(now,value);
+  if(result.action==WriterAction::waiting) return {WriterAction::stop,"writer_local_phase_or_input_lost",{}};
+  if(result.action==WriterAction::publish && result.evidence.mode_machine!=expected_machine)
+    return {WriterAction::stop,"writer_machine_changed",{}};
+  return result;
+}
 // Deterministic deadline/watchdog kernel; used by the actual native owner loop
 // and by fake-clock fault injection. No lifecycle INIT or SDK RPC here.
 class WriterKernel {
@@ -167,23 +199,23 @@ public:
     last_poll_=now;
     if(value.stop_requested) return stop(value.reason.empty()?"local_stop_requested":value.reason);
     if(started_ && last_write_ && now-*last_write_>writer_max_gap) return stop("writer_deadline_gap");
-    if(!value.body || !value.reference || !value.local_phase_validated) {
+    auto inputs=inspect_writer_inputs(now,value);
+    if(inputs.action==WriterAction::stop) return stop(inputs.reason);
+    if(inputs.action==WriterAction::waiting) {
       if(started_) return stop("writer_local_phase_or_input_lost");
       return {};
     }
-    const auto& body=*value.body; const auto& ref=*value.reference;
-    if(!body.crc_verified || body.mode_pr!=0 || !body.motor_health_checked ||
-       body.received_at>now || now-body.received_at>writer_max_age)
-      return stop("writer_body_crc_health_or_age_invalid");
-    for(auto error:body.motor_errors) if(error) return stop("writer_motor_error");
-    if(machine_ && *machine_!=body.mode_machine) return stop("writer_machine_changed");
-    if(ref.received_at>now || ref.source_age_bound.count()<0 || ref.source_age_bound>writer_max_age ||
-       now-ref.received_at>writer_max_age-ref.source_age_bound)
-      return stop("writer_reference_expired_or_invalid");
+    if(machine_ && *machine_!=inputs.evidence.mode_machine) return stop("writer_machine_changed");
     // Never replay missed 2ms periods in a burst. At most one publication/poll.
     if(last_write_ && now-*last_write_<writer_period) return {};
-    machine_=body.mode_machine; started_=true; last_write_=now;
-    return {WriterAction::publish,"",{true,0,body.mode_machine,std::chrono::duration<double>(now-body.received_at).count()}};
+    machine_=inputs.evidence.mode_machine; started_=true; last_write_=now;
+    return inputs;
+  }
+  // poll() assumes an immediate sink for deterministic kernel callers. The
+  // actual loop commits the guarded call's start, rather than an earlier poll.
+  void publication_started(WriterTime now) {
+    if(!last_write_ || now<*last_write_) throw std::logic_error("Writer publication clock invalid");
+    last_write_=now;
   }
 };
 
@@ -218,6 +250,7 @@ struct WriterRunReport {
   std::string reason;
   bool stop_attempted=false,stop_write_accepted=false,physical_stop_confirmed=false;
   double max_start_gap_s=0,max_sink_call_s=0;
+  double max_observed_gap_s=0,max_admission_delay_s=0,stop_body_age_s=-1,stop_reference_age_s=-1;
 };
 // Soft real-time steady-clock scheduling. Does NOT set RT priority/governor.
 // A blocking SDK write cannot be interrupted here: independent physical
@@ -231,29 +264,41 @@ inline WriterRunReport run_body_writer(WriterMailbox& mailbox,WriterSink& sink) 
     // Stop is latched before calling sink. No GPU/RPC/join wait first.
     report.stop_attempted=true;
     auto final=mailbox.snapshot();
+    auto detected=WriterClock::now();
+    if(final.body) report.stop_body_age_s=std::chrono::duration<double>(detected-final.body->received_at).count();
+    if(final.reference) report.stop_reference_age_s=std::chrono::duration<double>(detected-final.reference->received_at+
+        final.reference->source_age_bound).count();
     bool identity_lost=final.identity_lost || reason=="writer_machine_changed";
     try {report.stop_write_accepted=sink.stop_candidate_for(identity_lost,fault).sdk_write_accepted;}
     catch(...) {report.stop_write_accepted=false;}
     // Never promote the sink's response to a physical-stop confirmation.
   };
   while(true) {
-    auto now=WriterClock::now(); auto input=mailbox.snapshot();
+    auto input=mailbox.snapshot(); auto now=WriterClock::now();
+    if(prior_write) report.max_observed_gap_s=std::max(report.max_observed_gap_s,
+        std::chrono::duration<double>(now-*prior_write).count());
     auto decision=kernel.poll(now,input);
     if(decision.action==WriterAction::stop) {stop(decision.reason); return report;}
     if(decision.action==WriterAction::publish) {
       // A stop that won admission while we copied data must precede this write.
       // A request during the SDK call cannot retract an already in-flight write.
-      if(mailbox.snapshot().stop_requested) continue;
-      if(prior_write) report.max_start_gap_s=std::max(report.max_start_gap_s,std::chrono::duration<double>(now-*prior_write).count());
-      prior_write=now;
-      bool ok=false; auto begin=WriterClock::now();
-      try {ok=sink.publish_reference(decision.evidence,*input.reference);} catch(...) {}
+      auto latest=mailbox.snapshot(); auto begin=WriterClock::now();
+      auto guarded=guard_writer_publication(begin,latest,now,prior_write,decision.evidence.mode_machine);
+      report.max_admission_delay_s=std::max(report.max_admission_delay_s,std::chrono::duration<double>(begin-now).count());
+      if(prior_write) report.max_observed_gap_s=std::max(report.max_observed_gap_s,
+          std::chrono::duration<double>(begin-*prior_write).count());
+      if(guarded.action==WriterAction::stop) {stop(guarded.reason); return report;}
+      if(prior_write) report.max_start_gap_s=std::max(report.max_start_gap_s,std::chrono::duration<double>(begin-*prior_write).count());
+      prior_write=begin; kernel.publication_started(begin);
+      bool ok=false;
+      try {ok=sink.publish_reference(guarded.evidence,*latest.reference);} catch(...) {}
       auto end=WriterClock::now();
       report.max_sink_call_s=std::max(report.max_sink_call_s,std::chrono::duration<double>(end-begin).count());
       if(!ok) {stop("writer_sink_failed"); return report;}
       report.publications++;
       // No normal write after a blocked/slow sink violates the 10ms budget.
-      if(end-now>writer_max_gap) {stop("writer_sink_blocked_past_deadline"); return report;}
+      if(end-begin>writer_max_gap) {stop("writer_sink_blocked_past_deadline"); return report;}
+      now=begin;
     }
     // Anchor to the actual poll, not a loop of expired deadlines/catch-up writes.
     mailbox.wait_until(now+writer_period);

@@ -114,6 +114,33 @@ int main() {
     bool rejected=false; try {sink.stop_candidate(true);} catch(const std::logic_error&) {rejected=true;}
     assert(rejected && a.stop_latched() && f.writes==before); checks++;}
   std::vector<WriterRunReport> runs;
+  {WriterMailbox m("fake-session",fill(-1),fill(1),fill(1)); inputs(m,time_at(0));
+    auto latest=m.snapshot(); WriterKernel kernel;
+    assert(kernel.poll(time_at(0),latest).action==WriterAction::publish);
+    assert(guard_writer_publication(time_at(.010),latest,time_at(0),{},5).action==WriterAction::publish);
+    auto delayed=guard_writer_publication(time_at(.011),latest,time_at(0),{},5);
+    assert(delayed.action==WriterAction::stop && delayed.reason=="writer_deadline_gap"); checks++;}
+  {WriterMailbox m("fake-session",fill(-1),fill(1),fill(1)); inputs(m,time_at(0));
+    auto latest=m.snapshot();
+    auto stale=guard_writer_publication(time_at(.101),latest,time_at(.100),{},5);
+    assert(stale.action==WriterAction::stop && stale.reason=="writer_body_crc_health_or_age_invalid");
+    latest.body=body_at(time_at(.100),2);
+    stale=guard_writer_publication(time_at(.101),latest,time_at(.100),{},5);
+    assert(stale.action==WriterAction::stop && stale.reason=="writer_reference_expired_or_invalid");
+    latest.reference=ref_at(time_at(.100),1); latest.reference->source_age_bound=2ms;
+    auto fresh=guard_writer_publication(time_at(.101),latest,time_at(.100),{},5);
+    assert(fresh.action==WriterAction::publish && std::abs(fresh.evidence.age_s-.001)<1e-9);
+    latest.body->mode_machine=6;
+    assert(guard_writer_publication(time_at(.101),latest,time_at(.100),{},5).reason=="writer_machine_changed");
+    latest.stop_requested=true; latest.reason="local_cancel";
+    assert(guard_writer_publication(time_at(.120),latest,time_at(.100),{},5).reason=="local_cancel"); checks++;}
+  {WriterMailbox m("fake-session",fill(-1),fill(1),fill(1)); inputs(m,time_at(0)); WriterKernel kernel;
+    assert(kernel.poll(time_at(0),m.snapshot()).action==WriterAction::publish);
+    assert(guard_writer_publication(time_at(.008),m.snapshot(),time_at(0),{},5).action==WriterAction::publish);
+    kernel.publication_started(time_at(.008)); // actual guarded start, not earlier poll
+    assert(kernel.poll(time_at(.017),m.snapshot()).action==WriterAction::publish);
+    auto delayed=guard_writer_publication(time_at(.019),m.snapshot(),time_at(.017),time_at(.008),5);
+    assert(delayed.action==WriterAction::stop && delayed.reason=="writer_deadline_gap"); checks++;}
   {WriterMailbox m("fake-session",fill(-1),fill(1),fill(1)); Sink sink;
     WriterRunReport report;
     std::thread owner([&]{report=run_body_writer(m,sink);});
@@ -144,6 +171,7 @@ int main() {
     inputs(m,WriterClock::now()); auto report=run_body_writer(m,sink);
     assert(sink.writes==1 && sink.stops==1 && report.stop_attempted && !report.physical_stop_confirmed);
     assert(report.reason==(failure==2?"writer_sink_blocked_past_deadline":"writer_sink_failed"));
+    assert(report.stop_body_age_s>=0 && report.stop_reference_age_s>=0);
     assert(m.snapshot().stop_requested); runs.push_back(report); checks++;
   }
   std::cout<<"{\"writer_checks\":"<<checks<<",\"scope\":\"SDK_free_fake_transport_artificial_inputs\",\"robot_commands_sent\":false,\"physical_stop_confirmed\":false,\"threaded_runs\":[";

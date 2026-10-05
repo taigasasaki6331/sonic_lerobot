@@ -57,7 +57,7 @@ class LocalBodyRuntimeWorker(LocalBodyRecordWorker):
     def poll(self):
         super().poll()
         if self.native and self.phase=='running':
-            status=self.native.snapshot()
+            status=self.native.poll_status()
             if status['stop_latched'] or status['writer_exited'] or status['owner_exited']:
                 self.fail('native_owner_stopped: '+status['reason'])
                 raise RuntimeError('Native record owner stopped: '+status['reason'])

@@ -11,7 +11,7 @@ def compile_and_run(binary):
     subprocess.run(['g++','-std=c++17','-pthread','-O2','-Wall','-Wextra','-Werror',
         str(source/'check_body_writer.cpp'),'-o',str(binary)],check=True,timeout=20)
     report=json.loads(subprocess.check_output([str(binary)],timeout=5))
-    if (report.get('writer_checks')!=24 or report.get('robot_commands_sent') is not False or
+    if (report.get('writer_checks')!=27 or report.get('robot_commands_sent') is not False or
             report.get('physical_stop_confirmed') is not False or
             report.get('scope')!='SDK_free_fake_transport_artificial_inputs'):
         raise ValueError('Unexpected fake writer report')
@@ -23,7 +23,7 @@ class Tests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix='g1-body-writer-') as tmp:
             binary=Path(tmp)/'test'
             report=compile_and_run(binary)
-        self.assertEqual(report['writer_checks'],24)
+        self.assertEqual(report['writer_checks'],27)
         self.assertFalse(report['robot_commands_sent'])
         self.assertFalse(report['physical_stop_confirmed'])
         self.assertEqual(len(report['threaded_runs']),5)

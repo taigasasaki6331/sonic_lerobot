@@ -22,6 +22,8 @@ class NativeBodyRecordRuntime:
         self.lib.g1_pika_record_recover.argtypes=[C.c_void_p,C.c_char_p]
         self.lib.g1_pika_record_finish.argtypes=[C.c_void_p]
         self.lib.g1_pika_record_lifecycle.argtypes=[C.c_void_p,C.c_char_p,C.c_size_t]
+        self.lib.g1_pika_record_status.argtypes=[C.c_void_p,C.POINTER(C.c_uint64),C.c_char_p,C.c_size_t]
+        self.lib.g1_pika_record_timing.argtypes=[C.c_void_p,C.c_char_p,C.c_size_t]
         self.lib.g1_pika_record_snapshot.argtypes=[C.c_void_p,C.POINTER(C.c_ubyte),C.POINTER(C.c_uint64),ptr,C.c_char_p,C.c_size_t]
         self.lib.g1_pika_record_delete.argtypes=[C.c_void_p]; self.lib.g1_pika_record_delete.restype=None
         # Linux steady_clock and local Python CLOCK_MONOTONIC must share epoch.
@@ -64,13 +66,22 @@ class NativeBodyRecordRuntime:
 
     def begin(self): self.checked(self.lib.g1_pika_record_begin(self.handle))
 
+    def poll_status(self):
+        # Hot watchdog path: no packet copy, memory-output lock or owner JSON.
+        flags=(C.c_uint64*3)(); reason=C.create_string_buffer(512)
+        self.checked(self.lib.g1_pika_record_status(self.handle,flags,reason,len(reason)))
+        return dict(owner_exited=bool(flags[0]),stop_latched=bool(flags[1]),writer_exited=bool(flags[2]),reason=reason.value.decode())
+
     def snapshot(self):
         packet=(C.c_ubyte*1004)(); counts=(C.c_uint64*7)(); timings=(C.c_double*2)(); reason=C.create_string_buffer(512)
         self.checked(self.lib.g1_pika_record_snapshot(self.handle,packet,counts,timings,reason,len(reason)))
         lifecycle=C.create_string_buffer(2048)
         self.checked(self.lib.g1_pika_record_lifecycle(self.handle,lifecycle,len(lifecycle)))
+        diagnostics=C.create_string_buffer(1024)
+        self.checked(self.lib.g1_pika_record_timing(self.handle,diagnostics,len(diagnostics)))
         return dict(memory_publications=counts[0],owner_exited=bool(counts[1]),stop_latched=bool(counts[2]),
             writer_exited=bool(counts[6]),owner_lifecycle=json.loads(lifecycle.value),
+            writer_timing_diagnostics=json.loads(diagnostics.value),
             normal_publications_final=counts[3],record_stop_attempted=bool(counts[4]),record_stop_write_accepted=bool(counts[5]),
             max_start_gap_s=timings[0],max_memory_write_s=timings[1],reason=reason.value.decode(),
             references=self.seq,last_native_memory_hex=bytes(packet).hex(),robot_commands_sent=False,

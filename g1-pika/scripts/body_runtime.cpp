@@ -9,6 +9,7 @@
 #include <thread>
 #include <type_traits>
 #include <sstream>
+#include <iomanip>
 using namespace g1_pika;
 namespace {
 thread_local std::string error;
@@ -191,6 +192,24 @@ int g1_pika_record_lifecycle(void* h,char* out,size_t capacity) {
     json<<"],\"recovery_acknowledged\":"<<(s.recovery_acknowledged?"true":"false")
         <<",\"fault_latched\":"<<(s.fault_latched?"true":"false")<<'}';
     auto value=json.str(); if(value.size()+1>capacity) throw std::invalid_argument("Lifecycle buffer too small");
+    std::memcpy(out,value.c_str(),value.size()+1);});
+}
+int g1_pika_record_status(void* h,uint64_t* flags,char* reason,size_t capacity) {
+  return guarded([&] {auto& r=*static_cast<RecordRuntime*>(h); auto input=r.mailbox.snapshot();
+    if(!flags || !reason || input.reason.size()+1>capacity) throw std::invalid_argument("Status buffers required");
+    flags[0]=r.exited.load(std::memory_order_acquire); flags[1]=input.stop_requested;
+    flags[2]=r.done.load(std::memory_order_acquire);
+    std::memcpy(reason,input.reason.c_str(),input.reason.size()+1);});
+}
+int g1_pika_record_timing(void* h,char* out,size_t capacity) {
+  return guarded([&] {auto& r=*static_cast<RecordRuntime*>(h); bool done=r.done.load(std::memory_order_acquire);
+    std::ostringstream json; json<<std::setprecision(17)<<"{\"available\":"<<(done?"true":"false");
+    if(done) json<<",\"max_observed_gap_s\":"<<r.result.max_observed_gap_s
+      <<",\"max_admission_delay_s\":"<<r.result.max_admission_delay_s
+      <<",\"stop_body_age_s\":"<<r.result.stop_body_age_s
+      <<",\"stop_reference_age_s\":"<<r.result.stop_reference_age_s;
+    json<<'}'; auto value=json.str();
+    if(!out || value.size()+1>capacity) throw std::invalid_argument("Timing buffer required");
     std::memcpy(out,value.c_str(),value.size()+1);});
 }
 int g1_pika_record_snapshot(void* h,unsigned char* packet,uint64_t* counts,double* timings,char* reason,size_t capacity) {

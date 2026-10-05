@@ -1,5 +1,34 @@
 # 進捗
 
+## 2026-10-05 継続：native出力直前の時刻検査を修正
+
+利用者の停止理由の確認を受け、送信なし作業を再開。前回はコミット保存後にターンを終了したため、
+その後の実装処理は実行していなかった。継続許可やG1起動を待つ条件ではない。
+
+writerの状態コピー前に採った時刻を、コピー後の検査へ使っていた箇所を修正。
+同一ホストの新しい受信がコピーへ入ると、古いpoll時刻より未来に見える余地もあった。
+時刻はコピー後に取得し、sink直前に最新状態・停止・型式・body/reference年齢・10ms経過を再確認する。
+実sink呼出開始をkernelへ記録し、古いpoll時刻を次の出力間隔の起点にしない。
+監視のhot pathを軽量statusへ分離し、5msごとのpacket／owner historyコピーを外した。
+最終reportには失敗を含む最大観測gap、admission遅延、停止時のbody/reference年齢を残す。
+旧snapshotのC ABI配列は拡張せず、容量検査付きの追加APIで取得する。
+この修正が以前のCloud scheduling faultの根因をすべて解消したとは結論しない。
+
+writer27条件成功：最初の出力までの遅延、10ms境界、出力直前のbody/reference期限、型式変更・停止優先、
+actual call startによる次周期の時刻基準を検査。既存のSDK-free実thread／25ms遅いsinkの停止も維持。
+個別runtime通常／身体期限切れ／明示復帰3件成功。
+ルートmake cloud-checkは20スクリプト／134件、131成功・3明示skip・exit0。
+SDK flag0/1 object compile成功。py_compile／git diff --check成功。
+実SDK I/O／G1／GPU／MuJoCo／カメラ／シリアル／DDS command publisherは起動しない。
+
+最新cloud-check-1zmg5uuw：normal通常2394回／受理71、recovery通常2397回／受理72、owner終了。
+body_expiry通常1897回／受理21、身体年齢100.315msで期待fault、通常再開なし・owner終了。
+3件の最大観測gapは3.770ms／3.359ms／6.813ms。これは当該短時間fixtureだけの計測で、実時間保証ではない。
+人工姿勢／CRC metadata／ownership、独立packet CRC一致を実G1の姿勢・制御権・停止の証拠にしない。
+実入力147/150範囲外と、物理停止・SDK blocking・実起動・実タスクの未検証は維持。
+以前の失敗はcloud-validation-20261005.jsonと既存artifactsに保存、新結果は[今回の検証](cloud-validation-admission-20261005.json)。
+[共通owner](BODY_OWNER.md)とHANDOFF／TODOへ反映。
+
 ## 2026-10-05 Cloud CPUで共通ownerを統合、期限超過・環境制約も保存
 
 指定ブランチ／起点22999adeから再取得。前環境の未コミットworktreeは参照できず、会話記録から復元した。

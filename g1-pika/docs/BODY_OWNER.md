@@ -62,3 +62,13 @@ G1/aarch64の最新build、実SDKリンク／起動、LowState firmware motor解
 実ownership／初期姿勢／通常送信／停止／復帰の効果と期限、147/150範囲外の解決が残る。
 LeRobot ACTの実タスク、視覚閉ループ、PIKA幅／把持も別の未検証範囲。
 [TODO](IMPLEMENTATION_TODO.md)と[履歴](PROGRESS.md)を参照する。
+
+## 2026-10-05の継続修正
+
+writerは状態コピー後に時計を採り、sink直前にも最新入力／停止／型式と経過時間を検査する。
+10ms gap／100ms年齢は変更しない。guarded call startを次の周期の基準として保存する。
+watchdogはpacket／historyをコピーしない軽量statusを使用し、最終snapshotで詳しい状態を取得する。
+max_observed_gap_sは停止判断した周期も含む。max_admission_delay_sはpollからguardまでの経過。
+stop_body_age_s／stop_reference_age_sは停止観測時の年齢（入力なしは-1）。身体／参照の期限を延ばす値ではない。
+新APIは容量を検査する追加関数で、旧snapshotの配列サイズを変更しない。
+最新Cloudは131成功／3skip。以前の失敗・実機未検証を保持し、[検証履歴](PROGRESS.md)で区別する。

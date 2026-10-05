@@ -17,7 +17,7 @@ make cloud-body-runtime BODY_SCENARIO=recovery
 既定はrecord-only。人工の局所状態・目標を使い、初期化→制御権取得候補→3秒初期参照／整定→通常制御→停止→終了を通します。
 `recovery`は停止後の明示的なメモリ復帰を追加し、復帰後の再出力を拒否します。
 上の入口はin-process envelopeで、ZMQ配送は検証しません。IPC版のコマンドは[共通owner](docs/BODY_OWNER.md)。
-Cloudの期限超過による停止を確認しており、一括検証は未合格です。[成功・失敗の履歴](docs/PROGRESS.md)。
+最新Cloud一括は131成功・3skip。以前の期限超過による停止も保持し、実時間性は未認定です。[成功・失敗の履歴](docs/PROGRESS.md)。
 SDK側も同じowner状態機械へ接続しましたが、object compileのみでリンク・起動・機器I/Oは未検証です。
 
 保存実入力の147/150 SONIC目標はURDF範囲外のままです。clipping・閾値緩和は行いません。

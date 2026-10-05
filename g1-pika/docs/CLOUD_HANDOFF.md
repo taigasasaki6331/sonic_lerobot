@@ -19,7 +19,8 @@ Linux、Python3.10〜3.12、gcc/g++、make、libzmq.so.5、venv/pipが必要で�
 Cloudチェックは20スクリプト。共通owner18条件とdirect runtimeの通常／身体期限切れ／明示復帰を含みます。
 SDK flag0/1のobject compileだけを行い、SDK link／constructor実行／機器I/Oは行いません。
 
-**一括Cloud検証は未合格**。最新は130成功／3skip／期限超過1失敗（make exit2）。
+最新Cloud検証は131成功／3skip／exit0。出力直前の時刻検査を修正しました。
+以前の期限超過・未合格も[履歴](PROGRESS.md)に保持し、実時間性の保証とは分けます。
 IPC2ケースは既定skip。この環境ではbindがEPERMでした。
 /procとkillのPID名前空間が異なる場合、該当cleanup試験は子process開始・送信前に明示skipします。
 real-threadのdeadline faultはskipへ変換せず保存します。実時間保証・物理停止を認定しません。

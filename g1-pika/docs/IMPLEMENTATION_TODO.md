@@ -48,7 +48,7 @@ G1側record runtimeは状態/初期参照/ZMQ/native writer/停止要求を一�
 | ID | 作業・必要性 | 状態 / 次の完了条件 | 関連課題 |
 |---|---|---|---|
 | C1 | G1-local入力監視・CRC：GPU停止とは独立に身体入力を検査 | 実CRC診断済み。raw motor診断取得/native接続を実装、今回のG1配置/firmware解釈は未検証 | P4, P5 |
-| C2 | 500Hz owner loop：50Hz推論と低レベル出力周期を分離 | 共通ownerへ接続、native 2ms・局所期限・停止ラッチを通し検証。Cloud scheduling faultの記録あり。実SDK／G1周期は未検証 | P4, P5, P10 |
+| C2 | 500Hz owner loop：50Hz推論と低レベル出力周期を分離 | 共通ownerへ接続、native 2ms・局所期限・停止ラッチを通し検証。コピー後／出力直前の時刻再検査を修正、最新Cloud131成功／3skip。過去のscheduling faultを保持。実SDK／G1周期は未検証 | P4, P5, P10 |
 | C3 | 実gateway：session/目標期限、局所身体、初期姿勢、制御権を統合 | record runtimeとSDK sessionが共通owner状態機械を共有。通常／期限切れ／明示復帰を人工入力で通し検証。実SDK機器I/O／実gatewayの局所証拠供給・G1配置は未検証 | P1–P5 |
 | C4 | INIT→追従開始：最初の参照と実姿勢を整合 | 既存3秒参照／整定を共通ownerへ接続。physicalは別途の局所姿勢確認を要求。実初期姿勢／支持／参照適合は未検証 | P1–P4 |
 | C5 | 独立停止・復帰：異常をラッチし、GPU/RPC終了待ちにしない | 共通ownerの異常停止／停止候補最大1回／明示復帰・再arm拒否を実装。SDK object compileのみ、現場停止・SDKブロック時の代替・復帰効果は未検証 | P5, P10 |

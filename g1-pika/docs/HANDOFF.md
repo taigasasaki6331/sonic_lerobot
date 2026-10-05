@@ -1,5 +1,14 @@
 # 引き継ぎ（2026-10-02整理）
 
+## 最新：出力直前の時刻・停止検査を修正
+
+状態コピー後に時刻を採り、sink直前にも最新入力／停止／型式／100ms年齢／10ms経過を再検査する。
+実呼出開始時刻をkernelへ記録し、watchdogのpacket／historyコピーを軽量statusへ分離した。
+writer27条件・runtime3経路、最新cloud-checkは131成功／3skip／exit0。
+SDKはobject compileのみ。以前の期限失敗を保持し、短時間成功を実時間・物理成功にしない。
+[今回の検証](cloud-validation-admission-20261005.json)／[履歴](PROGRESS.md)。
+以下の130成功／期限失敗は修正前の履歴。実入力147/150範囲外と実SDK／実機の未検証は継続。
+
 ## 2026-10-05 共通ownerで起動・停止・明示復帰を統合
 
 指定ブランチ`codex/cloud-handoff-20261002`、起点`22999ade4b4035891157e9897c44172e2864acfa`からCloud CPU開発を継続。
